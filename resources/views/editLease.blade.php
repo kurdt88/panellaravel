@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Modificar Contrato')
 
 @section('content_header')
     {{-- <h1>Propiedades<b>LTE</b></h1> --}}
@@ -154,7 +154,7 @@
                     <div class="form-group">
                         <label for="contract">Información Adicional</label>
 
-                        <textarea class="form-control" name="contract" rows="3" placeholder="Información Adicional.">{{ $lease->contract }}</textarea>
+                        <textarea class="form-control" name="contract" rows="3">{{ $lease->contract }}</textarea>
                         @error('contract')
                             <p class="text-red">{{ $message }}</p>
                         @enderror

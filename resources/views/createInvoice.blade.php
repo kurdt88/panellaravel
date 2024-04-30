@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Crear Recibo')
 
 @section('content_header')
 
@@ -265,7 +265,8 @@
                     } else {
                         //Mostar Opciones Reducidas en el Campo concept
                         $("#concept").append('<option value="Egreso_General">Egreso General</option>');
-                        $("#concept").append('<option value="Compra de Menaje">Compra de Menaje</option>');
+                        $("#concept").append(
+                            '<option value="Compra de Inventario">Compra de Inventario</option>');
                         // $("#concept").append(
                         //     '<option value="Presupuesto_de_Mantenimiento">Presupuesto de Mantenimiento</option>'
                         // );

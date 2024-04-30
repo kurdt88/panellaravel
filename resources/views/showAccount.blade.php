@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Detalle de Cuenta Bancaria')
 
 @section('content_header')
     {{-- <h1>Propiedades<b>LTE</b></h1> --}}
@@ -112,13 +112,13 @@
                                 </button>
                                 <button onClick="location.href='/accountsearchmovements/{{ $account->id }}/'"
                                     type="button" class="btn btn-dark float-right" style="margin-right: 5px;">
-                                    <i class="fas fa-glasses"></i> Más movimientos
+                                    <i class="fas fa-coins"></i> Más movimientos
                                 </button>
 
-                                <button onClick="location.href='/accounts/'" type="button"
+                                {{-- <button onClick="location.href='/accounts/'" type="button"
                                     class="btn btn-success float-right" style="margin-right: 5px;">
                                     <i class="fas fa-coins"></i> Todas las Cuentas
-                                </button>
+                                </button> --}}
 
                             </div>
 

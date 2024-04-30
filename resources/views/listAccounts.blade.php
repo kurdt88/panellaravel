@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Lista de Cuentas Bancarias')
 
 
 @section('content_header')

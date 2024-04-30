@@ -63,9 +63,9 @@
 
                 <div class="col-7">
                     <div class="form-group">
+                        <label>Propiedad </label>
 
                         @if ($expense->lease->id != 1)
-                            <label>Propiedad </label>
 
                             @if ($expense->lease->subproperty_id != 1)
                                 <a href="/subproperties/{{ $expense->invoice->subproperty_id }}">
@@ -90,8 +90,6 @@
                                     class="form-control" disabled />
                             @endif
                         @else
-                            <label>Propiedad </label>
-
                             @if ($myprop_id = $expense->invoice->property_id)
                                 <a href="/properties/{{ $myprop_id }}/">
                                     <small>
@@ -162,8 +160,11 @@
                         <textarea class="form-control" rows="1" disabled>{{ $expense->description }}</textarea>
 
                         @if ($expense->maintenance_budget == 1)
-                            <font color="blue">Este Egreso afectó el <i>Presupuesto de
-                                    Mantenimiento</i> de la <a href="/buildings/">Unidad Habitacional [+]<a></font>
+                            <br>
+                            <x-adminlte-callout theme="primary" title-class="text-primary text" icon="fas fa-coins"
+                                title="* Este Egreso afectó el Presupuesto de Mantenimiento">
+                                <small>Para mas detalles, de click en "Ver Propiedad"-> "Ver Unidad Habitacional"</small>
+                            </x-adminlte-callout>
                         @endif
                     </div>
                     <a href="/invoices/{{ $expense->invoice_id }}/" rel="noopener" class="btn btn-success float-right"><i

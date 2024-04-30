@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Crear Cuenta')
 
 @section('content_header')
     <x-flash-error-message />
@@ -34,7 +34,9 @@
                             <option value="">-- Selecciona al Propietario de la Cuenta --</option>
 
                             @foreach ($landlords as $landlord)
-                                <option value="{{ $landlord->id }}">{{ $landlord->name }}</option>
+                                @if ($landlord->id != 1)
+                                    <option value="{{ $landlord->id }}">{{ $landlord->name }}</option>
+                                @endif
                             @endforeach
 
                         </select>

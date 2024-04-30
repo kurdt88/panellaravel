@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Ver Recibo')
 
 @section('content_header')
 
@@ -13,15 +13,13 @@
 
 
 
-    <!DOCTYPE html>
-    <html lang="en">
+
 
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>Invoice</title>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
         <style>
             @media print {
                 @page {
@@ -65,7 +63,7 @@
 
             .container {
                 padding: 20px 0;
-                width: 1000px;
+                width: 1200px;
                 max-width: 90%;
                 margin: 0 auto;
             }
@@ -487,7 +485,6 @@
 
     </body>
 
-    </html>
 
 
 

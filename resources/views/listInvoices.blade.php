@@ -2,7 +2,7 @@
 
 
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Lista de Recibos')
 
 
 @section('content_header')
@@ -69,7 +69,7 @@
 
                 </td>
                 <td>
-                    {{ Str::limit($invoice->concept, 15) }} | <small>{{ Str::limit($invoice->comment, 30) }}</small>
+                    {{ Str::limit($invoice->concept, 20) }} | <small>{{ Str::limit($invoice->comment, 30) }}</small>
 
 
                 </td>

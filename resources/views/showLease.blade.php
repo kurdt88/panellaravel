@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Detalles del Contrato')
 
 @section('content_header')
     {{-- <h1>Propiedades<b>LTE</b></h1> --}}
@@ -38,12 +38,12 @@
                             <h2><strong> <i class="far fa-handshake">
                                         &ensp;</i>{{ Str::limit(App\Models\Property::whereId($lease->property)->first()->title, 25) }}
                                 </strong>
-                                <a href="/properties/{{ App\Models\Lease::where('id', $lease->id)->first()->property }}">
-                                    <small>
-                                        [+]
-                                    </small>
-                                </a>
                             </h2>
+                            <a href="/properties/{{ App\Models\Lease::where('id', $lease->id)->first()->property }}">
+                                <label>
+                                    [+ Ver Propiedad]
+                                </label>
+                            </a>
 
                             <p class="lead mb-5">
                                 <i class='fas fa-map-marker-alt fa-sm'> </i>
@@ -56,13 +56,12 @@
                             <h2><strong> <i class="far fa-handshake">
                                         &ensp;</i>{{ Str::limit(App\Models\Subproperty::whereId($lease->subproperty_id)->first()->title, 25) }}
                                 </strong>
-                                <a href="/subproperties/{{ $lease->subproperty_id }}">
-                                    <small>
-                                        [+]
-                                    </small>
-                                </a>
-
                             </h2>
+                            <a href="/subproperties/{{ $lease->subproperty_id }}">
+                                <label>
+                                    [+ Ver Propiedad]
+                                </label>
+                            </a>
                             <p class="lead mb-1">
 
                                 Tipo de Subunidad:
@@ -87,13 +86,14 @@
                             <h2><strong> <i class="far fa-handshake">
                                         &ensp;</i>{{ Str::limit(App\Models\Subproperty::whereId($lease->subproperty_id)->first()->title, 25) }}
                                 </strong>
-                                <a href="/subproperties/{{ $lease->subproperty_id }}">
-                                    <small>
-                                        [+]
-                                    </small>
-                                </a>
-
                             </h2>
+                            <a href="/subproperties/{{ $lease->subproperty_id }}">
+                                <label>
+                                    [+ Ver Propiedad]
+                                </label>
+                            </a>
+
+
 
                             <p class="lead mb-1">
 
@@ -203,11 +203,140 @@
                             <br><br>
 
                         </x-adminlte-callout>
+                    @elseif ($isvalid == 5)
+                        <x-adminlte-callout theme="info" title-class="text-dark text-uppercase" icon="far fa-clock"
+                            title="CONTRATO VIGENTE PERO VENCE EN MENOS DE 1 MES">
+
+                            @php
+                                $myleasesarray = [];
+
+                                if ($lease->subproperty_id != 1) {
+                                    // Contrato de una subunidad
+                                    $myleases = $lease->subproperty->leases;
+                                    $thislease_end_date = Illuminate\Support\Carbon::createFromFormat(
+                                        'Y-m-d',
+                                        $lease->end,
+                                    );
+                                    foreach ($myleases as $mylease) {
+                                        $mylease_end_date = Illuminate\Support\Carbon::createFromFormat(
+                                            'Y-m-d',
+                                            $mylease->end,
+                                        );
+
+                                        if ($mylease_end_date->greaterThan($thislease_end_date)) {
+                                            array_push($myleasesarray, $mylease);
+                                        }
+                                    }
+                                } else {
+                                    // Contrato de una Unidad
+                                    $myleases = $lease->property_->leases;
+                                    $thislease_end_date = Illuminate\Support\Carbon::createFromFormat(
+                                        'Y-m-d',
+                                        $lease->end,
+                                    );
+                                    foreach ($myleases as $mylease) {
+                                        $mylease_end_date = Illuminate\Support\Carbon::createFromFormat(
+                                            'Y-m-d',
+                                            $mylease->end,
+                                        );
+
+                                        if ($mylease_end_date->greaterThan($thislease_end_date)) {
+                                            array_push($myleasesarray, $mylease);
+                                        }
+                                    }
+                                }
+                            @endphp
+
+                            @if (count($myleasesarray) > 0)
+                                Sin embargo, la propiedad tiene el siguiente Contrato con una fecha de
+                                vencimiento es <b>posterior</b> a la de este Contrato:<br><br>
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"><small><b>Estado</b></small></th>
+                                            <th scope="col"><small><b>Fecha de Inicio/Fin</b></small></th>
+                                            <th scope="col"><small><b>Renta</b></small></th>
+                                            <th scope="col"><small><b>Régimen Fiscal</b></small></th>
+                                            <th scope="col"><small><b>Arrendatario</b></small></th>
+                                            <th scope="col"><small><b>Comentario</b></small></th>
+                                            <th scope="col"><small><b>Ver [+]</b></small></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($myleasesarray as $lease_aux)
+                                            <tr>
+                                                <td>
+                                                    <small>
+                                                        <b>
+                                                            @if ($lease_aux->isvalid == 4)
+                                                                <font color="blue">Por Iniciar</font>
+                                                            @elseif ($lease_aux->isvalid == 2)
+                                                                <font color="red">Cancelado</font>
+                                                            @elseif ($lease_aux->isvalid == 3)
+                                                                <font color="gray">Vencido</font>
+                                                            @elseif ($lease_aux->isvalid == 5)
+                                                                <font color="#2B1B17">Por Vencer</font>
+                                                            @elseif ($lease_aux->isvalid == 1)
+                                                                <font color="green">Vigente</font>
+                                                            @endif
+                                                        </b>
+                                                    </small>
+                                                </td>
+                                                <td><small>{{ $lease_aux->start }} / {{ $lease_aux->end }}</small>
+                                                </td>
+                                                <td><small>{{ $lease_aux->type }}
+                                                        {{ Number::currency($lease_aux->rent) }}</td>
+                                                <td><small>{{ $lease_aux->iva }}</small></td>
+
+                                                <td><small>{{ $lease_aux->tenant_->name }}</small></td>
+
+                                                <td><small>{{ $lease_aux->contract }}</small></td>
+
+
+                                                <td>
+                                                    <small>
+                                                        <a href="/leases/{{ $lease_aux->id }}" class="text-muted">
+                                                            <button class="btn btn-xs btn-default text-teal mx-1 shadow"
+                                                                title="Details">
+                                                                <i class="fa fa-lg fa-fw fa-eye"></i>
+                                                            </button>
+                                                        </a>
+                                                    </small>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
+                                    </tbody>
+                                </table>
+
+
+
+                                <br>Se recomienda <u>revisar que este corresponde a la renovación del presente Contrato</u>.
+                            @else
+                                No se encontraron Contratos relacionados con esta Propiedad, con fecha de
+                                vencimiento posterior a la de este Contrato.<br>
+                                Si desea Renovar Contrato, se recomienda <u>preveerlo con debida anticipación </u>.
+                                <br> <br>
+
+                                <button type="button" onclick="location.href='/renewlease/{{ $lease->id }}'"
+                                    class="btn btn-success float-left" style="margin-left: 5px;">
+                                    <i class="fas fa-pen-alt"></i> Renovar Contrato
+                                </button>
+                                <br>
+                                <br>
+
+                            @endif
+
+
+
+                        </x-adminlte-callout>
                     @elseif ($isvalid == 1)
                         <x-adminlte-callout theme="success" title-class="text-success" icon="far fa-handshake"
                             title="Contrato Vigente">
 
                         </x-adminlte-callout>
+                    @endif
+                    @if ($isvalid == 1 || $isvalid == 5)
                         <button type="button" theme="outline-danger" class="btn btn-outline-danger float-right"
                             onClick="location.href='/cancellease/{{ $lease->id }}/'" style="margin-right: 5px;">
                             <i class="fas fa-handshake-slash"></i> Rescisión del Contrato
@@ -217,6 +346,7 @@
                             <i class="fas fa-pen-alt"></i> Editar
                         </button>
                     @endif
+
                     <button onClick="window.print()" type="button" class="btn btn-warning float-right"
                         style="margin-right: 5px;">
                         <i class="fas fa-print"></i> imprimir

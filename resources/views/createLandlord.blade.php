@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Crear nuevo Propietario')
 
 @section('content_header')
     <x-flash-error-message />

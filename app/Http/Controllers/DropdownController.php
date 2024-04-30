@@ -287,6 +287,16 @@ class DropdownController extends Controller
             error_log($myproperty_address);
             return response()->json($myproperty_address);
 
+        } elseif ($request->concept == 'find_property_landlord') {
+            error_log("Caso find_property_landlord");
+            $myproperty = Property::whereid($request->property_id)->get()->first();
+            if ($myproperty->id == 1) {
+                $data['landlords'] = Landlord::all();
+            } else {
+                $data['landlords'] = [$myproperty->landlord];
+            }
+
+
         } elseif ($request->concept == 'find_supplier') {
             error_log("Caso find_supplier");
 

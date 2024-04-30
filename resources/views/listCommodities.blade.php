@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Lista de Menaje')
+@section('title', 'Inventario de la propiedad')
 
 
 @section('content_header')
     <x-flash-message />
 
 
-    <h1>Menaje de la propiedad <strong>{{ $property->title }}</strong></h1>
+    <h1>Inventario de la propiedad <strong>{{ $property->title }}</strong></h1>
 
 @stop
 

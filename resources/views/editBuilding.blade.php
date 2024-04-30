@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Editar Unidad Habitacional')
 
 @section('content_header')
     <x-flash-error-message />

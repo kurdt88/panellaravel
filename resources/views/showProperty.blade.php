@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Detalles de la Propiedad')
 
 @section('content_header')
     {{-- <h1>Propiedades<b>LTE</b></h1> --}}
@@ -15,7 +15,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Detalles de la propiedad</h1>
+                    <h1>Detalles de la Propiedad</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -63,10 +63,10 @@
                     <div class="form-group">
 
                         @if ($property->building_id != 1)
-                            <label for="rent">Unidad Habitacional</label>
+                            <label>Unidad Habitacional</label>
 
                             <a href="/buildings/{{ $property->building_id }}">
-                                <label for="rent">[+]</label>
+                                <label><small>[+ Ver Unidad Habitacional]</small></label>
                             </a>
 
 
@@ -83,7 +83,7 @@
                         <label>Propietario</label>
 
                         <a href="/landlords/{{ $property->landlord_id }}">
-                            <label>[+]</label>
+                            <label><small>[+ Ver Propietario]</small></label>
                         </a>
 
                         <input type="text"
@@ -107,7 +107,7 @@
                     <div class="col-12">
                         <button type="button" onClick="location.href='/propertycommodities/{{ $property->id }}/'"
                             class="btn btn-success float-right" style="margin-right: 5px;">
-                            <i class="fas fa-shopping-cart"></i> Ver Menaje
+                            <i class="fas fa-shopping-cart"></i> Ver Inventario
                         </button>
 
                         <button onClick="window.print()" type="button" class="btn btn-warning float-right"
@@ -165,6 +165,8 @@
                                         <font color="red">Cancelado</font>
                                     @elseif ($lease->isvalid == 3)
                                         <font color="gray">Vencido</font>
+                                    @elseif ($lease->isvalid == 5)
+                                        <font color="#2B1B17">Por Vencer</font>
                                     @elseif ($lease->isvalid == 1)
                                         <font color="green">Vigente</font>
                                     @endif

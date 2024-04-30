@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Lista de Unidades')
 
 
 @section('content_header')
@@ -48,11 +48,11 @@
                 <tr>
                     <td>
                         <img src="/images/property-icon.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                        <a href="/properties/{{ $property->id }}/" class="text-muted"> {{ $property->title }} </a>
+                        {{ $property->title }}
                     </td>
                     <td>
-                        <a href="/landlords/{{ $property->landlord->id }}/" class="text-muted">
-                            {{ App\Models\Landlord::whereId($property->landlord_id)->first()->name }} </a>
+
+                        {{ App\Models\Landlord::whereId($property->landlord_id)->first()->name }}
                     </td>
                     <td>{{ Number::currency($property->rent) }}</td>
 
@@ -75,6 +75,8 @@
                                     <font color="#413839">Cancelado</font>
                                 @elseif ($lastLease->isvalid == 3)
                                     <font color="#FF6700">Vencido</font>
+                                @elseif ($lastLease->isvalid == 5)
+                                    <font color="#2B1B17">Por Vencer</font>
                                 @elseif ($lastLease->isvalid == 1)
                                     <font color="#12AD2B">Vigente</font>
                                 @endif
@@ -88,7 +90,7 @@
                         @if ($property->building_id == 1)
                             <font color="gray">Sin Unidad Habitacional</font>
                         @else
-                            <a href="/buildings/{{ $property->building_id }}">
+                            <a href="/buildings/{{ $property->building_id }}" class="text-muted">
                                 {{ $property->building->name }}</a>
                         @endif
                     </td>

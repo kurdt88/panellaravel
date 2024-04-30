@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Crear una nueva Unidad')
 
 @section('content_header')
     {{-- <h1>Propiedades<b>LTE</b></h1> --}}
@@ -54,7 +54,9 @@
                             <option value="">-- Selecciona un Propietario --</option>
 
                             @foreach ($landlords as $landlord)
-                                <option value="{{ $landlord->id }}">{{ $landlord->name }}</option>
+                                @if ($landlord->id != 1)
+                                    <option value="{{ $landlord->id }}">{{ $landlord->name }}</option>
+                                @endif
                             @endforeach
 
                         </select>

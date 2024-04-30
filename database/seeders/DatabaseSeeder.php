@@ -20,16 +20,7 @@ class DatabaseSeeder extends Seeder
             'phone' => '',
             'comment' => '',
         ]);
-        \App\Models\Landlord::factory(3)->create();
 
-        \App\Models\Account::factory(15)->create();
-
-        \App\Models\User::factory()->create([
-            'name' => 'Luis Perez',
-            'email' => 'lperezpaz@live.com',
-            // 'password' => '$2y$12$NZbMJsKlHmlRJoeTzR.The8s/QdisU7b8fqeDhtyTHQCtsNuTIG7K'
-            'password' => bcrypt('12345678'),
-        ]);
 
         // NOTA: Debido a que pueden existir propiedades sin una unidad habitacional, se
         // debe crear un objeto unidad habitacional con el ID 1 para referenciar los casos base
@@ -111,12 +102,26 @@ class DatabaseSeeder extends Seeder
 
 
 
-        \App\Models\Building::factory(5)->create();
-        \App\Models\Property::factory(12)->create();
-        \App\Models\Subproperty::factory(8)->create();
 
-        \App\Models\Tenant::factory(12)->create();
-        \App\Models\Supplier::factory(4)->create();
+
+
+        \App\Models\User::factory()->create([
+            'name' => 'Luis Perez',
+            'email' => 'lperezpaz@live.com',
+            'password' => bcrypt('12345678'),
+        ]);
+
+        // \App\Models\Landlord::factory(3)->create();
+
+        // \App\Models\Account::factory(15)->create();
+
+
+        // \App\Models\Building::factory(5)->create();
+        // \App\Models\Property::factory(12)->create();
+        // \App\Models\Subproperty::factory(8)->create();
+
+        // \App\Models\Tenant::factory(12)->create();
+        // \App\Models\Supplier::factory(4)->create();
 
 
 

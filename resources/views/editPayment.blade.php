@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Editar Ingreso')
 
 @section('content_header')
     {{-- <h1>Propiedades<b>LTE</b></h1> --}}

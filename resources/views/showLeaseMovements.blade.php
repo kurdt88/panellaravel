@@ -118,26 +118,21 @@
                                         </td>
                                         <td>
                                             @if ($invoice->category == 'Ingreso')
-
-
-                                                @if ($invoice->total - $invoice->payments->sum('ammount') == 0)
+                                                @if ($invoice->ammount == 0)
+                                                    <label style="color:rgb(90, 94, 96);">Excento Pago</label>
+                                                @elseif ($invoice->total - $invoice->payments->sum('ammount') == 0)
                                                     <label style="color:rgb(1, 109, 30);">Liquidado</label>
                                                 @else
-                                                    {{-- @if ($invoice->lease->rescission)
-                                                <label style="color:rgba(246, 2, 2, 0.398);">Cancelado</label>
-                                            @else --}}
                                                     @if (Illuminate\Support\Carbon::createFromFormat('Y-m-d', $invoice->start_date)->isFuture())
                                                         <label style="color:rgb(154, 155, 155);">Inactivo</label>
                                                     @else
                                                         @if (Illuminate\Support\Carbon::createFromFormat('Y-m-d', $invoice->due_date)->isPast())
                                                             <label style="color:rgba(246, 2, 2, 0.398);">Vencido</label>
                                                         @else
-                                                            <label style="color:rgb(45, 38, 168);">Por liquidar
-                                                                {{ $invoice->payments->sum('ammount') }}<small>
-                                                                    | {{ $invoice->category }}</small></label>
+                                                            <label style="color:rgb(198, 96, 0);">Por cobrar
+                                                                <small> | {{ $invoice->category }}</small></label>
                                                         @endif
                                                     @endif
-                                                    {{-- @endif --}}
                                                 @endif
                                             @else
                                                 @if ($invoice->total - $invoice->expenses->sum('ammount') == 0)
@@ -152,7 +147,7 @@
                                                             @if (Illuminate\Support\Carbon::createFromFormat('Y-m-d', $invoice->due_date)->isPast())
                                                                 <label style="color:rgba(246, 2, 2, 0.398);">Vencido</label>
                                                             @else
-                                                                <label style="color:rgb(45, 38, 168);">Por liquidar
+                                                                <label style="color:rgb(47, 60, 194);">Por Pagar
                                                                     <small>
                                                                         | {{ $invoice->category }}</small></label>
                                                             @endif

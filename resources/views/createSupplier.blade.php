@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Crear nuevo Proveedor')
 
 @section('content_header')
     <x-flash-error-message />
@@ -58,8 +58,8 @@
                     @enderror
                 </div>
 
-                <x-adminlte-textarea name="comment" label="Descripción" rows=2 label-class="text-dark" igroup-size="sm"
-                    placeholder="Información Adicional.">
+                <x-adminlte-textarea name="comment" label="Descripción del Servicio" rows=2 label-class="text-dark"
+                    igroup-size="sm" placeholder="Servicio que proporciona el proveedor.">
                     <x-slot name="prependSlot">
                         <div class="input-group-text bg-secondary">
                             <i class="fas fa-lg fa-file-alt text-light"></i>

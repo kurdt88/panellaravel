@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Detalles de la Subunidad')
 
 @section('content_header')
     {{-- <h1>Propiedades<b>LTE</b></h1> --}}
@@ -143,6 +143,8 @@
                                     <font color="red">Cancelado</font>
                                 @elseif ($lease->isvalid == 3)
                                     <font color="gray">Vencido</font>
+                                @elseif ($lease->isvalid == 5)
+                                    <font color="#2B1B17">Por Vencer</font>
                                 @elseif ($lease->isvalid == 1)
                                     <font color="green">Vigente</font>
                                 @endif

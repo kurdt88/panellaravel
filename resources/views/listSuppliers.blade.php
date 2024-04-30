@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Lista de Proveedores')
 
 
 @section('content_header')
@@ -18,7 +18,7 @@
 @section('content')
 
     @php
-        $heads = ['Nombre', 'Teléfono | Correo', 'Info Adicional', '#Pagos Recibidos', 'Acciones'];
+        $heads = ['Nombre', 'Teléfono | Correo', 'Servicio', '#Pagos Recibidos', 'Acciones'];
 
     @endphp
 

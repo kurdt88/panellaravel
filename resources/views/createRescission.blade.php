@@ -86,9 +86,13 @@
 
                 </div>
                 <x-adminlte-card theme="danger" theme-mode="outline">
-                    Al cancelarse el contrato se eliminirán del sistema los siguientes recibos, los cuales fueron emitidos
-                    de manera automática por concepto de "Renta" y que a la fecha no tienen pagos asociados:
-                    <br>
+                    <font>Al cancelarse el contrato se eliminirán del sistema los siguientes recibos, los cuales fueron
+                        emitidos
+                        de manera automática por concepto de "Renta"/"Depósito de Garantía" y que a la fecha no tienen pagos
+                        asociados:
+                    </font>
+                    <br> <br>
+
                     <div class="col-6">
                         <div>
 

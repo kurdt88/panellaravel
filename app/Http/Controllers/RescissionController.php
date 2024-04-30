@@ -36,7 +36,16 @@ class RescissionController extends Controller
                     $invoice->delete();
                 }
             }
+            $myinvoices = Invoice::where("lease_id", $request->get('lease_id'))
+                ->where('concept', 'like', '%Depósito de Garantía%')
+                ->get();
 
+
+            foreach ($myinvoices as $invoice) {
+                if (count($invoice->payments) == 0) {
+                    $invoice->delete();
+                }
+            }
 
 
 

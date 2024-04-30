@@ -33,7 +33,7 @@ class LeaseController extends Controller
         $myleasesarray = array();
         $myleases = Lease::latest()->get();
         foreach ($myleases as $lease) {
-            if ($lease->isvalid == 1) {
+            if ($lease->isvalid == 1 || $lease->isvalid == 5) {
                 array_push($myleasesarray, $lease);
             }
         }
@@ -50,6 +50,15 @@ class LeaseController extends Controller
         return view('createLease', [
             'properties' => Property::all()->reverse()->values(),
             'tenants' => Tenant::latest()->get()
+        ]);
+
+    }
+    public function renew(Lease $lease)
+    {
+
+        return view('renewLease', [
+            'lease' => $lease
+
         ]);
 
     }
@@ -123,29 +132,34 @@ class LeaseController extends Controller
                 $mylease = Lease::create($formFields);
                 $lease_id = $mylease->id;
 
-                // Primero Crea la factura del Deposito de Garantia y despues ya genera las de las rentas
-                $deposit_invoice_start_date = Carbon::createFromFormat('Y-m-d', $startString)->format('Y-m-d');
-                $deposit_invoice_due_date = Carbon::createFromFormat('Y-m-d', $startString)->addDays(5)->format('Y-m-d');
-                $concept = 'Depósito de Garantía';
-
-                Invoice::create([
-                    'lease_id' => $lease_id,
-                    'sequence' => 1,
-                    'ammount' => $request->get('rent'),
-                    'type' => $request->get('type'),
-                    'category' => "Ingreso",
-                    'concept' => $concept,
-                    'iva' => "IVA",
-                    'iva_rate' => $iva_rate,
-                    'iva_ammount' => $deposit * $iva_rate,
-
-                    'comment' => "Garantía establecida en el contrato",
-                    'start_date' => $deposit_invoice_start_date,
-                    'due_date' => $deposit_invoice_due_date
-
-                ]);
 
 
+                if ($deposit) {
+
+
+                    // Primero Crea la factura del Deposito de Garantia y despues ya genera las de las rentas
+                    $deposit_invoice_start_date = Carbon::createFromFormat('Y-m-d', $startString)->format('Y-m-d');
+                    $deposit_invoice_due_date = Carbon::createFromFormat('Y-m-d', $startString)->addDays(5)->format('Y-m-d');
+                    $concept = 'Depósito de Garantía';
+
+                    Invoice::create([
+                        'lease_id' => $lease_id,
+                        'sequence' => 1,
+                        'ammount' => $deposit,
+                        'type' => $request->get('type'),
+                        'category' => "Ingreso",
+                        'concept' => $concept,
+                        'iva' => "IVA",
+                        'iva_rate' => $iva_rate,
+                        'iva_ammount' => $deposit * $iva_rate,
+
+                        'comment' => "Garantía establecida en el contrato",
+                        'start_date' => $deposit_invoice_start_date,
+                        'due_date' => $deposit_invoice_due_date
+
+                    ]);
+
+                }
 
 
                 for ($i = 1; $i <= $diff; $i++) {
@@ -313,6 +327,14 @@ class LeaseController extends Controller
             ->where('concept', 'like', '%Renta%')
             ->get();
 
+        foreach ($myinvoices as $invoice) {
+            if (count($invoice->payments) == 0) {
+                array_push($myinvoicesarray, $invoice);
+            }
+        }
+        $myinvoices = Invoice::where("lease_id", $lease->id)
+            ->where('concept', 'like', '%Depósito de Garantía%')
+            ->get();
 
         foreach ($myinvoices as $invoice) {
             if (count($invoice->payments) == 0) {

@@ -184,7 +184,7 @@ class InvoiceController extends Controller
                 $errorInfo = $exception->getMessage();
                 return redirect('newinvoice')->with('message', $errorInfo);
             }
-            return redirect('/invoices')->with('message', 'Recibo creado');
+            return redirect('/invoices_active')->with('message', 'Recibo creado');
         }
 
 
@@ -217,7 +217,7 @@ class InvoiceController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('/invoices')->with('message', $errorInfo);
         }
-        return redirect('/invoices')->with('message', 'Recibo eliminado');
+        return redirect('/invoices_active')->with('message', 'Recibo eliminado');
 
     }
 
@@ -283,7 +283,7 @@ class InvoiceController extends Controller
                 $errorInfo = $exception->getMessage();
                 return redirect('newinvoice')->with('message', $errorInfo);
             }
-            return redirect('/invoices')->with('message', 'Recibo actualizado');
+            return redirect('/invoices_active')->with('message', 'Recibo actualizado');
         }
     }
 

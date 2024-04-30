@@ -66,10 +66,10 @@ class PropertyController extends Controller
 
 
         $myinvoicesarray = array();
-        #Aqui recupero las compras de Menaje que se hicieron CON un contrato asociado
+        #Aqui recupero las compras de Inventario que se hicieron CON un contrato asociado
         foreach ($property->leases as $lease) {
             $invoices = Invoice::where("lease_id", $lease->id)
-                ->where('concept', 'like', '%Compra de Menaje%')
+                ->where('concept', 'like', '%Compra de Inventario%')
                 ->get();
 
 
@@ -78,10 +78,10 @@ class PropertyController extends Controller
             }
         }
 
-        #Aqui recupero las compras de Menaje que se hicieron SIN un contrato asociado
+        #Aqui recupero las compras de Inventario que se hicieron SIN un contrato asociado
         if (
             $myinvoicesnolease = Invoice::where("property_id", $property->id)
-                ->where('concept', 'like', '%Compra de Menaje%')
+                ->where('concept', 'like', '%Compra de Inventario%')
                 ->get()
         ) {
             foreach ($myinvoicesnolease as $invoice) {

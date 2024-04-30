@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Crear nueva Subunidad')
 
 @section('content_header')
     <x-flash-error-message />
@@ -44,15 +44,12 @@
                         @enderror
                     </div>
 
+
+
+                    <label>Propietario</label>
+
                     <div class="form-group">
-                        <label for="landlord_id">Propietario</label>
-                        <select name="landlord_id" class="custom-select rounded-0" id="landlord_id">
-                            <option value="">-- Selecciona un Propietario --</option>
-
-                            @foreach ($landlords as $landlord)
-                                <option value="{{ $landlord->id }}">{{ $landlord->name }}</option>
-                            @endforeach
-
+                        <select id="landlord-dropdown" name="landlord_id" class="form-control">
                         </select>
                         @error('landlord_id')
                             <p class="text-red">{{ $message }}</p>
@@ -176,6 +173,43 @@
                             //     '<option value="">-- Select Invoice 2 --</option>');
                         }
                     });
+
+
+                    $.ajax({
+                        url: "{{ url('api/fetch-invoices') }}",
+                        type: "POST",
+                        data: {
+                            property_id: idProperty,
+                            concept: 'find_property_landlord',
+
+                            _token: '{{ csrf_token() }}'
+                        },
+                        dataType: 'json',
+                        success: function(result) {
+
+
+                            $('#landlord-dropdown').html(
+                                '<option value=0>-- Selecciona un Propietario --</option>'
+                            );
+                            $.each(result.landlords, function(key, value) {
+                                if (value.id != 1) {
+                                    $("#landlord-dropdown").append('<option value="' +
+                                        value
+                                        .id +
+                                        '">' + value.name + '</option>');
+                                }
+                            });
+
+
+
+
+
+                        }
+                    });
+
+
+
+
                 });
 
 

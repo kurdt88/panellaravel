@@ -78,6 +78,8 @@
                                                         <font color="#413839">Cancelado</font>
                                                     @elseif ($lastLease->isvalid == 3)
                                                         <font color="#FF6700">Vencido</font>
+                                                    @elseif ($lastLease->isvalid == 5)
+                                                        <font color="#2B1B17">Por Vencer</font>
                                                     @elseif ($lastLease->isvalid == 1)
                                                         <font color="#12AD2B">Vigente</font>
                                                     @endif
@@ -116,6 +118,8 @@
                                                         <font color="#413839">Cancelado</font>
                                                     @elseif ($lastLease->isvalid == 3)
                                                         <font color="#FF6700">Vencido</font>
+                                                    @elseif ($lastLease->isvalid == 5)
+                                                        <font color="#2B1B17">Por Vencer</font>
                                                     @elseif ($lastLease->isvalid == 1)
                                                         <font color="#12AD2B">Vigente</font>
                                                     @endif

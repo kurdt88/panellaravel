@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 
-@section('title', 'Crear Contrato')
+@section('title', 'Renovación de Contrato')
 
 @section('content_header')
     <x-flash-error-message />
@@ -21,7 +21,7 @@
 
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Crear nuevo Contrato</h3>
+                <h3 class="card-title">Renovar Contrato</h3>
             </div>
 
 
@@ -29,17 +29,20 @@
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="property">Propiedad</label>
-                        <select name="property" class="custom-select rounded-0" id="property">
-                            <option value="">-- Selecciona la Propiedad --</option>
+                        <label>Propiedad</label>
+                        @if ($lease->subproperty_id != 1)
+                            <input type="text" id="subproperty" value="{{ $lease->subproperty->title }}"
+                                class="form-control" disabled />
+                            <input type="hidden" id="property" name="property" value="{{ $lease->property }}" />
+                            <input type="hidden" id="subproperty_id" name="subproperty_id"
+                                value="{{ $lease->subproperty_id }}" />
+                        @else
+                            <input type="text" value="{{ $lease->property_->title }}" class="form-control" disabled />
+                            <input type="hidden" id="property" name="property" value="{{ $lease->property }}" />
+                            <input type="hidden" id="subproperty_id" name="subproperty_id"
+                                value="{{ $lease->subproperty_id }}" />
+                        @endif
 
-                            @foreach ($properties as $property)
-                                <option value="{{ $property->id }}">{{ $property->title }}</option>
-                            @endforeach
-                            {{-- <option selected="selected">
-                                {{ old('property') }}
-                            </option> --}}
-                        </select>
                         @error('property')
                             <p class="text-red">{{ $message }}</p>
                         @enderror
@@ -48,50 +51,11 @@
 
 
 
-                    <x-adminlte-button label="?" data-toggle="modal" data-target="#modalMin" theme="light" />
-                    <label for="type">Subunidad </label>
-
-                    <small> * Campo Opcional </small>
-                    <x-adminlte-modal id="modalMin" title="Contrato de una Subunidad" theme="dark">
-                        El sistema permite crear Contratos para Unidades (casas, departamentos, etc) y también para
-                        Subunidades (lugares de estacionamiento, bodegas, etc).<br><br>
-                        Si selecciona esta opción <b>se creará el contrato de una Subunidad</b> y no el de una Unidad.
-                        <br><br>
-                        Si lo que desea es crear un contrato de una Unidad, deje esta opción vacia.
-                    </x-adminlte-modal>
-
-                    {{-- Example button to open modal --}}
-
-
-
-                    <div class="form-group">
-
-                        <select id="subproperty-dropdown" name="subproperty_id" class="form-control">
-                        </select>
-                        @error('subproperty_id')
-                            <p class="text-red">{{ $message }}</p>
-                        @enderror
-
-
-
-                    </div>
-
-
-
                     <div class="form-group">
                         <label for="tenant">Arrendatario (Nombre o Razón Social)</label>
-                        <select name="tenant" class="custom-select rounded-0">
-                            <option value="">-- Selecciona un Arrendatario --</option>
-
-                            @foreach ($tenants as $tenant)
-                                @if ($tenant->id != 1)
-                                    <option value="{{ $tenant->id }}">{{ $tenant->name }}</option>
-                                @endif
-                            @endforeach
-                            {{-- <option selected="selected">
-                                {{ old('tenant') }}
-                            </option> --}}
-                        </select>
+                        <input type="text" value="{{ App\Models\Tenant::whereId($lease->tenant)->first()->name }}"
+                            class="form-control" disabled />
+                        <input type="hidden" id="tenant" name="tenant" value="{{ $lease->tenant }}" />
                         @error('tenant')
                             <p class="text-red">{{ $message }}</p>
                         @enderror
@@ -100,17 +64,24 @@
                     <div class="form-group">
                         <label id="months_grace_period_label">Periodo de gracia (meses)</label><small> * Campo
                             Opcional</small>
+                        <br>
+                        <font color="blue"><small>Valor actual:
+
+                                @if ($mygrace = $lease->months_grace_period)
+                                    {{ $mygrace }}
+                                @else
+                                    0
+                                @endif
+
+                            </small></font>
                         <select name="months_grace_period" class="custom-select rounded-0">
+                            <option value="0">0</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
                             <option value="6">6</option>
-
-                            <option selected="selected">
-                                {{ old('months_grace_period') }}
-                            </option>
                         </select>
                         @error('months_grace_period')
                             <p class="text-red">{{ $message }}</p>
@@ -120,12 +91,15 @@
 
                     <div class="form-group">
                         <label for="type">Divisa</label>
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                {{ $lease->type }}
+                            </small></font>
                         <select name="type" class="custom-select rounded-0">
                             <option value="MXN">MXN</option>
                             <option value="USD">USD</option>
-
                             <option selected="selected">
-                                {{ old('type') }}
+                                {{ $lease->type }}
                             </option>
                         </select>
                         @error('type')
@@ -135,13 +109,17 @@
 
                     <div class="form-group">
                         <label for="iva">IVA</label>
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                {{ $lease->iva }}
+                            </small></font>
                         <select id="iva" name="iva" class="custom-select rounded-0">
-                            <option selected="selected">
-                                {{ old('iva') }}
-                            </option>
                             <option value="Exento">Exento</option>
                             <option value="IVA">IVA</option>
                             <option value="IVA_ISR">IVA+ISR</option>
+                            <option selected="selected">
+                                {{ $lease->iva }}
+                            </option>
                         </select>
 
                         @error('iva')
@@ -151,8 +129,12 @@
 
                     <div class="form-group">
                         <label>Renta Mensual</label>
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                {{ Number::currency($lease->rent) }} / * Se recomienda <b>revisar y ajustar</b>
+                            </small></font>
                         <input type="number" min="1" step="any" class="form-control" name="rent"
-                            value="{{ old('rent') }}">
+                            value="{{ $lease->rent }}">
                         @error('rent')
                             <p class="text-red">{{ $message }}</p>
                         @enderror
@@ -160,7 +142,11 @@
 
                     <div class="form-group">
                         <label for="deposit">Depósito</label>
-                        <input type="number" class="form-control" name="deposit" value="{{ old('deposit') }}">
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                {{ Number::currency($lease->deposit) }} / * Se recomienda <b>revisar y ajustar</b>
+                            </small></font>
+                        <input type="number" class="form-control" name="deposit" value="{{ $lease->deposit }}">
                         @error('deposit')
                             <p class="text-red">{{ $message }}</p>
                         @enderror
@@ -168,9 +154,13 @@
 
                     @php
                         $config = [
-                            // 'timePicker' => true,
-                            'startDate' => 'js:moment()',
-                            'endDate' => "js:moment().add(1,'years')",
+                            'timePicker' => true,
+                            'startDate' => Illuminate\Support\Carbon::createFromFormat('Y-m-d', $lease->start)
+                                ->addYears(1)
+                                ->format('Y-m-d'),
+                            'endDate' => Illuminate\Support\Carbon::createFromFormat('Y-m-d', $lease->end)
+                                ->addYears(1)
+                                ->format('Y-m-d'),
                             'locale' => ['format' => 'YYYY-MM-DD'],
                         ];
                     @endphp
@@ -185,31 +175,26 @@
 
 
 
-                    <x-adminlte-textarea name="contract" label="Información Adicional" rows=1 label-class="text-dark"
-                        igroup-size="sm" placeholder="Información Adicional......">
-                        <x-slot name="prependSlot">
-                            <div class="input-group-text bg-dark">
-                                <i class="fas fa-lg fa-file-alt text-light"></i>
-                            </div>
-                        </x-slot>
-                        {{ old('contract') }}
-                    </x-adminlte-textarea>
 
+
+
+                    <div class="form-group">
+                        <label for="contract">Información Adicional</label>
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                {{ $lease->contract }}
+                            </small></font>
+                        <textarea class="form-control" name="contract" rows="3">{{ $lease->contract }}</textarea>
+                        @error('contract')
+                            <p class="text-red">{{ $message }}</p>
+                        @enderror
+                    </div>
 
                 </div>
 
-                <x-adminlte-modal id="modalinfo1" title="Creación de Recibos de manera Automática" theme="primary">
-                    Al crearse un nuevo contrato, el sistema crea de manera automática los recibos correspondientes a las
-                    Rentas (1 por mes) y al Depósito de Garatia (si hubiera). <br><br>Si desea revisar/editar/borrar estos
-                    Recibos,
-                    posterior a la creación del Contrato, vaya a la opción "Recibos".
-                </x-adminlte-modal>
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Crear Contrato</button>
-                    <x-adminlte-button label="Recibos (?)" theme="secondary" data-toggle="modal"
-                        data-target="#modalinfo1" />
-
+                    <button type="submit" class="btn btn-primary">Renovar Contrato</button>
 
                     <a href="javascript:history.back()" class="text-black ml-4">Regresar</a>
                 </div>

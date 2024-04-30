@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 
-@section('title', 'Panel de Inicio')
+@section('title', 'Editar Subunidad')
 
 @section('content_header')
     <x-flash-error-message />
@@ -49,10 +49,12 @@
                         <label for="landlord_id">Propietario</label>
                         <select name="landlord_id" class="custom-select rounded-0" id="landlord_id">
                             @foreach ($landlords as $landlord)
-                                @if ($landlord->id == $subproperty->landlord_id)
-                                    <option value="{{ $landlord->id }}" selected>{{ $landlord->name }}</option>
-                                @else
-                                    <option value="{{ $landlord->id }}">{{ $landlord->name }}</option>
+                                @if ($landlord->id != 1)
+                                    @if ($landlord->id == $subproperty->landlord_id)
+                                        <option value="{{ $landlord->id }}" selected>{{ $landlord->name }}</option>
+                                    @else
+                                        <option value="{{ $landlord->id }}">{{ $landlord->name }}</option>
+                                    @endif
                                 @endif
                             @endforeach
                         </select>

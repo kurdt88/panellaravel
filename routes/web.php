@@ -102,6 +102,8 @@ Route::middleware([
 
 
     Route::get('/cancellease/{lease}', [LeaseController::class, 'cancel']);
+    Route::get('/renewlease/{lease}', [LeaseController::class, 'renew']);
+
     Route::post('/cancellease', [RescissionController::class, 'store']);
 
 
