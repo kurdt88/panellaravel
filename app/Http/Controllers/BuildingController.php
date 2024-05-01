@@ -58,6 +58,90 @@ class BuildingController extends Controller
 
 
 
+    public function searchMovements(Building $building)
+    {
+        return view('searchBudgetMovements', [
+            'building' => $building
+        ]);
+    }
+
+
+
+
+    public function budgetsearchmovements(Request $request, Building $building)
+    {
+        $startString = substr($request->get('searchperiod'), 0, 10);
+        $endString = substr($request->get('searchperiod'), -10);
+        $start_date = Carbon::createFromFormat('Y-m-d', $startString);
+        $end_date = Carbon::createFromFormat('Y-m-d', $endString);
+
+
+        $myexpensesarray = array();
+        foreach ($building->properties as $property) {
+            foreach ($property->leases as $lease) {
+
+                $expenses = Expense::where('lease_id', $lease->id)
+                    ->where('maintenance_budget', 1)
+                    ->whereYear('date', '>=', $start_date->year)
+                    ->whereYear('date', '<=', $end_date->year)
+                    ->whereMonth('date', '>=', $start_date->month)
+                    ->whereMonth('date', '<=', $end_date->month)
+                    ->whereDay('date', '>=', $start_date->day)
+                    ->whereDay('date', '<=', $end_date->day)
+                    ->get();
+
+
+                foreach ($expenses as $expense) {
+                    array_push($myexpensesarray, $expense);
+                }
+            }
+
+            // Recuperando los egresos sin contrato asociado
+            $invoices = Invoice::where("property_id", $property->id)
+                ->whereYear('start_date', '>=', $start_date->year)
+                ->whereYear('start_date', '<=', $end_date->year)
+                ->whereMonth('start_date', '>=', $start_date->month)
+                ->whereMonth('start_date', '<=', $end_date->month)
+                ->whereDay('start_date', '>=', $start_date->day)
+                ->whereDay('start_date', '<=', $end_date->day)
+                ->get();
+
+            foreach ($invoices as $invoice) {
+                foreach ($invoice->expenses as $expense) {
+                    if ($expense->maintenance_budget == 1) {
+                        array_push($myexpensesarray, $expense);
+                    }
+                }
+            }
+
+
+
+
+        }
+
+
+
+        return view('showBuildingMaintenanceExpenses', [
+            'building' => $building,
+            'expenses' => $myexpensesarray,
+            'period' => $start_date->day . '/' . $start_date->month . '/' . $start_date->year . ' - ' . $end_date->day . '/' . $end_date->month . '/' . $end_date->year
+
+        ]);
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
     public function destroy(Building $building)
     {
         try {
@@ -170,7 +254,9 @@ class BuildingController extends Controller
 
         return view('showBuildingMaintenanceExpenses', [
             'building' => $building,
-            'expenses' => $myexpensesarray
+            'expenses' => $myexpensesarray,
+            'period' => ' Mes: ' . $now->month . ' / ' . $now->year
+
         ]);
     }
 

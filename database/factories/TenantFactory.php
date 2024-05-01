@@ -15,11 +15,14 @@ class TenantFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'address' => $this->faker->address(),
-            'email' => $this->faker->email(),
-            'phone' => $this->faker->numerify('##########'),
-            'description' => $this->faker->text(50),
+            //
         ];
+        // return [
+        //     'name' => $this->faker->name(),
+        //     'address' => $this->faker->address(),
+        //     'email' => $this->faker->email(),
+        //     'phone' => $this->faker->numerify('##########'),
+        //     'description' => $this->faker->text(50),
+        // ];
     }
 }

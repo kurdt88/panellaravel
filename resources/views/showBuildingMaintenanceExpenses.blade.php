@@ -123,6 +123,8 @@
 
         <x-adminlte-card theme="primary" theme-mode="outline">
 
+            Periodo | <label style="background-color:rgba(231, 244, 197, 0.829);">{{ $period }} </label><br>
+
             Presupuesto de Mtto (MXN):
             <font color="green">
                 {{ Number::currency($building->maintenance_budget) }}
@@ -155,6 +157,10 @@
 
             <button onClick="window.print()" type="button" class="btn btn-warning float-right" style="margin-right: 5px;">
                 <i class="fas fa-print"></i> Imprimir
+            </button>
+            <button onClick="location.href='/searchbudgetmovements/{{ $building->id }}'" type="button"
+                class="btn btn-dark float-right" style="margin-right: 5px;">
+                <i class="fas fa-coins"></i> Más movimientos
             </button>
 
         </x-adminlte-card>

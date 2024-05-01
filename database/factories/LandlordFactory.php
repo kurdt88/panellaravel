@@ -17,11 +17,14 @@ class LandlordFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->email(),
-            'address' => $this->faker->address(),
-            'phone' => $this->faker->phoneNumber(),
-            'comment' => $this->faker->text(50),
+            //
         ];
+        // return [
+        //     'name' => $this->faker->name(),
+        //     'email' => $this->faker->email(),
+        //     'address' => $this->faker->address(),
+        //     'phone' => $this->faker->phoneNumber(),
+        //     'comment' => $this->faker->text(50),
+        // ];
     }
 }

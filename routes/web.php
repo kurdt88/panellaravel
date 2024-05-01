@@ -80,6 +80,8 @@ Route::middleware([
     Route::get('/accountsearchmovements/{account}', [AccountController::class, 'searchMovements']);
     Route::post('/searchmovements/{account}', [AccountController::class, 'accountsearchmovements']);
 
+    Route::get('/searchbudgetmovements/{building}', [BuildingController::class, 'searchmovements']);
+    Route::post('/budgetmovements/{building}', [BuildingController::class, 'budgetsearchmovements']);
 
 
     Route::get('/propertycommodities/{property}/', [PropertyController::class, 'showCommodities']);

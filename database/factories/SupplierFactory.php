@@ -17,12 +17,15 @@ class SupplierFactory extends Factory
     public function definition(): array
     {
         return [
-            // 'building_id' => $this->faker->randomNumber(1),
-            'name' => $this->faker->city() . ' Supplier INC ',
-            'email' => $this->faker->email(),
-            'phone' => $this->faker->numerify('##########'),
-            'comment' => $this->faker->text(50),
-
+            //
         ];
+        // return [
+        //     // 'building_id' => $this->faker->randomNumber(1),
+        //     'name' => $this->faker->city() . ' Supplier INC ',
+        //     'email' => $this->faker->email(),
+        //     'phone' => $this->faker->numerify('##########'),
+        //     'comment' => $this->faker->text(50),
+
+        // ];
     }
 }
