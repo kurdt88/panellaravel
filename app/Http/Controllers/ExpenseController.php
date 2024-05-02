@@ -135,7 +135,7 @@ class ExpenseController extends Controller
                         'expense_id' => $myexpense->id,
                         'type' => 'image',
                         'original_name' => $file->getClientOriginalName(),
-                        'image' => $file->store('expenses.images', 'public'),
+                        'image' => $file->store('expenses.images', 'spaces'),
 
                     ]);
                 }
@@ -148,7 +148,7 @@ class ExpenseController extends Controller
                         'expense_id' => $myexpense->id,
                         'type' => 'file',
                         'original_name' => $file->getClientOriginalName(),
-                        'image' => $file->store('expenses.files', 'public'),
+                        'image' => $file->store('expenses.files', 'spaces'),
 
                     ]);
                 }

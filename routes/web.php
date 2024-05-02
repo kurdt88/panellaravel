@@ -219,6 +219,6 @@ Route::middleware([
     Route::post('api/fetch-invoices', [DropdownController::class, 'fetchInvoice']);
     Route::post('api/fetch-subproperties', [DropdownController::class, 'fetchSubproperties']);
 
-    URL::forceScheme('https');
+    // URL::forceScheme('https');
 
 });
