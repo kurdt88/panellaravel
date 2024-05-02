@@ -203,10 +203,11 @@
                     <div class="col-12 product-image-thumbs">
                         @foreach ($expense->expenseimgs as $expenseimg)
                             @if ($expenseimg->type == 'image')
-                                <a href="{{ asset('storage/' . $expenseimg->image) }}">
+                                {{-- <a href="{{ asset('storage/' . $expenseimg->image) }}"> --}}
+                                <a href="https://propertiesspace.sfo3.digitaloceanspaces.com/{{ $expenseimg->image }}">
                                     <div class="product-image-thumb">
-                                        <img width="300" height="auto"
-                                            src="{{ $expenseimg->image ? asset('storage/' . $expenseimg->image) : asset('/images/no-image.png') }}"
+                                        <img width="300" height="auto" {{-- src="{{ $expenseimg->image ? asset('storage/' . $expenseimg->image) : asset('/images/no-image.png') }}" --}}
+                                            src="https://propertiesspace.sfo3.digitaloceanspaces.com/{{ $expenseimg->image }}"
                                             alt="{{ $expenseimg->original_name }}" />
                                     </div>
                                 </a>
@@ -227,7 +228,9 @@
                 <ul>
                     @foreach ($expense->expenseimgs as $expenseimg)
                         @if ($expenseimg->type == 'file')
-                            <a href="{{ asset('storage/' . $expenseimg->image) }}">
+                            {{-- <a href="{{ asset('storage/' . $expenseimg->image) }}"> --}}
+                            <a href="https://propertiesspace.sfo3.digitaloceanspaces.com/{{ $expenseimg->image }}">
+
                                 <li>{{ $expenseimg->original_name }}</li>
                             </a>
                         @endif

@@ -10,6 +10,7 @@ use App\Models\Expenseimg;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 
 
@@ -131,11 +132,14 @@ class ExpenseController extends Controller
 
             if ($request->hasFile('images')) {
                 foreach ($files_images as $file) {
+                    $name = $file->getClientOriginalName();
                     Expenseimg::create([
                         'expense_id' => $myexpense->id,
                         'type' => 'image',
                         'original_name' => $file->getClientOriginalName(),
-                        'image' => $file->store('expenses.images', 'spaces'),
+                        'image' => $file->store('/expenses/images', ['disk' => 'spaces', 'visibility' => 'public']),
+
+                        // 'image' => Storage::disk('spaces')->put('/expenses/images/' . $name, file_get_contents($file->getRealPath()), 'public'),
 
                     ]);
                 }
@@ -148,7 +152,7 @@ class ExpenseController extends Controller
                         'expense_id' => $myexpense->id,
                         'type' => 'file',
                         'original_name' => $file->getClientOriginalName(),
-                        'image' => $file->store('expenses.files', 'spaces'),
+                        'image' => $file->store('/expenses/files', ['disk' => 'spaces', 'visibility' => 'public']),
 
                     ]);
                 }
@@ -224,7 +228,9 @@ class ExpenseController extends Controller
                         'expense_id' => $expense->id,
                         'type' => 'image',
                         'original_name' => $file->getClientOriginalName(),
-                        'image' => $file->store('expenses.images', 'public'),
+                        // 'image' => $file->store('expenses.images', 'public'),
+                        'image' => $file->store('/expenses/images', ['disk' => 'spaces', 'visibility' => 'public']),
+
 
                     ]);
                 }
@@ -237,7 +243,8 @@ class ExpenseController extends Controller
                         'expense_id' => $expense->id,
                         'type' => 'file',
                         'original_name' => $file->getClientOriginalName(),
-                        'image' => $file->store('expenses.files', 'public'),
+                        // 'image' => $file->store('expenses.files', 'public'),
+                        'image' => $file->store('/expenses/files', ['disk' => 'spaces', 'visibility' => 'public']),
 
                     ]);
                 }
