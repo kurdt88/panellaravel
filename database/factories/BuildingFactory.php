@@ -19,12 +19,6 @@ class BuildingFactory extends Factory
         return [
             //
         ];
-        // return [
-        //     // 'building_id' => $this->faker->randomNumber(1),
-        //     'name' => 'Edificio ' . $this->faker->city(),
-        //     'address' => $this->faker->address(),
-        //     'description' => $this->faker->text(50),
 
-        // ];
     }
 }

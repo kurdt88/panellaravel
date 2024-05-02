@@ -17,12 +17,6 @@ class TenantFactory extends Factory
         return [
             //
         ];
-        // return [
-        //     'name' => $this->faker->name(),
-        //     'address' => $this->faker->address(),
-        //     'email' => $this->faker->email(),
-        //     'phone' => $this->faker->numerify('##########'),
-        //     'description' => $this->faker->text(50),
-        // ];
+
     }
 }

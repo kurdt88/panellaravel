@@ -19,13 +19,6 @@ class AccountFactory extends Factory
         return [
             //
         ];
-        // return [
-        //     'landlord_id' => $this->faker->randomElement([2, 3, 4]),
-        //     'alias' => $this->faker->text(8),
-        //     'bank' => $this->faker->randomElement(['HSBC', 'City Banamex', 'BBVA Bancomer', 'Banorte']),
-        //     'number' => $this->faker->creditCardNumber(),
-        //     'type' => $this->faker->randomElement(['USD', 'MXN']),
-        //     'comment' => $this->faker->text(50),
-        // ];
+
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea4d584672d8ed07ef19e6d536fd7c75",
+    "content-hash": "5608490ec6365c7b2138d47748a51ff3",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -2458,16 +2458,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.4.11",
+            "version": "v3.4.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "8a78d0c3ae9b4c96a2d8932ea4ac0dc782325de0"
+                "reference": "54dd265c17f7b5200627eb9690590e7cbbad1027"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/8a78d0c3ae9b4c96a2d8932ea4ac0dc782325de0",
-                "reference": "8a78d0c3ae9b4c96a2d8932ea4ac0dc782325de0",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/54dd265c17f7b5200627eb9690590e7cbbad1027",
+                "reference": "54dd265c17f7b5200627eb9690590e7cbbad1027",
                 "shasum": ""
             },
             "require": {
@@ -2482,7 +2482,7 @@
             },
             "require-dev": {
                 "calebporzio/sushi": "^2.1",
-                "laravel/framework": "^10.0|^11.0",
+                "laravel/framework": "^10.15.0|^11.0",
                 "laravel/prompts": "^0.1.6",
                 "mockery/mockery": "^1.3.1",
                 "orchestra/testbench": "^8.21.0|^9.0",
@@ -2522,7 +2522,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.4.11"
+                "source": "https://github.com/livewire/livewire/tree/v3.4.12"
             },
             "funding": [
                 {
@@ -2530,7 +2530,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-24T12:14:15+00:00"
+            "time": "2024-05-02T17:10:37+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -6732,6 +6732,69 @@
     ],
     "packages-dev": [
         {
+            "name": "fakerphp/faker",
+            "version": "v1.23.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FakerPHP/Faker.git",
+                "reference": "bfb4fe148adbf78eff521199619b93a52ae3554b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/bfb4fe148adbf78eff521199619b93a52ae3554b",
+                "reference": "bfb4fe148adbf78eff521199619b93a52ae3554b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0",
+                "psr/container": "^1.0 || ^2.0",
+                "symfony/deprecation-contracts": "^2.2 || ^3.0"
+            },
+            "conflict": {
+                "fzaninotto/faker": "*"
+            },
+            "require-dev": {
+                "bamarni/composer-bin-plugin": "^1.4.1",
+                "doctrine/persistence": "^1.3 || ^2.0",
+                "ext-intl": "*",
+                "phpunit/phpunit": "^9.5.26",
+                "symfony/phpunit-bridge": "^5.4.16"
+            },
+            "suggest": {
+                "doctrine/orm": "Required to use Faker\\ORM\\Doctrine",
+                "ext-curl": "Required by Faker\\Provider\\Image to download images.",
+                "ext-dom": "Required by Faker\\Provider\\HtmlLorem for generating random HTML.",
+                "ext-iconv": "Required by Faker\\Provider\\ru_RU\\Text::realText() for generating real Russian text.",
+                "ext-mbstring": "Required for multibyte Unicode string functionality."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "support": {
+                "issues": "https://github.com/FakerPHP/Faker/issues",
+                "source": "https://github.com/FakerPHP/Faker/tree/v1.23.1"
+            },
+            "time": "2024-01-02T13:46:09+00:00"
+        },
+        {
             "name": "filp/whoops",
             "version": "2.15.4",
             "source": {
@@ -8741,16 +8804,16 @@
         },
         {
             "name": "spatie/flare-client-php",
-            "version": "1.4.4",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/flare-client-php.git",
-                "reference": "17082e780752d346c2db12ef5d6bee8e835e399c"
+                "reference": "9aa60f6ded35a774554e7a5256dca12b72693b78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/flare-client-php/zipball/17082e780752d346c2db12ef5d6bee8e835e399c",
-                "reference": "17082e780752d346c2db12ef5d6bee8e835e399c",
+                "url": "https://api.github.com/repos/spatie/flare-client-php/zipball/9aa60f6ded35a774554e7a5256dca12b72693b78",
+                "reference": "9aa60f6ded35a774554e7a5256dca12b72693b78",
                 "shasum": ""
             },
             "require": {
@@ -8798,7 +8861,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/flare-client-php/issues",
-                "source": "https://github.com/spatie/flare-client-php/tree/1.4.4"
+                "source": "https://github.com/spatie/flare-client-php/tree/1.5.0"
             },
             "funding": [
                 {
@@ -8806,7 +8869,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-31T14:18:45+00:00"
+            "time": "2024-05-02T13:18:42+00:00"
         },
         {
             "name": "spatie/ignition",
@@ -8893,16 +8956,16 @@
         },
         {
             "name": "spatie/laravel-ignition",
-            "version": "2.6.2",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ignition.git",
-                "reference": "42d986f4ab9d667020264a7481190a4606ebbeb0"
+                "reference": "f52124d50122611e8a40f628cef5c19ff6cc5b57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/42d986f4ab9d667020264a7481190a4606ebbeb0",
-                "reference": "42d986f4ab9d667020264a7481190a4606ebbeb0",
+                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/f52124d50122611e8a40f628cef5c19ff6cc5b57",
+                "reference": "f52124d50122611e8a40f628cef5c19ff6cc5b57",
                 "shasum": ""
             },
             "require": {
@@ -8911,7 +8974,7 @@
                 "ext-mbstring": "*",
                 "illuminate/support": "^10.0|^11.0",
                 "php": "^8.1",
-                "spatie/flare-client-php": "^1.3.5",
+                "spatie/flare-client-php": "^1.5",
                 "spatie/ignition": "^1.14",
                 "symfony/console": "^6.2.3|^7.0",
                 "symfony/var-dumper": "^6.2.3|^7.0"
@@ -8981,7 +9044,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-30T13:56:21+00:00"
+            "time": "2024-05-02T13:42:49+00:00"
         },
         {
             "name": "symfony/yaml",

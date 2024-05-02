@@ -19,12 +19,6 @@ class LandlordFactory extends Factory
         return [
             //
         ];
-        // return [
-        //     'name' => $this->faker->name(),
-        //     'email' => $this->faker->email(),
-        //     'address' => $this->faker->address(),
-        //     'phone' => $this->faker->phoneNumber(),
-        //     'comment' => $this->faker->text(50),
-        // ];
+
     }
 }

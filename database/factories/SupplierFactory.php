@@ -19,13 +19,6 @@ class SupplierFactory extends Factory
         return [
             //
         ];
-        // return [
-        //     // 'building_id' => $this->faker->randomNumber(1),
-        //     'name' => $this->faker->city() . ' Supplier INC ',
-        //     'email' => $this->faker->email(),
-        //     'phone' => $this->faker->numerify('##########'),
-        //     'comment' => $this->faker->text(50),
 
-        // ];
     }
 }
