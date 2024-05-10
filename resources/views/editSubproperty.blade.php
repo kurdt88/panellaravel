@@ -70,6 +70,7 @@
                             <option value="Estacionamiento">Estacionamiento</option>
                             <option value="Bodega">Bodega</option>
                             <option value="Estudio">Estudio</option>
+                            <option value="Depósito de Perro">Depósito de Perro</option>
                             <option value="Otro">Otro</option>
                             <option selected="selected">
                                 {{ $subproperty->type }}

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LeaseController;
+use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ExpenseController;
@@ -100,6 +101,7 @@ Route::middleware([
     Route::get('/newlandlord', [LandlordController::class, 'create']);
     Route::get('/newaccount', [AccountController::class, 'create']);
     Route::get('/newsupplier', [SupplierController::class, 'create']);
+    Route::get('/newbudget/{building}', [BuildingController::class, 'createBudget']);
 
 
 
@@ -121,6 +123,8 @@ Route::middleware([
     Route::post('/indexlandlords', [LandlordController::class, 'store']);
     Route::post('/indexaccounts', [AccountController::class, 'store']);
     Route::post('/indexsuppliers', [SupplierController::class, 'store']);
+    Route::post('/indexbudgets', [BudgetController::class, 'store']);
+
 
 
 
@@ -136,6 +140,8 @@ Route::middleware([
     Route::delete('/dellandlord/{landlord}', [LandlordController::class, 'destroy']);
     Route::delete('/delaccount/{account}', [AccountController::class, 'destroy']);
     Route::delete('/delsupplier/{supplier}', [SupplierController::class, 'destroy']);
+    Route::delete('/delbudget/{budget}', [BudgetController::class, 'destroy']);
+
 
 
 
@@ -154,6 +160,8 @@ Route::middleware([
     Route::get('/indexlandlords/{landlord}/edit', [LandlordController::class, 'edit']);
     Route::get('/indexaccounts/{account}/edit', [AccountController::class, 'edit']);
     Route::get('/indexsuppliers/{supplier}/edit', [SupplierController::class, 'edit']);
+    Route::get('/indexbudgets/{budget}/edit', [BudgetController::class, 'edit']);
+
 
 
 
@@ -172,6 +180,8 @@ Route::middleware([
     Route::put('/indexlandlords/{landlord}', [LandlordController::class, 'update']);
     Route::put('/indexaccounts/{account}', [AccountController::class, 'update']);
     Route::put('/indexsuppliers/{supplier}', [SupplierController::class, 'update']);
+    Route::put('/indexbudgets/{budget}', [BudgetController::class, 'update']);
+
 
 
 
@@ -195,6 +205,8 @@ Route::middleware([
 
     Route::get('/buildingproperties/{building}', [BuildingController::class, 'showProperties']);
     Route::get('/buildingmaintenanceexpenses/{building}', [BuildingController::class, 'showMaintenanceExpenses']);
+    Route::get('/buildingbudgets/{building}', [BuildingController::class, 'showBudgets']);
+
 
     Route::get('/propertysubproperties/{property}', [PropertyController::class, 'showSubproperties']);
     Route::get('/landlorditems/{landlord}', [LandlordController::class, 'showItems']);

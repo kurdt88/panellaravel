@@ -26,8 +26,8 @@
             'Nombre',
             'Dirección',
             'Descripción',
-            'Presupuesto Mtto (MXN)',
-            'Presupuesto Mtto (USD)',
+            // 'Presupuesto Mtto (MXN)',
+            // 'Presupuesto Mtto (USD)',
             '# Propiedades',
             'Acciones',
         ];
@@ -61,12 +61,12 @@
 
                     </td>
 
-                    <td>
+                    {{-- <td>
                         {{ Number::currency($building->maintenance_budget) }}
                     </td>
                     <td>
                         {{ Number::currency($building->maintenance_budget_usd) }}
-                    </td>
+                    </td> --}}
                     <td>
                         {{ count($building->properties) }}
 

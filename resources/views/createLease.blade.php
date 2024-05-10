@@ -141,7 +141,7 @@
                             </option>
                             <option value="Exento">Exento</option>
                             <option value="IVA">IVA</option>
-                            <option value="IVA_ISR">IVA+ISR</option>
+                            <option value="IVA_RETENCIONES">IVA+RETENCIONES</option>
                         </select>
 
                         @error('iva')

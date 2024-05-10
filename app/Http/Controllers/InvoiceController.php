@@ -137,6 +137,7 @@ class InvoiceController extends Controller
             $formFields = $request->validate([
                 'lease_id' => 'required',
                 'concept' => 'required',
+                'subconcept' => 'required',
                 'ammount' => 'required',
                 'type' => 'required',
                 'iva' => 'required',
@@ -166,9 +167,9 @@ class InvoiceController extends Controller
                 $iva_ammount = $request->get('ammount') * $iva_rate;
                 $formFields = array_merge($formFields, array('iva_ammount' => $iva_ammount));
                 $formFields = array_merge($formFields, array('iva_rate' => $iva_rate));
-            } elseif ($request->get('iva') == 'IVA_ISR') {
-                $iva_rate = Tax::where('name', '=', 'IVA_ISR')->first()->value;
-                $iva_ammount = $request->get('ammount') * $iva_rate;
+            } elseif ($request->get('iva') == 'IVA_RETENCIONES') {
+                $iva_rate = Tax::where('name', '=', 'IVA_RETENCIONES')->first()->value;
+                $iva_ammount = ($request->get('ammount') * 0.16) - ($request->get('ammount') * 0.10667) - ($request->get('ammount') * 0.0125);
                 $formFields = array_merge($formFields, array('iva_ammount' => $iva_ammount));
                 $formFields = array_merge($formFields, array('iva_rate' => $iva_rate));
             }
@@ -248,6 +249,7 @@ class InvoiceController extends Controller
             $formFields = $request->validate([
                 'lease_id' => 'required',
                 'concept' => 'required',
+                'subconcept' => 'required',
                 'ammount' => 'required',
                 'type' => 'required',
                 'iva' => 'required',
@@ -267,12 +269,13 @@ class InvoiceController extends Controller
                 $iva_ammount = $request->get('ammount') * $iva_rate;
                 $formFields = array_merge($formFields, array('iva_ammount' => $iva_ammount));
                 $formFields = array_merge($formFields, array('iva_rate' => $iva_rate));
-            } elseif ($request->get('iva') == 'IVA_ISR') {
-                $iva_rate = Tax::where('name', '=', 'IVA_ISR')->first()->value;
-                $iva_ammount = $request->get('ammount') * $iva_rate;
+            } elseif ($request->get('iva') == 'IVA_RETENCIONES') {
+                $iva_rate = Tax::where('name', '=', 'IVA_RETENCIONES')->first()->value;
+                $iva_ammount = ($request->get('ammount') * 0.16) - ($request->get('ammount') * 0.10667) - ($request->get('ammount') * 0.0125);
                 $formFields = array_merge($formFields, array('iva_ammount' => $iva_ammount));
                 $formFields = array_merge($formFields, array('iva_rate' => $iva_rate));
             }
+
 
             $formFields = array_merge($formFields, array('sequence' => 1, 'start_date' => $startString, 'due_date' => $endString));
 

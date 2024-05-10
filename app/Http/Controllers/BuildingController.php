@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Budget;
 use Carbon\Carbon;
 use App\Models\Expense;
 use App\Models\Invoice;
@@ -65,29 +66,54 @@ class BuildingController extends Controller
         ]);
     }
 
+    public function createBudget(Building $building)
+    {
+        return view('createBudget', [
+            'building' => $building
 
+        ]);
 
+    }
 
     public function budgetsearchmovements(Request $request, Building $building)
     {
-        $startString = substr($request->get('searchperiod'), 0, 10);
-        $endString = substr($request->get('searchperiod'), -10);
-        $start_date = Carbon::createFromFormat('Y-m-d', $startString);
-        $end_date = Carbon::createFromFormat('Y-m-d', $endString);
+
+        $formFields = $request->validate([
+            'date' => 'required',
+        ]);
+
+
+        $year = substr($request->get('date'), 0, 4);
+        $month = substr($request->get('date'), -2);
+
+
+
+
+
+
+        // $startString = substr($request->get('searchperiod'), 0, 10);
+        // $endString = substr($request->get('searchperiod'), -10);
+        // $start_date = Carbon::createFromFormat('Y-m-d', $startString);
+        // $end_date = Carbon::createFromFormat('Y-m-d', $endString);
 
 
         $myexpensesarray = array();
         foreach ($building->properties as $property) {
             foreach ($property->leases as $lease) {
 
+                // $expenses = Expense::where('lease_id', $lease->id)
+                //     ->where('maintenance_budget', 1)
+                //     ->whereYear('date', '>=', $start_date->year)
+                //     ->whereYear('date', '<=', $end_date->year)
+                //     ->whereMonth('date', '>=', $start_date->month)
+                //     ->whereMonth('date', '<=', $end_date->month)
+                //     ->whereDay('date', '>=', $start_date->day)
+                //     ->whereDay('date', '<=', $end_date->day)
+                //     ->get();
                 $expenses = Expense::where('lease_id', $lease->id)
                     ->where('maintenance_budget', 1)
-                    ->whereYear('date', '>=', $start_date->year)
-                    ->whereYear('date', '<=', $end_date->year)
-                    ->whereMonth('date', '>=', $start_date->month)
-                    ->whereMonth('date', '<=', $end_date->month)
-                    ->whereDay('date', '>=', $start_date->day)
-                    ->whereDay('date', '<=', $end_date->day)
+                    ->whereYear('date', '=', $year)
+                    ->whereMonth('date', '=', $month)
                     ->get();
 
 
@@ -97,13 +123,18 @@ class BuildingController extends Controller
             }
 
             // Recuperando los egresos sin contrato asociado
+            // $invoices = Invoice::where("property_id", $property->id)
+            //     ->whereYear('start_date', '>=', $start_date->year)
+            //     ->whereYear('start_date', '<=', $end_date->year)
+            //     ->whereMonth('start_date', '>=', $start_date->month)
+            //     ->whereMonth('start_date', '<=', $end_date->month)
+            //     ->whereDay('start_date', '>=', $start_date->day)
+            //     ->whereDay('start_date', '<=', $end_date->day)
+            //     ->get();
+
             $invoices = Invoice::where("property_id", $property->id)
-                ->whereYear('start_date', '>=', $start_date->year)
-                ->whereYear('start_date', '<=', $end_date->year)
-                ->whereMonth('start_date', '>=', $start_date->month)
-                ->whereMonth('start_date', '<=', $end_date->month)
-                ->whereDay('start_date', '>=', $start_date->day)
-                ->whereDay('start_date', '<=', $end_date->day)
+                ->whereYear('start_date', '=', $year)
+                ->whereMonth('start_date', '=', $month)
                 ->get();
 
             foreach ($invoices as $invoice) {
@@ -120,13 +151,33 @@ class BuildingController extends Controller
         }
 
 
+        if (
+            $mybudget = Budget::where("building_id", $building->id)
+                ->where('year', $year)
+                ->where('month', $month)
+                ->first()
+        ) {
+            $mybudget_mxn = $mybudget->maintenance_budget_mxn;
+            $mybudget_usd = $mybudget->maintenance_budget_usd;
+        } else {
+            $mybudget_mxn = 0;
+            $mybudget_usd = 0;
+        }
+
 
         return view('showBuildingMaintenanceExpenses', [
             'building' => $building,
             'expenses' => $myexpensesarray,
-            'period' => $start_date->day . '/' . $start_date->month . '/' . $start_date->year . ' - ' . $end_date->day . '/' . $end_date->month . '/' . $end_date->year
-
+            'period' => ' Mes: ' . $month . ' / ' . $year,
+            'budget_mxn' => $mybudget_mxn,
+            'budget_usd' => $mybudget_usd,
         ]);
+
+
+
+
+
+
 
 
 
@@ -212,6 +263,13 @@ class BuildingController extends Controller
     }
 
 
+    public function showBudgets(Building $building)
+    {
+        return view('showBuildingBudgets', [
+            'building' => $building
+        ]);
+    }
+
     public function showMaintenanceExpenses(Building $building)
     {
         $now = Carbon::now();
@@ -250,13 +308,33 @@ class BuildingController extends Controller
 
         }
 
+        if ($now->month < 9) {
+            $mymonth = 0 . $now->month;
+        } else {
+            $mymonth = $now->month;
+        }
+
+        if (
+            $mybudget = Budget::where("building_id", $building->id)
+                ->where('year', $now->year)
+                ->where('month', $mymonth)
+                ->first()
+        ) {
+            $mybudget_mxn = $mybudget->maintenance_budget_mxn;
+            $mybudget_usd = $mybudget->maintenance_budget_usd;
+        } else {
+            $mybudget_mxn = 0;
+            $mybudget_usd = 0;
+        }
+
 
 
         return view('showBuildingMaintenanceExpenses', [
             'building' => $building,
             'expenses' => $myexpensesarray,
-            'period' => ' Mes: ' . $now->month . ' / ' . $now->year
-
+            'period' => ' Mes: ' . $mymonth . ' / ' . $now->year,
+            'budget_mxn' => $mybudget_mxn,
+            'budget_usd' => $mybudget_usd,
         ]);
     }
 

@@ -265,19 +265,23 @@
 
 
                 {{-- With multiple slots and multiple files --}}
-                <x-adminlte-input-file id="images" name="images[]" label="Seleccionar imágenes"
-                    placeholder="Seleccionar imágenes..." legend="Seleccionar imágenes"
-                    accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" value="{{ old('images[]') }}"
+                <label>Seleccionar imágenes</label>
+
+                <font color="blue"><small> * Máximo <b>2Mb</b> por archivo </small></font>
+                <x-adminlte-input-file id="images" name="images[]" placeholder="Seleccionar imágenes..."
+                    legend="Seleccionar imágenes" accept=".jpg, .png, .jpeg |image/* " value="{{ old('images[]') }}"
                     multiple>
 
 
                 </x-adminlte-input-file>
 
 
+                <label>Seleccionar archivos</label>
 
-                <x-adminlte-input-file id="other_files" name="other_files[]" label="Seleccionar archivos"
-                    placeholder="Seleccionar archivos..." legend="Seleccionar archivos"
-                    accept="application/pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx" multiple>
+                <font color="blue"><small> * Máximo <b>2Mb</b> por archivo </small></font>
+                <x-adminlte-input-file id="other_files" name="other_files[]" placeholder="Seleccionar archivos..."
+                    legend="Seleccionar archivos" accept="application/pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx"
+                    multiple>
                     {{ old('other_files') }}
 
                 </x-adminlte-input-file>

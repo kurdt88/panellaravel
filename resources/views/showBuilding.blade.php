@@ -63,14 +63,14 @@
 
 
 
-                        <label for="inputName">Presupuesto Mtto (MXN)</label>
+                        {{-- <label for="inputName">Presupuesto Mtto (MXN)</label>
                         <input type="text" value=" {{ Number::currency($building->maintenance_budget) }}"
                             class="form-control" disabled />
 
 
                         <label for="inputName">Presupuesto Mtto (USD)</label>
                         <input type="text" value=" {{ Number::currency($building->maintenance_budget_usd) }}"
-                            class="form-control" disabled />
+                            class="form-control" disabled /> --}}
 
 
                         <label for="inputMessage">Descripción</label>
@@ -93,12 +93,17 @@
                     </button>
                     <button type="button" onClick="location.href='/buildingmaintenanceexpenses/{{ $building->id }}'"
                         class="btn btn-primary float-right" style="margin-right: 5px;">
-                        <i class="fas fa-coins"></i> Presupuesto de Mtto (mes)
+                        <i class="fas fa-coins"></i> Afectaciones al Presupuesto de Mtto
+                    </button>
+                    <button type="button" onClick="location.href='/buildingbudgets/{{ $building->id }}'"
+                        class="btn btn-secondary float-right" style="margin-right: 5px;">
+                        <i class="fas fa-coins"></i> Presupuestos de Mtto
                     </button>
                     <button type="button" onClick="location.href='/indexbuildings/{{ $building->id }}/edit'"
                         class="btn btn-dark float-right" style="margin-right: 5px;">
                         <i class="fas fa-pen-alt"></i> Editar
                     </button>
+
                 </div>
             </div>
         </div>

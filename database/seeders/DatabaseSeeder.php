@@ -96,8 +96,8 @@ class DatabaseSeeder extends Seeder
 
 
         \App\Models\Tax::factory()->create([
-            'name' => 'IVA_ISR',
-            'value' => 0.20,
+            'name' => 'IVA_RETENCIONES',
+            'value' => -1,
         ]);
 
 

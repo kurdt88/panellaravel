@@ -127,7 +127,9 @@
 
             Presupuesto de Mtto (MXN):
             <font color="green">
-                {{ Number::currency($building->maintenance_budget) }}
+                {{-- {{ Number::currency($building->maintenance_budget) }} --}}
+                {{ Number::currency($budget_mxn) }}
+
             </font> |
             Total afectación Presupuesto de Mtto (MXN):
             <font color="#A48000">
@@ -136,7 +138,9 @@
 
             Presupuesto de Mtto (USD):
             <font color="blue">
-                {{ Number::currency($building->maintenance_budget_usd) }}
+                {{-- {{ Number::currency($building->maintenance_budget_usd) }} --}}
+                {{ Number::currency($budget_usd) }}
+
             </font> |
             Total afectación Presupuesto de Mtto (USD):
             <font color="#A48000">
@@ -147,11 +151,11 @@
             Balance del Periodo:<br>
             <label style="color:rgb(22, 100, 126)">
                 <small>Presupuesto MXN</small>
-                {{ Number::currency($building->maintenance_budget - $mxn_expenses) }}
+                {{ Number::currency($budget_mxn - $mxn_expenses) }}
             </label>
             <label style="color:rgb(22, 100, 126)">
                 <small> | Presupuesto USD</small>
-                {{ Number::currency($building->maintenance_budget_usd - $usd_expenses) }}
+                {{ Number::currency($budget_usd - $usd_expenses) }}
             </label><br>
 
 
@@ -162,7 +166,10 @@
                 class="btn btn-dark float-right" style="margin-right: 5px;">
                 <i class="fas fa-coins"></i> Más movimientos
             </button>
-
+            <button type="button" onClick="location.href='/newbudget/{{ $building->id }}'"
+                class="btn btn-secondary float-right" style="margin-right: 5px;">
+                <i class="fas fa-upload"></i> Registrar Presupuesto de Mtto
+            </button>
         </x-adminlte-card>
     </section>
 

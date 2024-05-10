@@ -103,15 +103,16 @@ class LeaseController extends Controller
 
         $formFields = array_merge($formFields, array('start' => $startString, 'end' => $endString));
         $iva_rate = 0;
-        if ($request->get('iva') == 'Exento') {
+        $iva_type = $request->get('iva');
+        if ($iva_type == 'Exento') {
             $iva_rate = Tax::where('name', '=', 'Exento')->first()->value;
             $formFields = array_merge($formFields, array('iva_rate' => $iva_rate));
 
-        } elseif ($request->get('iva') == 'IVA') {
+        } elseif ($iva_type == 'IVA') {
             $iva_rate = Tax::where('name', '=', 'IVA')->first()->value;
             $formFields = array_merge($formFields, array('iva_rate' => $iva_rate));
-        } elseif ($request->get('iva') == 'IVA_ISR') {
-            $iva_rate = Tax::where('name', '=', 'IVA_ISR')->first()->value;
+        } elseif ($iva_type == 'IVA_RETENCIONES') {
+            $iva_rate = Tax::where('name', '=', 'IVA_RETENCIONES')->first()->value;
             $formFields = array_merge($formFields, array('iva_rate' => $iva_rate));
         }
 
@@ -142,6 +143,16 @@ class LeaseController extends Controller
                     $deposit_invoice_due_date = Carbon::createFromFormat('Y-m-d', $startString)->addDays(5)->format('Y-m-d');
                     $concept = 'Depósito de Garantía';
 
+                    // FORMULA DE IVA_RETENCIONES
+                    if ($iva_type == 'IVA_RETENCIONES') {
+
+                        $iva_ammount_fixed = ($deposit * 0.16) - ($deposit * 0.10667) - ($deposit * 0.0125);
+
+                    } else {
+                        $iva_ammount_fixed = $deposit * $iva_rate;
+                    }
+
+
                     Invoice::create([
                         'lease_id' => $lease_id,
                         'sequence' => 1,
@@ -149,9 +160,10 @@ class LeaseController extends Controller
                         'type' => $request->get('type'),
                         'category' => "Ingreso",
                         'concept' => $concept,
-                        'iva' => "IVA",
+                        'subconcept' => "Depósito",
+                        'iva' => $iva_type,
                         'iva_rate' => $iva_rate,
-                        'iva_ammount' => $deposit * $iva_rate,
+                        'iva_ammount' => $iva_ammount_fixed,
 
                         'comment' => "Garantía establecida en el contrato",
                         'start_date' => $deposit_invoice_start_date,
@@ -178,7 +190,14 @@ class LeaseController extends Controller
 
 
 
+                    // FORMULA DE IVA_RETENCIONES
+                    if ($iva_type == 'IVA_RETENCIONES') {
 
+                        $iva_ammount_fixed = ($ammount * 0.16) - ($ammount * 0.10667) - ($ammount * 0.0125);
+
+                    } else {
+                        $iva_ammount_fixed = $ammount * $iva_rate;
+                    }
 
 
                     Invoice::create([
@@ -188,9 +207,10 @@ class LeaseController extends Controller
                         'type' => $request->get('type'),
                         'category' => "Ingreso",
                         'concept' => $concept,
-                        'iva' => "IVA",
+                        'subconcept' => "Renta",
+                        'iva' => $iva_type,
                         'iva_rate' => $iva_rate,
-                        'iva_ammount' => $ammount * $iva_rate,
+                        'iva_ammount' => $iva_ammount_fixed,
                         'comment' => "Recibo # " . $sequence,
                         'start_date' => $invoice_start_date,
                         'due_date' => $invoice_due_date
@@ -283,8 +303,8 @@ class LeaseController extends Controller
         } elseif ($request->get('iva') == 'IVA') {
             $iva_rate = Tax::where('name', '=', 'IVA')->first()->value;
             $formFields = array_merge($formFields, array('iva_rate' => $iva_rate));
-        } elseif ($request->get('iva') == 'IVA_ISR') {
-            $iva_rate = Tax::where('name', '=', 'IVA_ISR')->first()->value;
+        } elseif ($request->get('iva') == 'IVA_RETENCIONES') {
+            $iva_rate = Tax::where('name', '=', 'IVA_RETENCIONES')->first()->value;
             $formFields = array_merge($formFields, array('iva_rate' => $iva_rate));
         }
 

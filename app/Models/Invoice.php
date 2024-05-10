@@ -10,7 +10,7 @@ class Invoice extends Model
     use HasFactory;
 
 
-    protected $fillable = ['lease_id', 'property_id', 'subproperty_id', 'sequence', 'ammount', 'iva', 'iva_rate', 'iva_ammount', 'type', 'concept', 'category', 'start_date', 'due_date', 'comment'];
+    protected $fillable = ['lease_id', 'property_id', 'subproperty_id', 'sequence', 'ammount', 'iva', 'iva_rate', 'iva_ammount', 'type', 'concept', 'subconcept', 'category', 'start_date', 'due_date', 'comment'];
 
     protected $appends = ['total', 'supplier'];
 

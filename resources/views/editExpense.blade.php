@@ -64,8 +64,9 @@
                             {{ App\Models\Landlord::whereId($expense->lease->property_->landlord_id)->first()->name }}&nbsp;/&nbsp;
                             Arrendatario:
                             {{ App\Models\Tenant::whereId($expense->lease->tenant)->first()->name }}&nbsp;/&nbsp;
-                            Inicio: {{ $expense->lease->start }}&nbsp;Fin:{{ $expense->lease->end }}
-
+                            Inicio: {{ $expense->lease->start }}&nbsp;Fin:{{ $expense->lease->end }}&nbsp;/&nbsp;
+                            Info Adicional:
+                            {{ Str::limit($expense->lease->contract, 25) }}
                         </small></font>
                     <select id="lease_id" name="lease_id" class="custom-select rounded-0">
                         <option value="">-- Selecciona el Contrato --</option>
@@ -263,11 +264,18 @@
 
                     @foreach ($expense->expenseimgs as $expenseimg)
                         @if ($expenseimg->type == 'image')
-                            <a href="{{ asset('storage/' . $expenseimg->image) }}">
+                            {{-- <a href="{{ asset('storage/' . $expenseimg->image) }}">
                                 <div class="product-image-thumb">
                                     <img alt="Evidencia" width="300" height="auto"
                                         src="{{ $expenseimg->image ? asset('storage/' . $expenseimg->image) : asset('/images/no-image.png') }}"
                                         alt="" />
+                                </div>
+                            </a> --}}
+                            <a href="https://propertiesspace.sfo3.digitaloceanspaces.com/{{ $expenseimg->image }}">
+                                <div class="product-image-thumb">
+                                    <img width="300" height="auto" {{-- src="{{ $expenseimg->image ? asset('storage/' . $expenseimg->image) : asset('/images/no-image.png') }}" --}}
+                                        src="https://propertiesspace.sfo3.digitaloceanspaces.com/{{ $expenseimg->image }}"
+                                        alt="{{ $expenseimg->original_name }}" />
                                 </div>
                             </a>
                         @endif
@@ -275,9 +283,12 @@
                 </div>
 
 
-                <x-adminlte-input-file id="images" name="images[]" label="Seleccionar nuevas imágenes"
-                    placeholder="Seleccionar archivos..." legend="Seleccionar archivos"
-                    accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" multiple>
+                <label>Seleccionar nuevas imágenes</label>
+
+                <font color="blue"><small> * Máximo <b>2Mb</b> por archivo </small></font>
+                <x-adminlte-input-file id="images" name="images[]" placeholder="Seleccionar archivos..."
+                    legend="Seleccionar archivos" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
+                    multiple>
                 </x-adminlte-input-file>
 
                 <br><br>
@@ -291,10 +302,15 @@
 
                         @foreach ($expense->expenseimgs as $expenseimg)
                             @if ($expenseimg->type == 'file')
-                                <a href="{{ asset('storage/' . $expenseimg->image) }}">
+                                {{-- <a href="{{ asset('storage/' . $expenseimg->image) }}">
                                     <a href="{{ asset('storage/' . $expenseimg->image) }}">
                                         <li>{{ $expenseimg->original_name }}</li>
                                     </a>
+                                </a> --}}
+                                <a
+                                    href="https://propertiesspace.sfo3.digitaloceanspaces.com/{{ $expenseimg->image }}">
+
+                                    <li>{{ $expenseimg->original_name }}</li>
                                 </a>
                             @endif
                         @endforeach
@@ -303,9 +319,12 @@
                 </div>
 
 
-                <x-adminlte-input-file id="other_files" name="other_files[]" label="Seleccionar otros archivos"
-                    placeholder="Seleccionar archivos..." legend="Seleccionar archivos"
-                    accept="application/pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx" multiple>
+                <label>Seleccionar otros archivos</label>
+
+                <font color="blue"><small> * Máximo <b>2Mb</b> por archivo </small></font>
+                <x-adminlte-input-file id="other_files" name="other_files[]" placeholder="Seleccionar archivos..."
+                    legend="Seleccionar archivos" accept="application/pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx"
+                    multiple>
 
                 </x-adminlte-input-file>
 

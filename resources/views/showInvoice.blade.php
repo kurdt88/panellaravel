@@ -272,6 +272,10 @@
                             <td style="text-align:center"> {{ $invoice->iva }}</td>
                         </tr>
                         <tr>
+                            <th>Categoría</th>
+                            <td style="text-align:center"> {{ $invoice->concept }}</td>
+                        </tr>
+                        <tr>
                             <th>Total</th>
                             <td style="text-align:center"> <small>{{ $invoice->type }}</small>
                                 {{ Number::currency($invoice->ammount + $invoice->iva_ammount) }}
@@ -290,7 +294,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                <h5> {{ $invoice->concept }}</h5>
+                                <h5> {{ $invoice->subconcept }}</h5>
 
                                 @if ($invoice->lease_id == 1)
                                     <small> SIN CONTRATO ASOCIADO</small>
@@ -319,17 +323,40 @@
                     <table>
                         <tr>
                             <th>Sub total</th>
-                            <td style="text-align:left"> <small>{{ $invoice->type }}</small>
+                            <td style="text-align:right"> <small>{{ $invoice->type }}</small>
                                 {{ Number::currency($invoice->ammount) }}</td>
                         </tr>
-                        <tr>
-                            <th>IVA ({{ $invoice->iva_rate }} %)</th>
-                            <td style="text-align:left"> <small>{{ $invoice->type }}</small>
-                                {{ Number::currency($invoice->iva_ammount) }}</td>
-                        </tr>
+
+                        @if ($invoice->iva == 'IVA_RETENCIONES')
+                            <tr>
+                                <th><span style="font-weight:normal">(+) IVA traslado <small>(16 %)</small></span></th>
+                                <td style="text-align:right"> <small>{{ $invoice->type }}</small>
+                                    {{ Number::currency($invoice->ammount * 0.16) }}</td>
+                            </tr>
+                            <tr>
+                                <th><span style="font-weight:normal">(-) IVA retención <small>(10.667 %)</small></span></th>
+                                <td style="text-align:right"> <small>{{ $invoice->type }}</small>
+                                    {{ Number::currency($invoice->ammount * 0.10667) }}</td>
+                            </tr>
+                            <tr>
+                                <th><span style="font-weight:normal">(-) ISR retención <small>(1.25 %)</small></span></th>
+                                <td style="text-align:right"> <small>{{ $invoice->type }}</small>
+                                    {{ Number::currency($invoice->ammount * 0.0125) }}</td>
+                            </tr>
+                        @else
+                            <tr>
+                                <th><span style="font-weight:normal">{{ $invoice->iva }} <small>({{ $invoice->iva_rate }}
+                                            %)</small></span></th>
+                                <td style="text-align:right"> <small>{{ $invoice->type }}</small>
+                                    {{ Number::currency($invoice->iva_ammount) }}</td>
+                            </tr>
+                        @endif
+
+
+
                         <tr>
                             <th>Total</th>
-                            <td style="text-align:left"> <small>{{ $invoice->type }}</small>
+                            <td style="text-align:right"> <small>{{ $invoice->type }}</small>
                                 {{ Number::currency($invoice->total) }}</td>
                         </tr>
                     </table>

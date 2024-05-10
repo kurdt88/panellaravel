@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->string('type');
             $table->string('category');
             $table->string('concept');
+            $table->string('subconcept');
             $table->string('iva');
             $table->string('iva_rate');
             $table->float('iva_ammount');

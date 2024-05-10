@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label id="concept_label">Concepto</label>
+                        <label id="concept_label">Categoría</label>
                         <select id="concept" name="concept" class="custom-select rounded-0">
                         </select>
                         @error('concept')
@@ -54,10 +54,40 @@
                         @enderror
                     </div>
 
+                    <div class="form-group">
+                        <label id="subconcept_label">Concepto</label>
+                        <select id="subconcept" name="subconcept" class="custom-select rounded-0">
+                            <option value="">-- Selecciona una opción --</option>
+                            <option value="Ingreso-Concepto1">Ingreso-Concepto1</option>
+                            <option value="Ingreso-Concepto2">Ingreso-Concepto2</option>
+                            <option value="Ingreso-Concepto3">Ingreso-Concepto3</option>
+                            <option value="Ingreso-Concepto4">Ingreso-Concepto4</option>
+                            <option value="Ingreso-Concepto5">Ingreso-Concepto5</option>
+                            <option value="Egreso-Concepto1">Egreso-Concepto1</option>
+                            <option value="Egreso-Concepto2">Egreso-Concepto2</option>
+                            <option value="Egreso-Concepto3">Egreso-Concepto3</option>
+                            <option value="Egreso-Concepto4">Egreso-Concepto4</option>
+                            <option value="Egreso-Concepto5">Egreso-Concepto5</option>
+                        </select>
+                        @error('subconcept')
+                            <p class="text-red">{{ $message }}</p>
+                        @enderror
+                    </div>
 
 
 
 
+                    <label>Descripción</label>
+
+                    <x-adminlte-textarea id="comment" name="comment" rows=1 label-class="text-dark" igroup-size="sm"
+                        placeholder="Ingrese una breve descripción">
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text bg-light">
+                                <i class="fas fa-edit "></i>
+                            </div>
+                        </x-slot>
+                        {{ old('comment') }}
+                    </x-adminlte-textarea>
 
 
 
@@ -177,7 +207,9 @@
                             </option>
                             <option value="Exento">Exento</option>
                             <option value="IVA">IVA</option>
-                            <option value="IVA_ISR">IVA+ISR</option>
+                            <option value="IVA_RETENCIONES">IVA+RETENCIONES</option>
+
+                            {{-- <option value="IVA_ISR">IVA+ISR</option> --}}
                         </select>
 
                         @error('iva')
@@ -205,15 +237,7 @@
                         </x-slot>
                     </x-adminlte-date-range>
 
-                    <x-adminlte-textarea id="comment" name="comment" label="Información Adicional" rows=1
-                        label-class="text-dark" igroup-size="sm" placeholder="Información Adicional......">
-                        <x-slot name="prependSlot">
-                            <div class="input-group-text bg-dark">
-                                <i class="fas fa-lg fa-file-alt text-light"></i>
-                            </div>
-                        </x-slot>
-                        {{ old('comment') }}
-                    </x-adminlte-textarea>
+
 
 
                 </div>
@@ -320,9 +344,7 @@
                                             '  /  Fin: ' + value.end +
                                             '  /  Renta: ' + value.rent +
                                             '  /  Divisa: ' + value.type +
-                                            '  /  ' + value.iva + ' (' + value
-                                            .iva_rate +
-                                            ' %) ' +
+                                            '  /  ' + value.iva +
                                             '  /  Info: ' + value.contract +
                                             '</option>');
                                     }

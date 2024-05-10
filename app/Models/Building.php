@@ -16,4 +16,9 @@ class Building extends Model
     {
         return $this->hasMany(Property::class, 'building_id');
     }
+
+    public function budgets()
+    {
+        return $this->hasMany(Budget::class, 'building_id');
+    }
 }

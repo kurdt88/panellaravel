@@ -1,0 +1,165 @@
+Date : 2024-05-03 09:59:57
+Directory : /home/luis/DESARROLLO/panellaravel/resources
+Total : 125 files,  10103 codes, 227 comments, 3412 blanks, all 13742 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| PHP        |        120 |     10,089 |        204 |      3,398 |     13,691 |
+| CSS        |          1 |          6 |          0 |          2 |          8 |
+| JavaScript |          2 |          4 |         23 |          8 |         35 |
+| Markdown   |          2 |          4 |          0 |          4 |          8 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                    | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                       |        125 |     10,103 |        227 |      3,412 |     13,742 |
+| css                                                                                                     |          1 |          6 |          0 |          2 |          8 |
+| js                                                                                                      |          2 |          4 |         23 |          8 |         35 |
+| markdown                                                                                                |          2 |          4 |          0 |          4 |          8 |
+| views                                                                                                   |        120 |     10,089 |        204 |      3,398 |     13,691 |
+| views (Files)                                                                                           |         68 |      8,850 |        204 |      3,136 |     12,190 |
+| views/api                                                                                               |          2 |        156 |          0 |         28 |        184 |
+| views/auth                                                                                              |         11 |        173 |          0 |         39 |        212 |
+| views/auth (Files)                                                                                      |          8 |        170 |          0 |         39 |        209 |
+| views/auth/passwords                                                                                    |          3 |          3 |          0 |          0 |          3 |
+| views/components                                                                                        |         30 |        437 |          0 |         90 |        527 |
+| views/emails                                                                                            |          1 |         16 |          0 |          8 |         24 |
+| views/layouts                                                                                           |          2 |         58 |          0 |         19 |         77 |
+| views/profile                                                                                           |          6 |        399 |          0 |         78 |        477 |
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                | language   | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /home/luis/DESARROLLO/panellaravel/resources/css/app.css                                                | CSS        |          6 |          0 |          2 |          8 |
+| /home/luis/DESARROLLO/panellaravel/resources/js/app.js                                                  | JavaScript |          1 |          0 |          1 |          2 |
+| /home/luis/DESARROLLO/panellaravel/resources/js/bootstrap.js                                            | JavaScript |          3 |         23 |          7 |         33 |
+| /home/luis/DESARROLLO/panellaravel/resources/markdown/policy.md                                         | Markdown   |          2 |          0 |          2 |          4 |
+| /home/luis/DESARROLLO/panellaravel/resources/markdown/terms.md                                          | Markdown   |          2 |          0 |          2 |          4 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/api/api-token-manager.blade.php                      | PHP        |        144 |          0 |         26 |        170 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/api/index.blade.php                                  | PHP        |         12 |          0 |          2 |         14 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/auth/confirm-password.blade.php                      | PHP        |         23 |          0 |          6 |         29 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/auth/forgot-password.blade.php                       | PHP        |         28 |          0 |          7 |         35 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/auth/login.blade.php                                 | PHP        |          1 |          0 |          0 |          1 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/auth/passwords/confirm.blade.php                     | PHP        |          1 |          0 |          0 |          1 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/auth/passwords/email.blade.php                       | PHP        |          1 |          0 |          0 |          1 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/auth/passwords/reset.blade.php                       | PHP        |          1 |          0 |          0 |          1 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/auth/register.blade.php                              | PHP        |          1 |          0 |          0 |          1 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/auth/reset-password.blade.php                        | PHP        |         29 |          0 |          8 |         37 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/auth/two-factor-challenge.blade.php                  | PHP        |         49 |          0 |         10 |         59 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/auth/verify-email.blade.php                          | PHP        |         38 |          0 |          8 |         46 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/auth/verify.blade.php                                | PHP        |          1 |          0 |          0 |          1 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/bienvenido.blade.php                                 | PHP        |        120 |          1 |         39 |        160 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/action-message.blade.php                  | PHP        |          9 |          0 |          2 |         11 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/action-section.blade.php                  | PHP        |         11 |          0 |          2 |         13 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/application-logo.blade.php                | PHP        |          5 |          0 |          1 |          6 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/application-mark.blade.php                | PHP        |          4 |          0 |          1 |          5 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/authentication-card-logo.blade.php        | PHP        |          6 |          0 |          1 |          7 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/authentication-card.blade.php             | PHP        |          8 |          0 |          2 |         10 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/banner.blade.php                          | PHP        |         41 |          0 |          4 |         45 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/button.blade.php                          | PHP        |          3 |          0 |          1 |          4 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/checkbox.blade.php                        | PHP        |          1 |          0 |          1 |          2 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/confirmation-modal.blade.php              | PHP        |         23 |          0 |          5 |         28 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/confirms-password.blade.php               | PHP        |         38 |          0 |          9 |         47 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/danger-button.blade.php                   | PHP        |          3 |          0 |          1 |          4 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/dialog-modal.blade.php                    | PHP        |         14 |          0 |          4 |         18 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/dropdown-link.blade.php                   | PHP        |          1 |          0 |          1 |          2 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/dropdown.blade.php                        | PHP        |         43 |          0 |          5 |         48 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/flash-error-message.blade.php             | PHP        |          7 |          0 |          1 |          8 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/flash-message.blade.php                   | PHP        |          4 |          0 |          1 |          5 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/form-section.blade.php                    | PHP        |         21 |          0 |          4 |         25 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/input-error.blade.php                     | PHP        |          4 |          0 |          2 |          6 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/input.blade.php                           | PHP        |          2 |          0 |          2 |          4 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/label.blade.php                           | PHP        |          4 |          0 |          2 |          6 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/modal.blade.php                           | PHP        |         39 |          0 |          5 |         44 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/nav-link.blade.php                        | PHP        |          9 |          0 |          3 |         12 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/responsive-nav-link.blade.php             | PHP        |          9 |          0 |          3 |         12 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/secondary-button.blade.php                | PHP        |          3 |          0 |          1 |          4 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/section-border.blade.php                  | PHP        |          5 |          0 |          1 |          6 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/section-title.blade.php                   | PHP        |         11 |          0 |          3 |         14 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/switchable-team.blade.php                 | PHP        |         17 |          0 |          5 |         22 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/validation-errors.blade.php               | PHP        |         10 |          0 |          2 |         12 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/components/welcome.blade.php                         | PHP        |         82 |          0 |         15 |         97 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/createAccount.blade.php                              | PHP        |         95 |          0 |         41 |        136 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/createBuilding.blade.php                             | PHP        |         55 |          0 |         36 |         91 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/createExpense.blade.php                              | PHP        |        416 |         74 |        156 |        646 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/createInvoice.blade.php                              | PHP        |        270 |         15 |        120 |        405 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/createLandlord.blade.php                             | PHP        |         68 |          0 |         37 |        105 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/createLease.blade.php                                | PHP        |        204 |          6 |         73 |        283 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/createPayment.blade.php                              | PHP        |        282 |         35 |        133 |        450 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/createRescission.blade.php                           | PHP        |        164 |          5 |         67 |        236 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/createSubproperty.blade.php                          | PHP        |        150 |          7 |         64 |        221 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/createSupplier.blade.php                             | PHP        |         62 |          0 |         33 |         95 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/createTenant.blade.php                               | PHP        |         83 |          0 |         28 |        111 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/createproperty.blade.php                             | PHP        |        110 |          7 |         46 |        163 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/dashboard.blade.php                                  | PHP        |         14 |          0 |          2 |         16 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/dropdown.blade.php                                   | PHP        |        112 |          9 |         26 |        147 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/editAccount.blade.php                                | PHP        |         99 |          0 |         43 |        142 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/editBuilding.blade.php                               | PHP        |         80 |          0 |         36 |        116 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/editExpense.blade.php                                | PHP        |        383 |         13 |        116 |        512 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/editInvoice.blade.php                                | PHP        |        166 |          0 |         68 |        234 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/editLandlord.blade.php                               | PHP        |         67 |          0 |         36 |        103 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/editLease.blade.php                                  | PHP        |        146 |          0 |         43 |        189 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/editPayment.blade.php                                | PHP        |        305 |         13 |        126 |        444 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/editProperty.blade.php                               | PHP        |        107 |          0 |         37 |        144 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/editSubproperty.blade.php                            | PHP        |        111 |          0 |         41 |        152 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/editSupplier.blade.php                               | PHP        |         62 |          0 |         30 |         92 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/editTenant.blade.php                                 | PHP        |        151 |          0 |         56 |        207 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/emails/team-invitation.blade.php                     | PHP        |         16 |          0 |          8 |         24 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/invoicepdf.blade.php                                 | PHP        |        194 |          3 |         39 |        236 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/layouts/app.blade.php                                | PHP        |         36 |          0 |         13 |         49 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/layouts/guest.blade.php                              | PHP        |         22 |          0 |          6 |         28 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/listAccounts.blade.php                               | PHP        |         56 |          0 |         32 |         88 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/listBuildings.blade.php                              | PHP        |         75 |          0 |         46 |        121 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/listCommodities.blade.php                            | PHP        |         45 |          0 |         31 |         76 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/listExpenses.blade.php                               | PHP        |        107 |          0 |         65 |        172 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/listInvoices.blade.php                               | PHP        |        120 |          0 |         46 |        166 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/listLandlords.blade.php                              | PHP        |         62 |          0 |         28 |         90 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/listLeases.blade.php                                 | PHP        |        101 |          0 |         45 |        146 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/listPayments.blade.php                               | PHP        |        102 |          0 |         52 |        154 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/listSubproperties.blade.php                          | PHP        |        101 |          0 |         32 |        133 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/listSuppliers.blade.php                              | PHP        |         51 |          0 |         26 |         77 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/listTenants.blade.php                                | PHP        |         60 |          0 |         26 |         86 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/listproperties.blade.php                             | PHP        |        104 |          2 |         33 |        139 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/navigation-menu.blade.php                            | PHP        |        187 |          0 |         33 |        220 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/paymentpdf.blade.php                                 | PHP        |        157 |          1 |         38 |        196 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/policy.blade.php                                     | PHP        |         12 |          0 |          2 |         14 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/postproperty.blade.php                               | PHP        |         20 |          0 |          8 |         28 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/profile/delete-user-form.blade.php                   | PHP        |         44 |          0 |         10 |         54 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/profile/logout-other-browser-sessions-form.blade.php | PHP        |         84 |          0 |         15 |         99 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/profile/show.blade.php                               | PHP        |         36 |          0 |         10 |         46 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/profile/two-factor-authentication-form.blade.php     | PHP        |        110 |          0 |         15 |        125 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/profile/update-password-form.blade.php               | PHP        |         39 |          0 |         11 |         50 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/profile/update-profile-information-form.blade.php    | PHP        |         86 |          0 |         17 |        103 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/renewLease.blade.php                                 | PHP        |        202 |          5 |         61 |        268 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/searchBudgetMovements.blade.php                      | PHP        |         37 |          1 |         17 |         55 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/searchMovements.blade.php                            | PHP        |         37 |          1 |         17 |         55 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showAccount.blade.php                                | PHP        |        102 |          0 |         54 |        156 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showAccountMovements.blade.php                       | PHP        |        193 |          0 |         60 |        253 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showBuilding.blade.php                               | PHP        |         84 |          0 |         42 |        126 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showBuildingMaintenanceExpenses.blade.php            | PHP        |        138 |          0 |         44 |        182 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showBuildingProperties.blade.php                     | PHP        |         95 |          0 |         26 |        121 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showExpense.blade.php                                | PHP        |        198 |          0 |         61 |        259 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showInvoice.blade.php                                | PHP        |        406 |          3 |        101 |        510 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showLandlord.blade.php                               | PHP        |         77 |          0 |         35 |        112 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showLandlordItems.blade.php                          | PHP        |        177 |          0 |         38 |        215 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showLease.blade.php                                  | PHP        |        296 |          2 |         89 |        387 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showLeaseMovements.blade.php                         | PHP        |        222 |          0 |         32 |        254 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showPayment.blade.php                                | PHP        |        215 |          0 |         47 |        262 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showProfile.blade.php                                | PHP        |         50 |          0 |         19 |         69 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showProperty.blade.php                               | PHP        |        167 |          0 |         45 |        212 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showPropertySubproperties.blade.php                  | PHP        |         84 |          0 |         28 |        112 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showSubproperty.blade.php                            | PHP        |        147 |          0 |         42 |        189 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showSupplier.blade.php                               | PHP        |         81 |          0 |         40 |        121 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showSupplierPayments.blade.php                       | PHP        |        117 |          1 |         58 |        176 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showTenant.blade.php                                 | PHP        |        149 |          0 |         34 |        183 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/showpanel.blade.php                                  | PHP        |         17 |          0 |          6 |         23 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/terms.blade.php                                      | PHP        |         12 |          0 |          2 |         14 |
+| /home/luis/DESARROLLO/panellaravel/resources/views/welcome.blade.php                                    | PHP        |        111 |          0 |         23 |        134 |
+| Total                                                                                                   |            |     10,103 |        227 |      3,412 |     13,742 |
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

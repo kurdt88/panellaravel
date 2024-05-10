@@ -23,7 +23,7 @@
     <div class="card card-primary">
         <form method="POST" action="/budgetmovements/{{ $building->id }}" enctype="multipart/form-data">
             @csrf
-            @php
+            {{-- @php
                 $config = [
                     // 'timePicker' => true,
                     'endDate' => 'js:moment()',
@@ -37,7 +37,22 @@
                         <i class="far fa-lg fa-calendar-alt"></i>
                     </div>
                 </x-slot>
-            </x-adminlte-date-range>
+            </x-adminlte-date-range> --}}
+
+
+            <div class="form-group">
+                <label>Seleccione el Mes</label>
+
+                <div>
+                    <input type="month" name="date" onkeydown="return false" style="color:gray" />
+
+                </div>
+                </label>
+                @error('date')
+                    <p class="text-red">{{ $message }}</p>
+                @enderror
+            </div>
+
 
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Buscar movimientos</button>

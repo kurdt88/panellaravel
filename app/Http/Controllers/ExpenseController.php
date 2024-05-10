@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 
 class ExpenseController extends Controller
@@ -123,6 +124,51 @@ class ExpenseController extends Controller
         }
 
 
+
+
+        $imageRules = array(
+            'image' => 'image|mimes:jpeg,jpg,png|max:2000'
+        );
+
+
+        // dd($files_images);
+        if ($request->hasFile('images')) {
+            foreach ($files_images as $image) {
+                $img = $image;
+                $image = array('image' => $image);
+                $imageValidator = Validator::make($image, $imageRules);
+
+                if ($imageValidator->fails()) {
+
+                    $messages = $imageValidator->messages();
+
+                    return Redirect::back()
+                        ->withErrors('Alguna imágen excede el límite de tamaño 2Mb o no es del tipo image|mimes:jpeg,jpg,png. ' . $messages);
+                }
+            }
+        }
+
+
+        $fileRules = array(
+            "file" => "max:2000"
+        );
+
+
+        // dd($files_images);
+        if ($request->hasFile('other_files')) {
+            foreach ($files_others as $file) {
+                $file = array('file' => $file);
+                $fileValidator = Validator::make($file, $fileRules);
+
+                if ($fileValidator->fails()) {
+
+                    $messages = $fileValidator->messages();
+
+                    return Redirect::back()
+                        ->withErrors('Algún archivo excede el límite de tamaño 2Mb o no es del tipo application/pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx. ' . $messages);
+                }
+            }
+        }
 
 
         try {

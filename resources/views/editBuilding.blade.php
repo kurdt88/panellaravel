@@ -64,7 +64,7 @@
                     {{ $building->description }}
                 </x-adminlte-textarea>
 
-                <label>Presupuesto de Mtto en MXN</label>
+                {{-- <label>Presupuesto de Mtto en MXN</label>
                 <br>
                 <font color="blue"><small>Valor actual:
                         {{ $building->maintenance_budget }}
@@ -88,7 +88,7 @@
                     @error('maintenance_budget_usd')
                         <p class="text-red">{{ $message }}</p>
                     @enderror
-                </div>
+                </div> --}}
 
 
             </div>
