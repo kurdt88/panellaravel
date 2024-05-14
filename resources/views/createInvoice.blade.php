@@ -57,7 +57,7 @@
                     <div class="form-group">
                         <label id="subconcept_label">Concepto</label>
                         <select id="subconcept" name="subconcept" class="custom-select rounded-0">
-                            <option value="">-- Selecciona una opción --</option>
+                            {{-- <option value="">-- Selecciona una opción --</option>
                             <option value="Ingreso-Concepto1">Ingreso-Concepto1</option>
                             <option value="Ingreso-Concepto2">Ingreso-Concepto2</option>
                             <option value="Ingreso-Concepto3">Ingreso-Concepto3</option>
@@ -67,7 +67,7 @@
                             <option value="Egreso-Concepto2">Egreso-Concepto2</option>
                             <option value="Egreso-Concepto3">Egreso-Concepto3</option>
                             <option value="Egreso-Concepto4">Egreso-Concepto4</option>
-                            <option value="Egreso-Concepto5">Egreso-Concepto5</option>
+                            <option value="Egreso-Concepto5">Egreso-Concepto5</option> --}}
                         </select>
                         @error('subconcept')
                             <p class="text-red">{{ $message }}</p>
@@ -279,10 +279,25 @@
                     var category = $('#category').val();
                     $("#concept").html('');
                     $('#concept').html(
-                        '<option value="">-- Selecciona una Opcion --</option>"');
+                        '<option value="">-- Selecciona una Opción --</option>"');
+
+                    $("#subconcept").html('');
+                    $('#subconcept').html(
+                        '<option value="">-- Selecciona una Opción --</option>"');
+
+
+
+
                     if (category == 'Ingreso') {
                         //Mostar Opciones Reducidas en el Campo concept
-                        $("#concept").append('<option value="Ingreso General">Ingreso General</option>');
+                        $("#concept").append(
+                            '<option value="Ingreso General" selected>Ingreso General</option>');
+
+                        $("#subconcept").append('<option value="Ingreso-Concepto1">Ingreso-Concepto1</option>');
+                        $("#subconcept").append('<option value="Ingreso-Concepto2">Ingreso-Concepto2</option>');
+                        $("#subconcept").append('<option value="Ingreso-Concepto3">Ingreso-Concepto3</option>');
+                        $("#subconcept").append('<option value="Ingreso-Concepto4">Ingreso-Concepto4</option>');
+                        $("#subconcept").append('<option value="Ingreso-Concepto5">Ingreso-Concepto5</option>');
 
 
 
@@ -295,6 +310,11 @@
                         //     '<option value="Presupuesto_de_Mantenimiento">Presupuesto de Mantenimiento</option>'
                         // );
 
+                        $("#subconcept").append('<option value="Egreso-Concepto1">Egreso-Concepto1</option>');
+                        $("#subconcept").append('<option value="Egreso-Concepto2">Egreso-Concepto2</option>');
+                        $("#subconcept").append('<option value="Egreso-Concepto3">Egreso-Concepto3</option>');
+                        $("#subconcept").append('<option value="Egreso-Concepto4">Egreso-Concepto4</option>');
+                        $("#subconcept").append('<option value="Egreso-Concepto5">Egreso-Concepto5</option>');
 
                     }
 
