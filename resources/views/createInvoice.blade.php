@@ -291,7 +291,7 @@
                     if (category == 'Ingreso') {
                         //Mostar Opciones Reducidas en el Campo concept
                         $("#concept").append(
-                            '<option value="Ingreso General" selected>Ingreso General</option>');
+                            '<option value="Ingreso General">Ingreso General</option>');
 
                         $("#subconcept").append('<option value="Ingreso-Concepto1">Ingreso-Concepto1</option>');
                         $("#subconcept").append('<option value="Ingreso-Concepto2">Ingreso-Concepto2</option>');
