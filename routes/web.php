@@ -201,6 +201,6 @@ Route::middleware([
         Route::get('profile', [HomeController::class, 'settings']);
     });
 
-    // URL::forceScheme('https');
+    URL::forceScheme('https');
 
 });
