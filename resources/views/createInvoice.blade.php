@@ -288,6 +288,11 @@
                         );
                         $("#subconcept").append('<option value="RENTA DE T.S. ">RENTA DE T.S. </option>');
                         $("#subconcept").append('<option value="RENTA SAN JOSE">RENTA SAN JOSE</option>');
+                        $("#subconcept").append('<option value="RENTA">RENTA</option>');
+                        $("#subconcept").append(
+                            '<option value="RENTA EXENTA POR PERIODO DE GRACIA">RENTA EXENTA POR PERIODO DE GRACIA</option>'
+                        );
+                        $("#subconcept").append('<option value="DEPOSITO CONTRATO">DEPOSITO CONTRATO</option>');
                         $("#subconcept").append('<option value="OTRO">OTRO</option>');
 
 

@@ -141,7 +141,7 @@ class LeaseController extends Controller
                     // Primero Crea la factura del Deposito de Garantia y despues ya genera las de las rentas
                     $deposit_invoice_start_date = Carbon::createFromFormat('Y-m-d', $startString)->format('Y-m-d');
                     $deposit_invoice_due_date = Carbon::createFromFormat('Y-m-d', $startString)->addDays(5)->format('Y-m-d');
-                    $concept = 'Depósito de Garantía';
+                    $concept = 'Ingreso General';
 
                     // FORMULA DE IVA_RETENCIONES
                     if ($iva_type == 'IVA_RETENCIONES') {
@@ -160,7 +160,7 @@ class LeaseController extends Controller
                         'type' => $request->get('type'),
                         'category' => "Ingreso",
                         'concept' => $concept,
-                        'subconcept' => "Depósito",
+                        'subconcept' => "DEPOSITO CONTRATO",
                         'iva' => $iva_type,
                         'iva_rate' => $iva_rate,
                         'iva_ammount' => $iva_ammount_fixed,
@@ -180,12 +180,13 @@ class LeaseController extends Controller
                     $invoice_due_date = Carbon::createFromFormat('Y-m-d', $startString)->addMonths($i - 1)->addDays(5)->format('Y-m-d');
                     if ($i <= $months_grace_period) {
                         $ammount = 0;
-                        $concept = 'Renta Excenta por periodo de gracia';
+                        $concept = 'Ingreso General';
+                        $subconcept = 'RENTA EXENTA POR PERIODO DE GRACIA';
 
                     } else {
                         $ammount = $request->get('rent');
-                        $concept = 'Renta';
-
+                        $concept = 'Ingreso General';
+                        $subconcept = 'RENTA';
                     }
 
 
@@ -207,7 +208,7 @@ class LeaseController extends Controller
                         'type' => $request->get('type'),
                         'category' => "Ingreso",
                         'concept' => $concept,
-                        'subconcept' => "Renta",
+                        'subconcept' => $subconcept,
                         'iva' => $iva_type,
                         'iva_rate' => $iva_rate,
                         'iva_ammount' => $iva_ammount_fixed,
