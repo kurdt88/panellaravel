@@ -158,7 +158,9 @@
                                     <th scope="col">Cuenta</th>
                                     <th scope="col">Divisa</th>
                                     <th scope="col">Alias</th>
-                                    <th scope="col">Ver Mas</th>
+                                    @can('bankaccount')
+                                        <th scope="col">Ver Mas</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody>
@@ -169,15 +171,16 @@
                                         <td>{{ $account->number }}</td>
                                         <td>{{ $account->type }}</td>
                                         <td>{{ Str::limit($account->alias, 20) }}</td>
-
-                                        <td>
-                                            <a href="/accounts/{{ $account->id }}" class="text-muted">
-                                                <button class="btn btn-xs btn-default text-teal mx-1 shadow"
-                                                    title="Details">
-                                                    <i class="fa fa-lg fa-fw fa-eye"></i>
-                                                </button>
-                                            </a>
-                                        </td>
+                                        @can('bankaccount')
+                                            <td>
+                                                <a href="/accounts/{{ $account->id }}" class="text-muted">
+                                                    <button class="btn btn-xs btn-default text-teal mx-1 shadow"
+                                                        title="Details">
+                                                        <i class="fa fa-lg fa-fw fa-eye"></i>
+                                                    </button>
+                                                </a>
+                                            </td>
+                                        @endcan
                                     </tr>
                                 @endforeach
                             </tbody>

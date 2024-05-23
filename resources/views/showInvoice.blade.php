@@ -479,10 +479,10 @@
                 <div class="col-12">
 
 
-                    <button type="button" onClick="location.href='/invoicepdf/{{ $invoice->id }}/'"
+                    {{-- <button type="button" onClick="location.href='/invoicepdf/{{ $invoice->id }}/'"
                         class="btn btn-danger float-right" style="margin-right: 5px;">
                         <i class="fas fa-download"></i> PDF
-                    </button>
+                    </button> --}}
 
 
                     <button type="button" onClick="location.href='/invoicexml/{{ $invoice->id }}/'"

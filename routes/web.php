@@ -40,6 +40,8 @@ Route::middleware([
 
 
     Route::get('/', [HomeController::class, 'welcome']);
+    Route::get('/dashboard', [HomeController::class, 'welcome']);
+
 
 
     //RUTAS para el permiso CREATE

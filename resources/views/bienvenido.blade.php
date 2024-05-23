@@ -157,8 +157,10 @@
                                     <th scope="col">Egresos del Mes</th>
                                     <th scope="col">Balance del Mes</th>
 
+                                    @can('bankaccount')
+                                        <th scope="col">Ver Mas</th>
+                                    @endcan
 
-                                    <th scope="col">Ver Mas</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -196,14 +198,16 @@
                                                 {{ Number::currency($account->monthbalance) }}
                                             </label>
                                         </td>
-                                        <td>
-                                            <a href="/accountallmovements/{{ $account->id }}/" class="text-muted">
-                                                <button class="btn btn-xs btn-default text-teal mx-1 shadow"
-                                                    title="Details">
-                                                    <i class="fa fa-lg fa-fw fa-eye"></i>
-                                                </button>
-                                            </a>
-                                        </td>
+                                        @can('bankaccount')
+                                            <td>
+                                                <a href="/accountallmovements/{{ $account->id }}/" class="text-muted">
+                                                    <button class="btn btn-xs btn-default text-teal mx-1 shadow"
+                                                        title="Details">
+                                                        <i class="fa fa-lg fa-fw fa-eye"></i>
+                                                    </button>
+                                                </a>
+                                            </td>
+                                        @endcan
                                     </tr>
                                 @endforeach
                             </tbody>

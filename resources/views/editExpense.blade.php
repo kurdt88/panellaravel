@@ -60,14 +60,12 @@
                     <br>
                     <font color="blue"><small>Valor actual:
                             <b>
-
                                 Propiedad:
                                 {{ App\Models\Property::whereId($expense->lease->property)->first()->title }}&nbsp;/&nbsp;
-                                Propietario:
-                                {{ App\Models\Landlord::whereId($expense->lease->property_->landlord_id)->first()->name }}&nbsp;/&nbsp;
                                 Arrendatario:
                                 {{ App\Models\Tenant::whereId($expense->lease->tenant)->first()->name }}&nbsp;/&nbsp;
                                 Inicio: {{ $expense->lease->start }}&nbsp;Fin:{{ $expense->lease->end }}&nbsp;/&nbsp;
+                                Divisa: {{ $expense->lease->type }}&nbsp;/&nbsp;&nbsp;
                                 Info Adicional:
                                 {{ Str::limit($expense->lease->contract, 25) }}
                             </b>
@@ -111,8 +109,9 @@
                 <font color="blue"><small>Valor actual:
                         <b>
                             [{{ $expense->invoice->sequence }}]: {{ $expense->invoice->start_date }} -
-                            {{ $expense->invoice->due_date }} / Divisa: {{ $expense->invoice->type }} /
-                            {{ $expense->invoice->total }} / {{ $expense->invoice->comment }}
+                            {{ $expense->invoice->due_date }} | Divisa: {{ $expense->invoice->type }} |
+                            {{ $expense->invoice->total }} | {{ $expense->invoice->comment }}|
+                            {{ $expense->invoice->concept }}
                         </b>
 
                     </small></font>

@@ -230,9 +230,9 @@
                                     <i class="fas fa-book"></i> Ver Recibo
                                 </button>
 
-                                <button type="button" class="btn btn-danger float-right" style="margin-right: 5px;">
+                                {{-- <button type="button" class="btn btn-danger float-right" style="margin-right: 5px;">
                                     <i class="fas fa-download"></i> PDF
-                                </button>
+                                </button> --}}
                                 <button onClick="window.print()" type="button" class="btn btn-warning float-right"
                                     style="margin-right: 5px;">
                                     <i class="fas fa-print"></i> imprimir
