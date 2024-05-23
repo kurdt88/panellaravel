@@ -57,17 +57,7 @@
                     <div class="form-group">
                         <label id="subconcept_label">Concepto</label>
                         <select id="subconcept" name="subconcept" class="custom-select rounded-0">
-                            {{-- <option value="">-- Selecciona una opción --</option>
-                            <option value="Ingreso-Concepto1">Ingreso-Concepto1</option>
-                            <option value="Ingreso-Concepto2">Ingreso-Concepto2</option>
-                            <option value="Ingreso-Concepto3">Ingreso-Concepto3</option>
-                            <option value="Ingreso-Concepto4">Ingreso-Concepto4</option>
-                            <option value="Ingreso-Concepto5">Ingreso-Concepto5</option>
-                            <option value="Egreso-Concepto1">Egreso-Concepto1</option>
-                            <option value="Egreso-Concepto2">Egreso-Concepto2</option>
-                            <option value="Egreso-Concepto3">Egreso-Concepto3</option>
-                            <option value="Egreso-Concepto4">Egreso-Concepto4</option>
-                            <option value="Egreso-Concepto5">Egreso-Concepto5</option> --}}
+
                         </select>
                         @error('subconcept')
                             <p class="text-red">{{ $message }}</p>
@@ -152,23 +142,6 @@
                         @enderror
                     </div>
 
-                    {{-- <div class="form-group">
-                        <label id="building_id_label">Conjunto Habitacional Asociado</label>
-
-                        <select id="building_id" name="building_id" class="custom-select rounded-0">
-                            <option value="">-- Selecciona una opción --</option>
-
-                            @foreach (App\Models\Building::all() as $building)
-                                @if ($building->id != 1)
-                                    <option value="{{ $building->id }}">{{ $building->name }}</option>
-                                @endif
-                            @endforeach
-
-                        </select>
-                        @error('building_id')
-                            <p class="text-red">{{ $message }}</p>
-                        @enderror
-                    </div> --}}
 
 
 
@@ -293,11 +266,29 @@
                         $("#concept").append(
                             '<option value="Ingreso General">Ingreso General</option>');
 
-                        $("#subconcept").append('<option value="Ingreso-Concepto1">Ingreso-Concepto1</option>');
-                        $("#subconcept").append('<option value="Ingreso-Concepto2">Ingreso-Concepto2</option>');
-                        $("#subconcept").append('<option value="Ingreso-Concepto3">Ingreso-Concepto3</option>');
-                        $("#subconcept").append('<option value="Ingreso-Concepto4">Ingreso-Concepto4</option>');
-                        $("#subconcept").append('<option value="Ingreso-Concepto5">Ingreso-Concepto5</option>');
+                        $("#subconcept").append('<option value="RENTA DE LOCALES">RENTA DE LOCALES</option>');
+                        $("#subconcept").append(
+                            '<option value="RENTA DE APARTAMENTOS">RENTA DE APARTAMENTOS </option>');
+                        $("#subconcept").append('<option value="DEPOSITOS">DEPOSITOS</option>');
+                        $("#subconcept").append(
+                            '<option value="PAGO DE AGUA MENSUAL">PAGO DE AGUA MENSUAL</option>');
+                        $("#subconcept").append(
+                            '<option value="PAGO DE CONEXION LUZ Y AGUA">PAGO DE CONEXION LUZ Y AGUA</option>'
+                        );
+                        $("#subconcept").append('<option value="MULTAS">MULTAS</option>');
+                        $("#subconcept").append('<option value="INTERESES">INTERESES</option>');
+                        $("#subconcept").append(
+                            '<option value="RENTA DE ESTACIONAMIENTO">RENTA DE ESTACIONAMIENTO</option>');
+                        $("#subconcept").append(
+                            '<option value="DEPOSITO POR MASCOTAS">DEPOSITO POR MASCOTAS</option>');
+                        $("#subconcept").append(
+                            '<option value="ESTACIONAMIENTO POR HORA">ESTACIONAMIENTO POR HORA</option>');
+                        $("#subconcept").append(
+                            '<option value="TARJETA EXTRA ESTACIONAMIENTO">TARJETA EXTRA ESTACIONAMIENTO</option>'
+                        );
+                        $("#subconcept").append('<option value="RENTA DE T.S. ">RENTA DE T.S. </option>');
+                        $("#subconcept").append('<option value="RENTA SAN JOSE">RENTA SAN JOSE</option>');
+                        $("#subconcept").append('<option value="OTRO">OTRO</option>');
 
 
 
@@ -310,11 +301,50 @@
                         //     '<option value="Presupuesto_de_Mantenimiento">Presupuesto de Mantenimiento</option>'
                         // );
 
-                        $("#subconcept").append('<option value="Egreso-Concepto1">Egreso-Concepto1</option>');
-                        $("#subconcept").append('<option value="Egreso-Concepto2">Egreso-Concepto2</option>');
-                        $("#subconcept").append('<option value="Egreso-Concepto3">Egreso-Concepto3</option>');
-                        $("#subconcept").append('<option value="Egreso-Concepto4">Egreso-Concepto4</option>');
-                        $("#subconcept").append('<option value="Egreso-Concepto5">Egreso-Concepto5</option>');
+                        $("#subconcept").append('<option value="OOMSAPAS">OOMSAPAS</option>');
+                        $("#subconcept").append('<option value="CFE">CFE</option>');
+                        $("#subconcept").append('<option value="TELMEX">TELMEX</option>');
+                        $("#subconcept").append('<option value="SUELDO PERSONAL">SUELDO PERSONAL</option>');
+                        $("#subconcept").append('<option value="AZTEK">AZTEK</option>');
+                        $("#subconcept").append('<option value="CAMARAS">CAMARAS</option>');
+                        $("#subconcept").append('<option value="CONTABILIDAD">CONTABILIDAD</option>');
+                        $("#subconcept").append('<option value="GASOLINA">GASOLINA</option>');
+                        $("#subconcept").append(
+                            '<option value="ARTICULOS DE LIMPIEZA">ARTICULOS DE LIMPIEZA</option>');
+                        $("#subconcept").append(
+                            '<option value="MATERIAL MANTENIMIENTO">MATERIAL MANTENIMIENTO</option>');
+                        $("#subconcept").append(
+                            '<option value="MANTENIMIENTO ELEVADOR">MANTENIMIENTO ELEVADOR</option>');
+                        $("#subconcept").append('<option value="RECOLECTORA TAZ">RECOLECTORA TAZ</option>');
+                        $("#subconcept").append(
+                            '<option value="DANIEL HIGUERA ANUAL">DANIEL HIGUERA ANUAL</option>');
+                        $("#subconcept").append('<option value="PREDIAL">PREDIAL</option>');
+                        $("#subconcept").append('<option value="COMISIONES">COMISIONES</option>');
+                        $("#subconcept").append('<option value="SAT">SAT</option>');
+                        $("#subconcept").append('<option value="IMSS">IMSS</option>');
+                        $("#subconcept").append('<option value="SAPAS LA PAZ">SAPAS LA PAZ</option>');
+                        $("#subconcept").append('<option value="TELCEL">TELCEL</option>');
+                        $("#subconcept").append('<option value="MUEBLES">MUEBLES</option>');
+                        $("#subconcept").append(
+                            '<option value="REPARACION DE MUEBLES">REPARACION DE MUEBLES</option>');
+                        $("#subconcept").append(
+                            '<option value="AIRES ACONDICIONADOS">AIRES ACONDICIONADOS</option>');
+                        $("#subconcept").append('<option value="CARPINTERIA">CARPINTERIA</option>');
+                        $("#subconcept").append('<option value="PINTURA">PINTURA</option>');
+                        $("#subconcept").append(
+                            '<option value="SUELDO ADMINISTRACION">SUELDO ADMINISTRACION</option>');
+                        $("#subconcept").append('<option value="JARDINERIA">JARDINERIA</option>');
+                        $("#subconcept").append(
+                            '<option value="RECOLECCION DE BASURA">RECOLECCION DE BASURA</option>');
+                        $("#subconcept").append(
+                            '<option value="PERSONAL DE LIMPIEZA">PERSONAL DE LIMPIEZA</option>');
+                        $("#subconcept").append('<option value="COLEGIATURA">COLEGIATURA</option>');
+                        $("#subconcept").append(
+                            '<option value="MENSUALIDAD ISABELLA">MENSUALIDAD ISABELLA</option>');
+                        $("#subconcept").append(
+                            '<option value="OTRO"</option>');
+                        $("#subconcept").append(
+                            '<option value=OTRO</option>');
 
                     }
 

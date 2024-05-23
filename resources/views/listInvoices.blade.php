@@ -8,8 +8,13 @@
 @section('content_header')
     <x-flash-message />
 
-    <h1>Lista de Recibos<a href="/newinvoice" class="btn btn-tool btn-sm">
-            [Nuevo Recibo] <button class="btn btn-link"><i class="fas fa-plus"></i></button></a></h1>
+    <h1>Lista de Recibos
+        @can('create')
+            <a href="/newinvoice" class="btn btn-tool btn-sm">
+                [Nuevo Recibo] <button class="btn btn-link"><i class="fas fa-plus"></i></button>
+            </a>
+        @endcan
+    </h1>
 
 @stop
 
@@ -133,20 +138,25 @@
                             </button>
                         </a>
 
-                        <a href="/indexinvoices/{{ $invoice->id }}/edit" class="text-muted">
-                            <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
-                                <i class="fa fa-lg fa-fw fa-pen"></i>
-                            </button> </a>
+                        @can('edit')
+                            <a href="/indexinvoices/{{ $invoice->id }}/edit" class="text-muted">
+                                <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                                    <i class="fa fa-lg fa-fw fa-pen"></i>
+                                </button>
+                            </a>
+                        @endcan
 
-                        <form style="display:inline;" method="POST" action="/delinvoice/{{ $invoice->id }}">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete"
-                                onclick="return confirm('¿Estas seguro de querer borrar el Recibo seleccionado ? \n ALERTA Si confirma no se podrá recuperar la información.')">
+                        @can('delete')
+                            <form style="display:inline;" method="POST" action="/delinvoice/{{ $invoice->id }}">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete"
+                                    onclick="return confirm('¿Estas seguro de querer borrar el Recibo seleccionado ? \n ALERTA Si confirma no se podrá recuperar la información.')">
 
-                                <i class="fa fa-lg fa-fw fa-trash"></i>
-                            </button>
-                        </form>
+                                    <i class="fa fa-lg fa-fw fa-trash"></i>
+                                </button>
+                            </form>
+                        @endcan
                     </td>
                 </div>
             </tr>

@@ -494,11 +494,12 @@
                         style="margin-right: 5px;">
                         <i class="fas fa-print"></i> Imprimir
                     </button>
-
-                    <button type="button" onClick="location.href='/indexinvoices/{{ $invoice->id }}/edit/'"
-                        class="btn btn-dark float-right" style="margin-right: 5px;">
-                        <i class="fas fa-edit"></i> Editar
-                    </button>
+                    @can('edit')
+                        <button type="button" onClick="location.href='/indexinvoices/{{ $invoice->id }}/edit/'"
+                            class="btn btn-dark float-right" style="margin-right: 5px;">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                    @endcan
 
 
 

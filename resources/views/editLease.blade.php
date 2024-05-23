@@ -16,27 +16,21 @@
 
     </header>
 
-    <br>
-    <p>
+    <x-adminlte-callout theme="danger" title-class="text-danger text-uppercase" icon="fas fa-handshake-slash"
+        title="MODIFICAR UN CONTRATO PUEDE SER CAUSA DE SU INVALIDEZ">
+        Previo a modificar cualquier información del Contrato se recomienda consultar al área Legal encargada.
 
-    <div class="alert alert-danger alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <h5><i class="icon fas fa-exclamation-triangle"></i>Modificar un contrato puede causar su invalidez. Previo a
-            modificarlo se recomienda verificarlo con el área Legal encargada.
-        </h5>
+    </x-adminlte-callout>
 
-    </div>
-    </p>
+
 
     <div class="col-md-12">
 
         <div class="card card-primary">
             <div class="card-header">
-                @foreach ($properties as $property)
-                    @if ($property->id == $lease->property)
-                        <h3 class="card-title">Editar Contrato: {{ $properties[$lease->property - 1]['title'] }}</h3>
-                    @endif
-                @endforeach
+
+                <h3 class="card-title">Editar Contrato: {{ $lease->property_->title }}</h3>
+
             </div>
 
 
@@ -45,7 +39,11 @@
                 @method('PUT')
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="property">Propiedad <i>[{{ $properties[$lease->property - 1]['title'] }}]</i></label>
+                        <label for="property">Propiedad</label>
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                {{ $lease->property_->title }}
+                            </small></font>
                         <select name="property" class="custom-select rounded-0" id="exampleSelectRounded0">
 
                             @foreach ($properties as $property)
@@ -63,7 +61,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="tenant">Arrendatario <i>[{{ $tenants[$lease->tenant - 1]['name'] }}]</i></label>
+                        <label for="tenant">Arrendatario</i></label>
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                {{ $lease->tenant_->name }}
+                            </small></font>
                         <select name="tenant" class="custom-select rounded-0" id="exampleSelectRounded0">
                             @foreach ($tenants as $tenant)
                                 @if ($tenant->id == $lease->tenant)
@@ -81,6 +83,10 @@
 
                     <div class="form-group">
                         <label for="type">Divisa</label>
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                {{ $lease->type }}
+                            </small></font>
                         <select name="type" class="custom-select rounded-0">
                             <option value="MXN">MXN</option>
                             <option value="USD">USD</option>
@@ -96,6 +102,10 @@
 
                     <div class="form-group">
                         <label for="iva">IVA</label>
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                {{ $lease->iva }}
+                            </small></font>
                         <select id="iva" name="iva" class="custom-select rounded-0">
                             <option selected="selected">
                                 {{ $lease->iva }}
@@ -111,6 +121,10 @@
                     </div>
                     <div class="form-group">
                         <label for="rent">Renta Mensual</label>
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                {{ Number::Currency($lease->rent) }}
+                            </small></font>
                         <input type="number" min="1" step="any" class="form-control" name="rent"
                             value="{{ $lease->rent }}">
                         @error('rent')
@@ -119,11 +133,41 @@
                     </div>
                     <div class="form-group">
                         <label for="deposit">Depósito</label>
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                {{ Number::Currency($lease->deposit) }}
+                            </small></font>
                         <input type="number" class="form-control" name="deposit" value="{{ $lease->deposit }}">
                         @error('deposit')
                             <p class="text-red">{{ $message }}</p>
                         @enderror
                     </div>
+
+
+
+
+
+
+                    <x-adminlte-modal id="modalinfo1" title="Advertencia" theme="warning">
+                        No se recomienda la modificación en las fechas
+                        del
+                        Contrato, ya que esto implica revisar y modificar de manera "manual" los Recibos asociados que se
+                        generaron de manera automática al crearse el Contrato.
+                        <br><br>Al crearse un nuevo contrato, el sistema crea de manera
+                        automática los Recibos correspondientes a las
+                        Rentas (1 por mes) y al Depósito de Garatia (si hubiera).
+                        <br><br>
+                        Si desea continuar con la modificación de las fechas del Contrato, también tome en cuenta que el
+                        sistema
+                        no generará nuevos Recibos (de renta o depósito) de manera automática ni tampoco actualizará los
+                        anteriormente generados. Por lo que, estos cambios
+                        deberán realizarse de manera manual.
+                        <br><br>
+                    </x-adminlte-modal>
+
+
+
+
                     @php
                         $config = [
                             'timePicker' => true,
@@ -133,8 +177,14 @@
                         ];
                     @endphp
                     {{-- Label and placeholder --}}
-                    <x-adminlte-date-range name="invoiceperiod" label="Fecha de Inicio y Vencimiento" :config="$config"
-                        disabled>
+
+                    <label>Fecha de Inicio y Vencimiento</label>
+                    <x-adminlte-button label="?" theme="warning" data-toggle="modal" data-target="#modalinfo1" />
+                    <br>
+                    <font color="blue"><small>Valor actual:
+                            {{ $lease->start }} - {{ $lease->end }}
+                        </small></font>
+                    <x-adminlte-date-range name="leaseperiod" :config="$config">
                         <x-slot name="prependSlot">
                             <div class="input-group-text bg-gradient-primary">
                                 <i class="far fa-lg fa-calendar-alt"></i>
@@ -142,19 +192,14 @@
                         </x-slot>
                     </x-adminlte-date-range>
 
-                    <div class="alert alert-warning alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h5><i class="icon fas fa-exclamation-triangle"></i>No se permite la modificación en las fechas del
-                            contrato, toda vez que existen facturas asociadas al periodo inicialmente definido. En caso de
-                            requerir su modificación consulte al administrador del sistema.
-                        </h5>
-
-                    </div>
 
                     <div class="form-group">
                         <label for="contract">Información Adicional</label>
-
-                        <textarea class="form-control" name="contract" rows="3">{{ $lease->contract }}</textarea>
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                {{ $lease->contract }}
+                            </small></font>
+                        <textarea class="form-control" name="contract" rows="1">{{ $lease->contract }}</textarea>
                         @error('contract')
                             <p class="text-red">{{ $message }}</p>
                         @enderror

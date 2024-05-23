@@ -5,11 +5,11 @@
 @section('content_header')
     {{-- <h1>Propiedades<b>LTE</b></h1> --}}
     <x-flash-error-message />
-    @if ($errors->any())
+    {{-- @if ($errors->any())
         <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <h5><i class="icon fas fa-ban"></i>{{ $errors->first() }}</h5>
-    @endif
+    @endif --}}
 @stop
 
 @section('content')
@@ -42,7 +42,9 @@
                         <label>Fecha del pago</label>
                         <br>
                         <font color="blue"><small>Valor actual:
-                                {{ $payment->date }}
+                                <b>
+                                    {{ $payment->date }}
+                                </b>
                             </small></font>
                         <div>
                             <input type="date" name="date" onkeydown="return false" style="color:gray"
@@ -63,18 +65,18 @@
                         <label for="lease_id">Contrato asociado</label>
                         <br>
                         <font color="blue"><small>Valor actual:
-
-                                Propiedad:
-                                {{ App\Models\Property::whereId($payment->lease->property)->first()->title }}&nbsp;/&nbsp;
-                                Propietario:
-                                {{ App\Models\Landlord::whereId($payment->lease->property_->landlord_id)->first()->name }}&nbsp;/&nbsp;
-                                Arrendatario:
-                                {{ App\Models\Tenant::whereId($payment->lease->tenant)->first()->name }}&nbsp;/&nbsp;
-                                Inicio: {{ $payment->lease->start }}&nbsp;Fin:{{ $payment->lease->end }}
-
+                                <b>
+                                    Propiedad:
+                                    {{ App\Models\Property::whereId($payment->lease->property)->first()->title }}&nbsp;/&nbsp;
+                                    Arrendatario:
+                                    {{ App\Models\Tenant::whereId($payment->lease->tenant)->first()->name }}&nbsp;/&nbsp;
+                                    Inicio: {{ $payment->lease->start }}&nbsp;Fin:{{ $payment->lease->end }}&nbsp;/&nbsp;
+                                    Divisa: {{ $payment->lease->type }}&nbsp;/&nbsp;&nbsp;
+                                    Info Adicional:
+                                    {{ Str::limit($payment->lease->contract, 25) }}
+                                </b>
                             </small></font>
                         <select id="lease_id" name="lease_id" class="custom-select rounded-0">
-                            <option value="">-- Selecciona el Contrato --</option>
 
                             <option value="">-- Selecciona el Contrato --</option>
 
@@ -111,9 +113,11 @@
                     <label>Recibo asociado</label>
                     <br>
                     <font color="blue"><small>Valor actual:
-                            [{{ $payment->invoice->sequence }}]: {{ $payment->invoice->start_date }} -
-                            {{ $payment->invoice->due_date }} / Divisa: {{ $payment->invoice->type }} /
-                            {{ $payment->invoice->total }} / {{ $payment->invoice->comment }}
+                            <b>
+                                [{{ $payment->invoice->sequence }}]: {{ $payment->invoice->start_date }} -
+                                {{ $payment->invoice->due_date }} / Divisa: {{ $payment->invoice->type }} /
+                                {{ $payment->invoice->total }} / {{ $payment->invoice->comment }}
+                            </b>
                         </small></font>
                     <div class="form-group">
                         <select id="invoice-dropdown" name="invoice_id" class="form-control">
@@ -156,7 +160,9 @@
                     <div class="form-group">
                         <label for="type">Divisa del ingreso</label><br>
                         <font color="blue"><small>Valor actual:
-                                {{ $payment->type }}
+                                <b>
+                                    {{ $payment->type }}
+                                </b>
                             </small></font>
 
                         <select name="type" id="type" class="custom-select rounded-0">
@@ -175,7 +181,9 @@
                     @if ($payment->rate_exchange)
                         <label id="current_val_rate_exchange_label">
                             <font color="blue"><small>Valor actual:
-                                    {{ $payment->rate_exchange }}
+                                    <b>
+                                        {{ $payment->rate_exchange }}
+                                    </b>
                                 </small></font>
                         </label>
                         <input type="number" step="0.01" class="custom-select" name="rate_exchange" id="rate_exchange"
@@ -187,11 +195,23 @@
 
                     <label for="ammount">Monto del ingreso</label><br>
                     <font color="blue"><small>Valor actual:
-                            {{ $payment->ammount }}
+                            <b>
+                                @if ($payment->rate_exchange)
+                                    {{ Number::Currency($payment->ammount_exchange) }}
+                                    @php
+                                        $myammount = $payment->ammount_exchange;
+                                    @endphp
+                                @else
+                                    {{ Number::Currency($payment->ammount) }}
+                                    @php
+                                        $myammount = $payment->ammount;
+                                    @endphp
+                                @endif
+                            </b>
                         </small></font>
                     <div class="form-group">
                         <input type="number" step="0.01" id="ammount" name="ammount" class="custom-select rounded-0"
-                            value={{ $payment->ammount }}></input>
+                            value={{ $myammount }}></input>
 
 
                         @error('ammount')
@@ -206,9 +226,11 @@
                     <label>Cuenta Bancaria Destino</label>
                     <br>
                     <font color="blue"><small>Valor actual:
-                            [{{ $payment->account->type }}]: {{ $payment->account->alias }} -
-                            {{ $payment->account->bank }} / Divisa: {{ $payment->account->number }} /
-                            Propietario: {{ $payment->account->owner }}
+                            <b>
+                                [{{ $payment->account->type }}]: {{ $payment->account->alias }} -
+                                {{ $payment->account->bank }} / {{ $payment->account->number }} /
+                                Propietario: {{ $payment->account->owner }}
+                            </b>
                         </small></font>
 
                     <div class="form-group">
@@ -231,7 +253,9 @@
                         {{ $payment->comment }}
                     </x-adminlte-textarea>
                     <font color="blue"><small>Valor actual:
-                            {{ $payment->comment }}
+                            <b>
+                                {{ $payment->comment }}
+                            </b>
                         </small></font>
 
 

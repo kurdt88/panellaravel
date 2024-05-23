@@ -20,7 +20,9 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="javascript:history.back()">Regresar</a></li>
-                        <li class="breadcrumb-item active"><a href="/indexexpenses/{{ $expense->id }}/edit/">Editar</a></li>
+                        @can('edit')
+                            <li class="breadcrumb-item active"><a href="/indexexpenses/{{ $expense->id }}/edit/">Editar</a></li>
+                        @endcan
                     </ol>
                 </div>
             </div>

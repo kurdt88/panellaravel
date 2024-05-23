@@ -35,7 +35,10 @@
 
                 <div class="form-group">
                     <label>Nombre de la Unidad</label>
-
+                    <br>
+                    <font color="blue"><small>Valor actual:
+                            <b>{{ $building->name }}</b>
+                        </small></font>
                     <input type="text" class="form-control" name="name" value="{{ $building->name }}"
                         placeholder="Ejemplo: Edificio Torre Portales, etc">
                     @error('name')
@@ -46,6 +49,10 @@
 
                 <div class="form-group">
                     <label>Dirección</label>
+                    <br>
+                    <font color="blue"><small>Valor actual:
+                            <b>{{ $building->address }}</b>
+                        </small></font>
                     <input type="text" class="form-control" name="address" value="{{ $building->address }}"
                         placeholder="Indique la dirección completa">
                     @error('address')
@@ -54,8 +61,14 @@
 
                 </div>
 
-                <x-adminlte-textarea name="description" label="Descripción" rows=5 label-class="text-dark"
-                    igroup-size="sm" placeholder="Incluye todos los detalles de la Unidad Habitacional.">
+                <label>Descripción</label>
+
+
+                <font color="blue"><small><br>Valor actual:
+                        <b>{{ $building->description }}</b>
+                    </small></font>
+                <x-adminlte-textarea name="description" rows=3 label-class="text-dark" igroup-size="sm"
+                    placeholder="Incluye todos los detalles de la Unidad Habitacional.">
                     <x-slot name="prependSlot">
                         <div class="input-group-text bg-secondary">
                             <i class="fas fa-lg fa-file-alt text-light"></i>
@@ -64,31 +77,7 @@
                     {{ $building->description }}
                 </x-adminlte-textarea>
 
-                {{-- <label>Presupuesto de Mtto en MXN</label>
-                <br>
-                <font color="blue"><small>Valor actual:
-                        {{ $building->maintenance_budget }}
-                    </small></font>
-                <div class="form-group">
-                    <input type="number" step="0.01" id="maintenance_budget" name="maintenance_budget"
-                        class="custom-select rounded-0" value={{ $building->maintenance_budget }}></input>
-                    @error('maintenance_budget')
-                        <p class="text-red">{{ $message }}</p>
-                    @enderror
-                </div>
 
-                <label>Presupuesto de Mtto en USD</label>
-                <br>
-                <font color="blue"><small>Valor actual:
-                        {{ $building->maintenance_budget_usd }}
-                    </small></font>
-                <div class="form-group">
-                    <input type="number" step="0.01" id="maintenance_budget_usd" name="maintenance_budget_usd"
-                        class="custom-select rounded-0" value={{ $building->maintenance_budget_usd }}></input>
-                    @error('maintenance_budget_usd')
-                        <p class="text-red">{{ $message }}</p>
-                    @enderror
-                </div> --}}
 
 
             </div>

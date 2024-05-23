@@ -258,6 +258,22 @@ class InvoiceController extends Controller
 
             ]);
 
+
+
+            if ($property_id = $request->get('property_id')) {
+                $formFields = array_merge($formFields, array('property_id' => $property_id));
+            } else {
+                $formFields = array_merge($formFields, array('property_id' => null));
+
+            }
+            if ($subproperty_id = $request->get('subproperty_id')) {
+                $formFields = array_merge($formFields, array('subproperty_id' => $subproperty_id));
+            } else {
+                $formFields = array_merge($formFields, array('subproperty_id' => null));
+
+            }
+
+
             if ($request->get('iva') == 'Exento') {
                 $iva_rate = Tax::where('name', '=', 'Exento')->first()->value;
                 $iva_ammount = $request->get('ammount') * $iva_rate;

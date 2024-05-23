@@ -7,8 +7,13 @@
     <x-flash-message />
 
 
-    <h1>Lista de Egresos<a href="/newexpense" class="btn btn-tool btn-sm">
-            [Nuevo Egreso] <button class="btn btn-link"><i class="fas fa-plus"></i></button></a></h1>
+    <h1>Lista de Egresos
+        @can('create')
+            <a href="/newexpense" class="btn btn-tool btn-sm">
+                [Nuevo Egreso] <button class="btn btn-link"><i class="fas fa-plus"></i></button>
+            </a>
+        @endcan
+    </h1>
 
 @stop
 
@@ -141,20 +146,25 @@
                             <i class="fa fa-lg fa-fw fa-eye"></i>
                         </button>
                     </a>
-                    <a href="/indexexpenses/{{ $expense->id }}/edit" class="text-muted">
-                        <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
-                            <i class="fa fa-lg fa-fw fa-pen"></i>
-                        </button> </a>
+                    @can('edit')
+                        <a href="/indexexpenses/{{ $expense->id }}/edit" class="text-muted">
+                            <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                                <i class="fa fa-lg fa-fw fa-pen"></i>
+                            </button>
+                        </a>
+                    @endcan
 
-                    <form style="display:inline;" method="POST" action="/delexpense/{{ $expense->id }}">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete"
-                            onclick="return confirm('¿Estas seguro de querer borrar el Gasto <<{{ $expense->title }}>> ? \n ALERTA Si confirma no se podrá recuperar la información.')">
+                    @can('delete')
+                        <form style="display:inline;" method="POST" action="/delexpense/{{ $expense->id }}">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete"
+                                onclick="return confirm('¿Estás seguro de querer borrar el Egreso seleccionado ? \n ALERTA Si confirma no se podrá recuperar la información.')">
 
-                            <i class="fa fa-lg fa-fw fa-trash"></i>
-                        </button>
-                    </form>
+                                <i class="fa fa-lg fa-fw fa-trash"></i>
+                            </button>
+                        </form>
+                    @endcan
                 </td>
                 </div>
             </tr>

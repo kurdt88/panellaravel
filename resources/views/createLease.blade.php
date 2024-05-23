@@ -199,7 +199,7 @@
                 </div>
 
                 <x-adminlte-modal id="modalinfo1" title="Creación de Recibos de manera Automática" theme="primary">
-                    Al crearse un nuevo contrato, el sistema crea de manera automática los recibos correspondientes a las
+                    Al crearse un nuevo contrato, el sistema crea de manera automática los Recibos correspondientes a las
                     Rentas (1 por mes) y al Depósito de Garatia (si hubiera). <br><br>Si desea revisar/editar/borrar estos
                     Recibos,
                     posterior a la creación del Contrato, vaya a la opción "Recibos".

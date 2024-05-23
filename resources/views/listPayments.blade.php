@@ -7,8 +7,13 @@
     <x-flash-message />
 
 
-    <h1>Lista de Ingresos<a href="/newpayment" class="btn btn-tool btn-sm">
-            [Nuevo Ingreso] <button class="btn btn-link"><i class="fas fa-plus"></i></button></a></h1>
+    <h1>Lista de Ingresos
+        @can('create')
+            <a href="/newpayment" class="btn btn-tool btn-sm">
+                [Nuevo Ingreso] <button class="btn btn-link"><i class="fas fa-plus"></i></button>
+            </a>
+        @endcan
+    </h1>
 
 @stop
 
@@ -124,18 +129,22 @@
                                 <i class="fa fa-lg fa-fw fa-eye"></i>
                             </button>
                         </a>
-                        <a href="/indexpayments/{{ $payment->id }}/edit" class="text-muted">
-                            <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
-                                <i class="fa fa-lg fa-fw fa-pen"></i>
-                            </button> </a>
+                        @can('edit')
+                            <a href="/indexpayments/{{ $payment->id }}/edit" class="text-muted">
+                                <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                                    <i class="fa fa-lg fa-fw fa-pen"></i>
+                                </button> </a>
+                        @endcan
 
-                        <form style="display:inline;" method="POST" action="/delpayment/{{ $payment->id }}">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
-                                <i class="fa fa-lg fa-fw fa-trash"></i>
-                            </button>
-                        </form>
+                        @can('delete')
+                            <form style="display:inline;" method="POST" action="/delpayment/{{ $payment->id }}">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
+                                    <i class="fa fa-lg fa-fw fa-trash"></i>
+                                </button>
+                            </form>
+                        @endcan
                     </td>
                 </div>
             </tr>

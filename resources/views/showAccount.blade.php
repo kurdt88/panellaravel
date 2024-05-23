@@ -20,7 +20,10 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="javascript:history.back()">Regresar</a></li>
-                        <li class="breadcrumb-item active"><a href="/indexaccounts/{{ $account->id }}/edit">Editar</a></li>
+                        @can('edit')
+                            <li class="breadcrumb-item active"><a href="/indexaccounts/{{ $account->id }}/edit">Editar</a></li>
+                        @endcan
+
                     </ol>
                 </div>
             </div>
@@ -106,10 +109,12 @@
                                         <i class="far fa-calendar-alt"></i> Todos los movimientos
                                     </button>
                                 </a>
-                                <button onClick="location.href='/indexaccounts/{{ $account->id }}/edit'" type="button"
-                                    class="btn btn-primary float-right" style="margin-right: 5px;">
-                                    <i class="fas fa-pen-alt"></i> Editar
-                                </button>
+                                @can('edit')
+                                    <button onClick="location.href='/indexaccounts/{{ $account->id }}/edit'" type="button"
+                                        class="btn btn-primary float-right" style="margin-right: 5px;">
+                                        <i class="fas fa-pen-alt"></i> Editar
+                                    </button>
+                                @endcan
                                 <button onClick="location.href='/accountsearchmovements/{{ $account->id }}/'"
                                     type="button" class="btn btn-dark float-right" style="margin-right: 5px;">
                                     <i class="fas fa-coins"></i> Más movimientos

@@ -20,7 +20,9 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="javascript:history.back()">Regresar</a></li>
-                        <li class="breadcrumb-item active"><a href="/indexproperties/{{ $property->id }}/edit">Editar</a></li>
+                        @can('edit')
+                            <li class="breadcrumb-item active"><a href="/indexproperties/{{ $property->id }}/edit">Editar</a></li>
+                        @endcan
                     </ol>
                 </div>
             </div>
@@ -114,11 +116,12 @@
                             style="margin-right: 5px;">
                             <i class="fas fa-print"></i> Imprimir
                         </button>
-                        <button onClick="location.href='/indexproperties/{{ $property->id }}/edit'" type="button"
-                            class="btn btn-dark float-right" style="margin-right: 5px;">
-                            <i class="fas fa-pen-alt"></i> Editar
-                        </button>
-
+                        @can('edit')
+                            <button onClick="location.href='/indexproperties/{{ $property->id }}/edit'" type="button"
+                                class="btn btn-dark float-right" style="margin-right: 5px;">
+                                <i class="fas fa-pen-alt"></i> Editar
+                            </button>
+                        @endcan
                         @if (count($property->subproperties) > 0)
                             <button type="button" onClick="location.href='/propertysubproperties/{{ $property->id }}'"
                                 class="btn btn-primary float-right" style="margin-right: 5px;">

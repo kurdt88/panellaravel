@@ -7,8 +7,13 @@
     <x-flash-message />
 
 
-    <h1>Lista de Subunidades <a href="/newsubproperty" class="btn btn-tool btn-sm">
-            [Nueva Subunidad] <button class="btn btn-link"><i class="fas fa-plus"></i></button></a> </h1>
+    <h1>Lista de Subunidades
+        @can('create')
+            <a href="/newsubproperty" class="btn btn-tool btn-sm">
+                [Nueva Subunidad] <button class="btn btn-link"><i class="fas fa-plus"></i></button>
+            </a>
+        @endcan
+    </h1>
 
 @stop
 
@@ -98,20 +103,25 @@
                                 </button>
                             </a>
 
-                            <a href="/indexsubproperties/{{ $subproperty->id }}/edit" class="text-muted">
-                                <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
-                                    <i class="fa fa-lg fa-fw fa-pen"></i>
-                                </button> </a>
+                            @can('edit')
+                                <a href="/indexsubproperties/{{ $subproperty->id }}/edit" class="text-muted">
+                                    <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                                        <i class="fa fa-lg fa-fw fa-pen"></i>
+                                    </button> </a>
+                            @endcan
 
-                            <form style="display:inline;" method="POST" action="/delsubproperty/{{ $subproperty->id }}">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete"
-                                    onclick="return confirm('¿Estas seguro de querer borrar la subunidad <<{{ $subproperty->title }}>> ? \n ALERTA Si confirma se borrarán todos los pagos asociados al contrato.')">
+                            @can('delete')
+                                <form style="display:inline;" method="POST" action="/delsubproperty/{{ $subproperty->id }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete"
+                                        onclick="return confirm('¿Estas seguro de querer borrar la subunidad <<{{ $subproperty->title }}>> ? \n ALERTA Si confirma se borrarán todos los pagos asociados al contrato.')">
 
-                                    <i class="fa fa-lg fa-fw fa-trash"></i>
-                                </button>
-                            </form>
+                                        <i class="fa fa-lg fa-fw fa-trash"></i>
+                                    </button>
+                                </form>
+                            @endcan
+
                         </td>
                     </div>
                 </tr>

@@ -278,6 +278,8 @@ class LeaseController extends Controller
             'rent' => 'required',
             'iva' => 'required',
             'type' => 'required',
+            'leaseperiod' => 'required'
+
 
         ]);
 

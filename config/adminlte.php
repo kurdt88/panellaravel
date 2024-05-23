@@ -321,6 +321,8 @@ return [
         [
             'text' => ' Propiedades',
             'icon' => 'fas fa-landmark fa-fw',
+            'can' => 'view',
+
             'submenu' => [
                 [
                     'text' => 'Conjuntos habitacionales',
@@ -346,12 +348,15 @@ return [
             'text' => ' Propietarios',
             'icon' => 'fas fa-user-tie fa-fw"',
             'url' => 'landlords',
+            'can' => 'view',
+
         ],
 
         [
             'text' => 'Cuentas bancarias',
             'icon' => 'fas fa-credit-card fa-fw',
             'url' => 'accounts',
+            'can' => 'bankaccount',
         ],
 
         [
@@ -359,11 +364,14 @@ return [
             'url' => 'tenants',
 
             'icon' => 'fas fa-users fa-fw',
+            'can' => 'view',
+
         ],
         [
             'text' => ' Contratos',
             // 'icon' => 'fas fa-envelope-open-text fa-fw',
             'icon' => 'far fa-handshake',
+            'can' => 'view',
             'submenu' => [
                 [
                     'text' => 'Vigentes',
@@ -379,12 +387,15 @@ return [
                     'text' => 'Crear Contrato',
                     'icon' => 'fas fa-folder-plus fa-fw',
                     'url' => 'newlease',
+                    'can' => 'create',
+
                 ]
             ],
         ],
         [
             'text' => ' Recibos',
             'icon' => 'fa fa-book',
+            'can' => 'view',
             'submenu' => [
                 [
                     'text' => 'Por Cobrar',
@@ -415,6 +426,8 @@ return [
                     'text' => 'Crear recibo',
                     'icon' => 'fas fa-folder-plus fa-fw',
                     'url' => 'newinvoice',
+                    'can' => 'create',
+
                 ]
             ],
 
@@ -424,11 +437,15 @@ return [
             'text' => '  Ingresos',
             'url' => 'payments',
             'icon' => 'fas fa-donate fa-fw"',
+            'can' => 'view',
+
         ],
         [
             'text' => '  Egresos',
             'url' => 'expenses',
             'icon' => 'fas fa-hand-holding-usd fa-fw"',
+            'can' => 'view',
+
         ],
         [
             'text' => 'Proveedores',
@@ -436,12 +453,31 @@ return [
             'icon' => 'fas fa-business-time fa-fw',
             // 'label' => 4,
             'label_color' => 'success',
+            'can' => 'view',
+
         ],
-        ['header' => 'CONFIGURACION DE LA CUENTA'],
         [
-            'text' => 'Perfil de usuario',
+            'header' => 'CONFIGURACION DE LA CUENTA',
+            'can' => 'view'
+        ],
+
+        [
+            'text' => 'Perfil de Usuario',
             'url' => 'profile',
             'icon' => 'fas fa-fw fa-user',
+            'can' => 'view',
+
+        ],
+        [
+            'header' => 'ADMINISTRACION DE USUARIOS',
+            'can' => 'mgmtusers'
+        ],
+        [
+            'text' => 'Administración de Usuarios',
+            'url' => 'users',
+            'icon' => 'fas fa-fw fa-users',
+            'can' => 'mgmtusers',
+
         ],
         // [
         //     'text' => 'change_password',

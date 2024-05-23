@@ -19,6 +19,8 @@ return new class extends Migration {
             $table->string('type');
             $table->longText('comment')->nullable();
             $table->unique('number');
+            $table->unique('alias');
+
 
             $table->timestamps();
         });

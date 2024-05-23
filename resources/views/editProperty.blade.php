@@ -29,6 +29,32 @@
             </div>
 
 
+            <x-adminlte-modal id="modalinfo1" title="Lea esto antes de modificar este campo" theme="warning">
+                No se recomienda la modificación de este campo, si ya existen Egresos que afectaron al Presupuesto de
+                Mantenimiento de la Unidad Habitacional actualmente asociada.
+                <br><br>Al modificar este campo, automáticamente se transferiran a la nueva Unidad Habitacional todos los
+                Egresos asociados con la Propiedad.
+                <br><br>Si la Propiedad aún no tiene este tipo de Egresos asociados, puede modificar este campo de manera
+                segura.
+                <br><br>
+            </x-adminlte-modal>
+
+            <x-adminlte-modal id="modalinfo2" title="Lea esto antes de modificar este campo" theme="danger">
+                No se recomienda la modificación de este campo, si ya existen Contratos, Recibos, Ingresos y/o Egresos en el
+                sistema.
+                <br><br>Al modificar este campo, automáticamente se transferirán al nuevo Propietario todos los Contratos,
+                Recibos,
+                Ingresos y/o Egresos que existan registrados en el sistema.
+                <br><br>Esto <b>afectaría la consistencia de la información histórica del sistema</b>, relacionada con los
+                estados
+                de cuenta asociados al anterior y nuevo Propietario.
+                <br><br>Si la Propiedad aún no tiene Contratos, Recibos, Ingresos y/o Egresos asociados, puede modificar
+                este campo de
+                manera segura.
+                <br><br>
+            </x-adminlte-modal>
+
+
             <form method="POST" action="/indexproperties/{{ $property->id }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -36,7 +62,13 @@
 
 
                     <div class="form-group">
+
                         <label for="building_id">Conjunto habitacional</label>
+                        <x-adminlte-button label="Alerta" theme="warning" data-toggle="modal" data-target="#modalinfo1" />
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                <b>{{ $property->building->name }}</b>
+                            </small></font>
                         <select name="building_id" class="custom-select rounded-0" id="exampleSelectRounded0">
                             @foreach ($buildings as $building)
                                 @if ($building->id == $property->building_id)
@@ -55,6 +87,12 @@
 
                     <div class="form-group">
                         <label for="landlord_id">Propietario</label>
+                        <x-adminlte-button label="Alerta" theme="danger" data-toggle="modal" data-target="#modalinfo2" />
+
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                <b>{{ $property->landlord->name }}</b>
+                            </small></font>
                         <select name="landlord_id" class="custom-select rounded-0" id="landlord_id">
                             @foreach ($landlords as $landlord)
                                 @if ($landlord->id != 1)
@@ -74,6 +112,10 @@
 
                     <div class="form-group">
                         <label for="tittle">Título</label>
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                <b>{{ $property->tite }}</b>
+                            </small></font>
                         <input type="text" class="form-control" name="title" value="{{ $property->title }}">
                         @error('title')
                             <p class="text-red">{{ $message }}</p>
@@ -81,6 +123,10 @@
                     </div>
                     <div class="form-group">
                         <label for="rent">Renta Mensual Sugerida (avalúo)</label>
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                <b>{{ Number::Currency($property->rent) }}</b>
+                            </small></font>
                         <input type="number" min="1" step="any" class="form-control" name="rent"
                             value="{{ $property->rent }}"">
                         @error('rent')
@@ -96,6 +142,10 @@
                     </div> --}}
                     <div class="form-group">
                         <label for="location">Ubicación</label>
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                <b>{{ $property->location }}</b>
+                            </small></font>
                         <input type="text" class="form-control" name="location" value="{{ $property->location }}">
                         @error('location')
                             <p class="text-red">{{ $message }}</p>
@@ -111,7 +161,10 @@
                     </div> --}}
                     <div class="form-group">
                         <label for="description">Descripción de la propiedad</label>
-
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                <b>{{ $property->description }}</b>
+                            </small></font>
                         <textarea class="form-control" name="description" rows="3">{{ $property->description }}</textarea>
                         @error('description')
                             <p class="text-red">{{ $message }}</p>

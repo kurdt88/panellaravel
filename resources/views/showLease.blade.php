@@ -337,14 +337,18 @@
                         </x-adminlte-callout>
                     @endif
                     @if ($isvalid == 1 || $isvalid == 5)
-                        <button type="button" theme="outline-danger" class="btn btn-outline-danger float-right"
-                            onClick="location.href='/cancellease/{{ $lease->id }}/'" style="margin-right: 5px;">
-                            <i class="fas fa-handshake-slash"></i> Rescisión del Contrato
-                        </button>
-                        <button type="button" onClick="location.href='/indexleases/{{ $lease->id }}/edit'"
-                            class="btn btn-dark float-right" style="margin-right: 5px;">
-                            <i class="fas fa-pen-alt"></i> Editar
-                        </button>
+                        @can('create')
+                            <button type="button" theme="outline-danger" class="btn btn-outline-danger float-right"
+                                onClick="location.href='/cancellease/{{ $lease->id }}/'" style="margin-right: 5px;">
+                                <i class="fas fa-handshake-slash"></i> Rescisión del Contrato
+                            </button>
+                        @endcan
+                        @can('edit')
+                            <button type="button" onClick="location.href='/indexleases/{{ $lease->id }}/edit'"
+                                class="btn btn-dark float-right" style="margin-right: 5px;">
+                                <i class="fas fa-pen-alt"></i> Editar
+                            </button>
+                        @endcan
                     @endif
 
                     <button onClick="window.print()" type="button" class="btn btn-warning float-right"

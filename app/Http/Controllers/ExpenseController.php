@@ -265,7 +265,166 @@ class ExpenseController extends Controller
 
         }
 
+        $ammount = $request->get('ammount');
+        $type = $request->get('type');
+
+        $myinvoice = Invoice::whereId($request->get('invoice_id'))->first();
+        $invoice_type = $myinvoice->type;
+        $debt = $myinvoice->total - $myinvoice->expenses->sum('ammount') + $expense->ammount;
+
+
+
+
+
+        //Si NO hay cambio de DIVISA en el update
+        if ($type == $expense->type) {
+            //Simplemente se toman los valores de los campos y se guardan
+            if ($rate_exchange = $request->get('rate_exchange')) {
+                $formFields = array_merge($formFields, array('rate_exchange' => $rate_exchange));
+            }
+            //Si la Divisa del Update es igual que en el Recibo
+            if ($invoice_type == $type) {
+                $formFields = array_merge($formFields, array('ammount' => $request->get('ammount')));
+
+                //Aqui valido que el pago no exceda la deuda en la prefactura
+                $tmp = $ammount;
+                if ($tmp > $debt) {
+                    return Redirect::back()->withErrors(['msg' => "Error.a El monto del pago ingresado $type$ $ammount ( $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
+                }
+
+            } else {
+                //Si la Divisa del Update cambia respecto del Recibo
+                $formFields = array_merge($formFields, array('ammount_exchange' => $request->get('ammount')));
+                if ($request->get('type') == 'USD') {
+                    $formFields = array_merge($formFields, array('ammount' => $ammount * $rate_exchange));
+                    //Aqui valido que el pago no exceda la deuda en la prefactura
+                    $tmp = $ammount * $rate_exchange;
+
+                    if ($tmp > $debt) {
+                        return Redirect::back()->withErrors(['msg' => "Error. El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
+                    }
+
+
+
+                } else {
+                    $formFields = array_merge($formFields, array('ammount' => $ammount / $rate_exchange));
+                    //Aqui valido que el pago no exceda la deuda en la prefactura
+                    $tmp = $ammount / $rate_exchange;
+                    if ($tmp > $debt) {
+                        return Redirect::back()->withErrors(['msg' => "Error. El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
+                    }
+                }
+
+            }
+        } else {
+            //Si hay cambio de divisa en el Update lo que sigue es revisar la divisa en el Recibo. Si son iguales NO se necesitan los campos con tipo de cambio
+            if ($invoice_type == $type) {
+                $formFields = array_merge($formFields, array('ammount' => $ammount));
+                $formFields = array_merge($formFields, array('rate_exchange' => null));
+                $formFields = array_merge($formFields, array('ammount_exchange' => null));
+                //Aqui valido que el pago no exceda la deuda en la prefactura
+                $tmp = $ammount;
+                if ($tmp > $debt) {
+                    return Redirect::back()->withErrors(['msg' => "Error. El monto del pago ingresado $type$ $ammount  ($invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
+                }
+            } else {
+                if ($rate_exchange = $request->get('rate_exchange')) {
+                    $formFields = array_merge($formFields, array('rate_exchange' => $rate_exchange));
+                }
+                $formFields = array_merge($formFields, array('ammount_exchange' => $request->get('ammount')));
+                if ($request->get('type') == 'USD') {
+                    $formFields = array_merge($formFields, array('ammount' => $ammount * $rate_exchange));
+                    //Aqui valido que el pago no exceda la deuda en la prefactura
+                    $tmp = $ammount * $rate_exchange;
+
+                    if ($tmp > $debt) {
+                        return Redirect::back()->withErrors(['msg' => "Error. El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
+                    }
+
+
+
+                } else {
+                    $formFields = array_merge($formFields, array('ammount' => $ammount / $rate_exchange));
+                    //Aqui valido que el pago no exceda la deuda en la prefactura
+                    $tmp = $ammount / $rate_exchange;
+                    if ($tmp > $debt) {
+                        return Redirect::back()->withErrors(['msg' => "Error. El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
+                    }
+                }
+
+
+            }
+
+
+
+        }
+
+
+
+
+
+        if ($maintenance_budget = $request->get('maintenance_budget')) {
+            if ($maintenance_budget == 'Si') {
+                $formFields = array_merge($formFields, array('maintenance_budget' => 1));
+            } else {
+                $formFields = array_merge($formFields, array('maintenance_budget' => 0));
+
+            }
+        }
+
+
+
+
+        $imageRules = array(
+            'image' => 'image|mimes:jpeg,jpg,png|max:2000'
+        );
+
+
+        // dd($files_images);
+        if ($request->hasFile('images')) {
+            foreach ($files_images as $image) {
+                $img = $image;
+                $image = array('image' => $image);
+                $imageValidator = Validator::make($image, $imageRules);
+
+                if ($imageValidator->fails()) {
+
+                    $messages = $imageValidator->messages();
+
+                    return Redirect::back()
+                        ->withErrors('Alguna imágen excede el límite de tamaño 2Mb o no es del tipo image|mimes:jpeg,jpg,png. ' . $messages);
+                }
+            }
+        }
+
+
+        $fileRules = array(
+            "file" => "max:2000"
+        );
+
+
+        // dd($files_images);
+        if ($request->hasFile('other_files')) {
+            foreach ($files_others as $file) {
+                $file = array('file' => $file);
+                $fileValidator = Validator::make($file, $fileRules);
+
+                if ($fileValidator->fails()) {
+
+                    $messages = $fileValidator->messages();
+
+                    return Redirect::back()
+                        ->withErrors('Algún archivo excede el límite de tamaño 2Mb o no es del tipo application/pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx. ' . $messages);
+                }
+            }
+        }
+
+
+
+
         try {
+            DB::connection()->beginTransaction();
+
             $expense->update($formFields);
 
             if ($request->hasFile('images')) {
@@ -295,10 +454,10 @@ class ExpenseController extends Controller
                     ]);
                 }
             }
-
+            DB::connection()->commit();
 
         } catch (QueryException $exception) {
-            // You can check get the details of the error using `errorInfo`:
+            DB::connection()->rollBack();            // You can check get the details of the error using `errorInfo`:
             $errorInfo = $exception->getMessage();
             return Redirect::back()->with('message', $errorInfo);
         }

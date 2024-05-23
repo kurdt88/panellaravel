@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
+        $this->call(RoleSeeder::class);
+
         \App\Models\Landlord::factory()->create([
             'name' => 'Sin Propietario Asociado',
             'email' => '',
@@ -109,7 +111,30 @@ class DatabaseSeeder extends Seeder
             'name' => 'Luis Perez',
             'email' => 'lperezpaz@live.com',
             'password' => bcrypt('12345678'),
+        ])->assignRole('administrador');
+
+
+        \App\Models\User::factory()->create([
+            'name' => 'administrador',
+            'email' => 'administrador@live.com',
+            'password' => bcrypt('12345678'),
+        ])->assignRole('administrador');
+        \App\Models\User::factory()->create([
+            'name' => 'operador',
+            'email' => 'operador@live.com',
+            'password' => bcrypt('12345678'),
+        ])->assignRole('operador');
+        \App\Models\User::factory()->create([
+            'name' => 'auditor',
+            'email' => 'auditor@live.com',
+            'password' => bcrypt('12345678'),
+        ])->assignRole('auditor');
+        \App\Models\User::factory()->create([
+            'name' => 'newuser',
+            'email' => 'newuser@live.com',
+            'password' => bcrypt('12345678'),
         ]);
+
 
         // \App\Models\Landlord::factory(3)->create();
 
@@ -122,6 +147,7 @@ class DatabaseSeeder extends Seeder
 
         // \App\Models\Tenant::factory(12)->create();
         // \App\Models\Supplier::factory(4)->create();
+
 
 
 

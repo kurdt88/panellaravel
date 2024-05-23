@@ -34,7 +34,10 @@
 
                 <div class="form-group">
                     <label>Nombre</label>
-
+                    <br>
+                    <font color="blue"><small>Valor actual:
+                            <b>{{ $landlord->name }}</b>
+                        </small></font>
                     <input type="text" class="form-control" name="name" value="{{ $landlord->name }}">
                     @error('name')
                         <p class="text-red">{{ $message }}</p>
@@ -44,7 +47,10 @@
 
                 <div class="form-group">
                     <label>Dirección</label>
-
+                    <br>
+                    <font color="blue"><small>Valor actual:
+                            <b>{{ $landlord->address }}</b>
+                        </small></font>
                     <input type="text" class="form-control" name="address" value="{{ $landlord->address }}"
                         placeholder="Dirección usada para Facturación">
                     @error('address')
@@ -54,6 +60,10 @@
 
                 <div class="form-group">
                     <label for="email">Correo Electrónico</label>
+                    <br>
+                    <font color="blue"><small>Valor actual:
+                            <b>{{ $landlord->email }}</b>
+                        </small></font>
                     <input type="email" class="form-control" name="email" value="{{ $landlord->email }}">
                     @error('email')
                         <p class="text-red">{{ $message }}</p>
@@ -61,6 +71,10 @@
                 </div>
                 <div class="form-group">
                     <label for="phone">Teléfono</label>
+                    <br>
+                    <font color="blue"><small>Valor actual:
+                            <b>{{ $landlord->phone }}</b>
+                        </small></font>
                     <input type="text" class="form-control" name="phone" value="{{ $landlord->phone }}">
                     @error('phone')
                         <p class="text-red">{{ $message }}</p>
@@ -69,6 +83,10 @@
 
                 <div class="form-group">
                     <label for="comment">Información adicional</label>
+                    <br>
+                    <font color="blue"><small>Valor actual:
+                            <b>{{ $landlord->comment }}</b>
+                        </small></font>
 
                     <textarea class="form-control" name="comment" rows="3" placeholder="">{{ $landlord->comment }}</textarea>
                     @error('comment')

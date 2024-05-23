@@ -7,8 +7,12 @@
     <x-flash-message />
 
 
-    <h1>Lista de Unidades Habitacionales<a href="/newbuilding" class="btn btn-tool btn-sm">
-            [Nueva Unidad Habitacional] <button class="btn btn-link"><i class="fas fa-plus"></i></button></a></h1>
+    <h1>Lista de Unidades Habitacionales
+        @can('create')
+            <a href="/newbuilding" class="btn btn-tool btn-sm">
+                [Nueva Unidad Habitacional] <button class="btn btn-link"><i class="fas fa-plus"></i></button></a>
+        @endcan
+    </h1>
 
 @stop
 
@@ -89,19 +93,25 @@
                                 <i class="fa fa-lg fa-fw fa-eye"></i>
                             </button>
                         </a>
-                        <a href="/indexbuildings/{{ $building->id }}/edit" class="text-muted">
-                            <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
-                                <i class="fa fa-lg fa-fw fa-pen"></i>
-                            </button> </a>
+                        @can('edit')
+                            <a href="/indexbuildings/{{ $building->id }}/edit" class="text-muted">
+                                <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                                    <i class="fa fa-lg fa-fw fa-pen"></i>
+                                </button>
+                            </a>
+                        @endcan
 
-                        <form style="display:inline;" method="POST" action="/delbuilding/{{ $building->id }}">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete"
-                                onclick="return confirm('¿Estas seguro de querer borrar la Unidad Habitacional <<{{ $building->name }}>> ? \n ALERTA Si confirma no se podrá recuperar la información.')">
-                                <i class="fa fa-lg fa-fw fa-trash"></i>
-                            </button>
-                        </form>
+                        @can('delete')
+                            <form style="display:inline;" method="POST" action="/delbuilding/{{ $building->id }}">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete"
+                                    onclick="return confirm('¿Estas seguro de querer borrar la Unidad Habitacional <<{{ $building->name }}>> ? \n ALERTA Si confirma no se podrá recuperar la información.')">
+                                    <i class="fa fa-lg fa-fw fa-trash"></i>
+                                </button>
+                            </form>
+                        @endcan
+
                     </td>
                     </div>
                 </tr>

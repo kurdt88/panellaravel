@@ -65,20 +65,22 @@
                                     </td>
 
                                     <td>
+                                        @can('edit')
+                                            <a href="/indexbudgets/{{ $budget->id }}/edit" class="text-muted">
+                                                <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                                                    <i class="fa fa-lg fa-fw fa-pen"></i>
+                                                </button> </a>
 
-                                        <a href="/indexbudgets/{{ $budget->id }}/edit" class="text-muted">
-                                            <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
-                                                <i class="fa fa-lg fa-fw fa-pen"></i>
-                                            </button> </a>
+                                            <form style="display:inline;" method="POST"
+                                                action="/delbudget/{{ $budget->id }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
+                                                    <i class="fa fa-lg fa-fw fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        @endcan
 
-                                        <form style="display:inline;" method="POST"
-                                            action="/delbudget/{{ $budget->id }}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
-                                                <i class="fa fa-lg fa-fw fa-trash"></i>
-                                            </button>
-                                        </form>
                                     </td>
 
                                 </tr>
@@ -87,11 +89,12 @@
                     </table>
                 </div>
                 <div class="col-12">
-
-                    <button type="button" onClick="location.href='/newbudget/{{ $building->id }}'"
-                        class="btn btn-secondary float-right" style="margin-right: 5px;">
-                        <i class="fas fa-upload"></i> Registrar Presupuesto de Mtto
-                    </button>
+                    @can('create')
+                        <button type="button" onClick="location.href='/newbudget/{{ $building->id }}'"
+                            class="btn btn-secondary float-right" style="margin-right: 5px;">
+                            <i class="fas fa-upload"></i> Registrar Presupuesto de Mtto
+                        </button>
+                    @endcan
                     <button onClick="window.print()" type="button" class="btn btn-warning float-right"
                         style="margin-right: 5px;">
                         <i class="fas fa-print"></i> Imprimir

@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Lease;
 use App\Models\Tenant;
+use App\Models\Account;
+use App\Models\Expense;
+use App\Models\Invoice;
 use App\Models\Payment;
 use App\Models\Property;
+use App\Models\Subproperty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+
 
 class HomeController extends Controller
 {
@@ -39,23 +46,151 @@ class HomeController extends Controller
     public function welcome()
     {
 
-        $resultados = Payment::select('type', DB::raw('sum(ammount) as total'))
-            ->groupBy('type')
-            // ->orderBy('total')
+
+
+        $resultadosusd = Account::where('type', 'USD')->get();
+        $resultadosmxn = Account::where('type', 'MXN')->get();
+
+
+
+
+
+        //OBTENIENDO EL % DE OCUPACION DE UNIDADES Y SUBUNIDADES
+        $countpropertyleases = 0;
+        foreach (Property::all() as $key => $property) {
+            //Se filtra a la propiedad 1
+            if ($property->id != 1) {
+                $lastLease = Lease::where('property', $property->id)
+                    ->where('subproperty_id', 1)
+                    ->get()
+                    ->last();
+                if ($lastLease) {
+                    if ($lastLease->isvalid == 1) {
+                        $countpropertyleases++;
+                    }
+                }
+            }
+        }
+
+        $countsubpropertyleases = 0;
+        foreach (Subproperty::all() as $key => $subproperty) {
+            //Se filtra a la subpropiedad 1
+            if ($subproperty->id != 1) {
+                $lastLease = $subproperty->leases->last();
+                if ($lastLease) {
+                    if ($lastLease->isvalid == 1) {
+                        $countsubpropertyleases++;
+                    }
+                }
+            }
+        }
+
+        $countproperties = count(Property::all()) - 1;
+        $countsubproperties = count(Subproperty::all()) - 1;
+
+        // $raterentedproperties = 0;
+        // if (($tmpcount = count(Property::all())) > 1) {
+        //     $raterentedproperties = ($countpropertyleases / ($tmpcount - 1)) * 100;
+        // }
+        // $raterentedsubproperties = 0;
+        // if (($tmpcount = count(Subproperty::all())) > 1) {
+        //     $raterentedsubproperties = ($countsubpropertyleases / ($tmpcount - 1)) * 100;
+        // }
+
+
+
+        // OBTENIENDO LOS RECIBOS VENCIDOS
+        $myoverdueinvoicesarraypayment = array();
+        $myoverdueinvoicesarrayexpense = array();
+
+        $myinvoices = Invoice::where('due_date', '<=', Carbon::now())->get();
+        foreach ($myinvoices as $invoice) {
+            if ($invoice->category == 'Ingreso') {
+                if (($invoice->total - $invoice->payments->sum('ammount')) != 0) {
+                    array_push($myoverdueinvoicesarraypayment, $invoice);
+                }
+            }
+
+            if ($invoice->category == 'Egreso') {
+                if (($invoice->total - $invoice->expenses->sum('ammount')) != 0) {
+                    array_push($myoverdueinvoicesarrayexpense, $invoice);
+                }
+            }
+        }
+
+
+        //OBTENIENDO LOS INGRESOS Y EGRESOS TOTALES DEL MES
+        $now = Carbon::now();
+
+        $paymentsmxn1 = Payment::whereYear('date', '=', $now->year)
+            ->whereMonth('date', '=', $now->month)
+            ->where('type', 'MXN')
+            ->where('rate_exchange', null)
             ->get();
 
-        // $resultados2 = Payment::select('concept', DB::raw('sum(ammount) as total'))
-        //     ->groupBy('concept')
-        //     ->get();
+        $paymentsmxn2 = Payment::whereYear('date', '=', $now->year)
+            ->whereMonth('date', '=', $now->month)
+            ->where('type', 'MXN')
+            ->whereNotNull('rate_exchange')
+            ->get();
+
+        $expensesmxn1 = Expense::whereYear('date', '=', $now->year)
+            ->whereMonth('date', '=', $now->month)
+            ->where('type', 'MXN')
+            ->where('rate_exchange', null)
+            ->get();
+
+        $expensesmxn2 = Expense::whereYear('date', '=', $now->year)
+            ->whereMonth('date', '=', $now->month)
+            ->where('type', 'MXN')
+            ->whereNotNull('rate_exchange')
+            ->get();
+
+        $paymentsusd1 = Payment::whereYear('date', '=', $now->year)
+            ->whereMonth('date', '=', $now->month)
+            ->where('type', 'USD')
+            ->where('rate_exchange', null)
+            ->get();
+
+        $paymentsusd2 = Payment::whereYear('date', '=', $now->year)
+            ->whereMonth('date', '=', $now->month)
+            ->where('type', 'USD')
+            ->whereNotNull('rate_exchange')
+            ->get();
+
+        $expensesusd1 = Expense::whereYear('date', '=', $now->year)
+            ->whereMonth('date', '=', $now->month)
+            ->where('type', 'USD')
+            ->where('rate_exchange', null)
+            ->get();
+
+        $expensesusd2 = Expense::whereYear('date', '=', $now->year)
+            ->whereMonth('date', '=', $now->month)
+            ->where('type', 'USD')
+            ->whereNotNull('rate_exchange')
+            ->get();
+
+
+
+
+
+
 
         return view('bienvenido', [
-            'leases' => Lease::latest()->get(),
-            'properties' => Property::latest()->get(),
-            'payments' => Payment::latest()->get(),
-            'tenants' => Tenant::latest()->get(),
-            'resultados' => $resultados
-            // 'resultados2' => $resultados2
+            'paymentsmxn' => $paymentsmxn1->sum('ammount') + $paymentsmxn2->sum('ammount_exchange'),
+            'expensesmxn' => $expensesmxn1->sum('ammount') + $expensesmxn2->sum('ammount_exchange'),
+            'paymentsusd' => $paymentsusd1->sum('ammount') + $paymentsusd2->sum('ammount_exchange'),
+            'expensesusd' => $expensesusd1->sum('ammount') + $expensesusd2->sum('ammount_exchange'),
 
+            'cuentasusd' => $resultadosusd,
+            'cuentasmxn' => $resultadosmxn,
+            'myoverdueinvoicesarrayexpense' => count($myoverdueinvoicesarrayexpense),
+            'myoverdueinvoicesarraypayment' => count($myoverdueinvoicesarraypayment),
+
+            'countproperties' => $countproperties,
+            'countsubproperties' => $countsubproperties,
+            'countrentedproperties' => $countpropertyleases,
+            'countrentedsubproperties' => $countsubpropertyleases,
         ]);
     }
 

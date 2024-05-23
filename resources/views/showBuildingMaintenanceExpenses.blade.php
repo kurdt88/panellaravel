@@ -166,10 +166,12 @@
                 class="btn btn-dark float-right" style="margin-right: 5px;">
                 <i class="fas fa-coins"></i> Más movimientos
             </button>
-            <button type="button" onClick="location.href='/newbudget/{{ $building->id }}'"
-                class="btn btn-secondary float-right" style="margin-right: 5px;">
-                <i class="fas fa-upload"></i> Registrar Presupuesto de Mtto
-            </button>
+            @can('create')
+                <button type="button" onClick="location.href='/newbudget/{{ $building->id }}'"
+                    class="btn btn-secondary float-right" style="margin-right: 5px;">
+                    <i class="fas fa-upload"></i> Registrar Presupuesto de Mtto
+                </button>
+            @endcan
         </x-adminlte-card>
     </section>
 

@@ -31,7 +31,10 @@
             <div class="card-body">
                 <div class="form-group">
                     <label>Nombre del Proveedor</label>
-
+                    <br>
+                    <font color="blue"><small>Valor actual:
+                            <b>{{ $supplier->name }}</b>
+                        </small></font>
                     <input type="text" class="form-control" name="name" value="{{ $supplier->name }}"
                         placeholder="Razón social, etiqueta o nombre corto">
                     @error('name')
@@ -42,6 +45,10 @@
 
                 <div class="form-group">
                     <label for="email">Correo Electrónico</label>
+                    <br>
+                    <font color="blue"><small>Valor actual:
+                            <b>{{ $supplier->email }}</b>
+                        </small></font>
                     <input type="email" class="form-control" name="email" value="{{ $supplier->email }}">
                     @error('email')
                         <p class="text-red">{{ $message }}</p>
@@ -49,14 +56,22 @@
                 </div>
                 <div class="form-group">
                     <label for="phone">Teléfono</label>
+                    <br>
+                    <font color="blue"><small>Valor actual:
+                            <b>{{ $supplier->phone }}</b>
+                        </small></font>
                     <input type="number" class="form-control" name="phone" value="{{ $supplier->phone }}">
                     @error('phone')
                         <p class="text-red">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <x-adminlte-textarea name="comment" label="Descripción del Servicio" rows=2 label-class="text-dark"
-                    igroup-size="sm">
+                <label for="phone">Descripción del Servicio</label>
+                <br>
+                <font color="blue"><small>Valor actual:
+                        <b>{{ $supplier->comment }}</b>
+                    </small></font>
+                <x-adminlte-textarea name="comment" rows=2 label-class="text-dark" igroup-size="sm">
                     <x-slot name="prependSlot">
                         <div class="input-group-text bg-secondary">
                             <i class="fas fa-lg fa-file-alt text-light"></i>

@@ -20,7 +20,9 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="javascript:history.back()">Regresar</a></li>
-                        <li class="breadcrumb-item active"><a href="/indexlandlords/{{ $landlord->id }}/edit">Editar</a></li>
+                        @can('edit')
+                            <li class="breadcrumb-item active"><a href="/indexlandlords/{{ $landlord->id }}/edit">Editar</a></li>
+                        @endcan
                     </ol>
                 </div>
             </div>
@@ -69,10 +71,12 @@
                             style="margin-right: 5px;">
                             <i class="fas fa-print"></i> Imprimir
                         </button>
-                        <button type="button" onclick="location.href='/indexlandlords/{{ $landlord->id }}/edit'"
-                            class="btn btn-dark float-right" style="margin-right: 5px;">
-                            <i class="fas fa-pen-alt"></i> Editar
-                        </button>
+                        @can('edit')
+                            <button type="button" onclick="location.href='/indexlandlords/{{ $landlord->id }}/edit'"
+                                class="btn btn-dark float-right" style="margin-right: 5px;">
+                                <i class="fas fa-pen-alt"></i> Editar
+                            </button>
+                        @endcan
                     </div>
                 </div>
 
