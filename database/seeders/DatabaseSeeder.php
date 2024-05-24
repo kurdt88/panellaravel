@@ -108,8 +108,8 @@ class DatabaseSeeder extends Seeder
 
 
         \App\Models\User::factory()->create([
-            'name' => 'Luis Perez',
-            'email' => 'lperezpaz@live.com',
+            'name' => 'Recovery Account',
+            'email' => 'recovery@live.com',
             'password' => bcrypt('12345678'),
         ])->assignRole('administrador');
 
