@@ -114,6 +114,8 @@ class DatabaseSeeder extends Seeder
         ])->assignRole('administrador');
 
 
+
+
         \App\Models\User::factory()->create([
             'name' => 'administrador',
             'email' => 'administrador@live.com',
