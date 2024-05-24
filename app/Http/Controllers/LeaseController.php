@@ -347,7 +347,7 @@ class LeaseController extends Controller
         $myinvoicesarray = array();
 
         $myinvoices = Invoice::where("lease_id", $lease->id)
-            ->where('concept', 'like', '%Renta%')
+            ->where('subconcept', 'like', '%RENTA%')
             ->get();
 
         foreach ($myinvoices as $invoice) {
@@ -356,7 +356,7 @@ class LeaseController extends Controller
             }
         }
         $myinvoices = Invoice::where("lease_id", $lease->id)
-            ->where('concept', 'like', '%Depósito de Garantía%')
+            ->where('subconcept', 'like', '%DEPOSITO CONTRATO%')
             ->get();
 
         foreach ($myinvoices as $invoice) {

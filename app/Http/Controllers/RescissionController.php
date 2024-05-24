@@ -27,7 +27,7 @@ class RescissionController extends Controller
             Rescission::create($formFields);
 
             $myinvoices = Invoice::where("lease_id", $request->get('lease_id'))
-                ->where('concept', 'like', '%Renta%')
+                ->where('subconcept', 'like', '%RENTA%')
                 ->get();
 
 
@@ -37,7 +37,7 @@ class RescissionController extends Controller
                 }
             }
             $myinvoices = Invoice::where("lease_id", $request->get('lease_id'))
-                ->where('concept', 'like', '%Depósito de Garantía%')
+                ->where('subconcept', 'like', '%DEPOSITO CONTRATO%')
                 ->get();
 
 

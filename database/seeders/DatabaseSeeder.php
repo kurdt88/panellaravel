@@ -143,87 +143,87 @@ class DatabaseSeeder extends Seeder
 
         // SEEDER SOLO PARA PROPOSITOS DE DESARROLLO
 
-        // for ($i = 1; $i <= 5; $i++) {
-        //     \App\Models\Landlord::factory()->create([
-        //         'name' => 'Propietario ' . $i + 1,
-        //         'email' => 'propietario' . $i + 1 . '@correo.com',
-        //         'address' => 'Direccion ' . $i + 1,
-        //         'phone' => '55443311' . $i + 1,
-        //         'comment' => 'Propietario ' . $i + 1,
-        //     ]);
-        // }
-        // for ($i = 2; $i <= 6; $i++) {
-        //     \App\Models\Account::factory()->create([
-        //         'landlord_id' => $i,
-        //         'bank' => 'Banorte',
-        //         'number' => '00012255443311 ' . $i,
-        //         'type' => 'MXN',
-        //         'alias' => 'MXN ' . $i,
-        //         'comment' => 'MXN ' . $i,
-        //     ]);
-        // }
+        for ($i = 1; $i <= 5; $i++) {
+            \App\Models\Landlord::factory()->create([
+                'name' => 'Propietario ' . $i + 1,
+                'email' => 'propietario' . $i + 1 . '@correo.com',
+                'address' => 'Direccion ' . $i + 1,
+                'phone' => '55443311' . $i + 1,
+                'comment' => 'Propietario ' . $i + 1,
+            ]);
+        }
+        for ($i = 2; $i <= 6; $i++) {
+            \App\Models\Account::factory()->create([
+                'landlord_id' => $i,
+                'bank' => 'Banorte',
+                'number' => '00012255443311 ' . $i,
+                'type' => 'MXN',
+                'alias' => 'MXN ' . $i,
+                'comment' => 'MXN ' . $i,
+            ]);
+        }
 
-        // for ($i = 2; $i <= 6; $i++) {
-        //     \App\Models\Account::factory()->create([
-        //         'landlord_id' => $i,
-        //         'bank' => 'Scotiabank',
-        //         'number' => '00012227641311 ' . $i,
-        //         'type' => 'USD',
-        //         'alias' => 'USD ' . $i,
-        //         'comment' => 'USD ' . $i,
-        //     ]);
-        // }
-
-
-        // for ($i = 1; $i <= 5; $i++) {
-        //     \App\Models\Building::factory()->create([
-        //         'name' => 'Unidad Habitacional ' . $i + 1,
-        //         'address' => 'Domicilio ' . $i + 1,
-        //         'description' => 'Unidad Habitacional ' . $i + 1,
-        //     ]);
-        // }
+        for ($i = 2; $i <= 6; $i++) {
+            \App\Models\Account::factory()->create([
+                'landlord_id' => $i,
+                'bank' => 'Scotiabank',
+                'number' => '00012227641311 ' . $i,
+                'type' => 'USD',
+                'alias' => 'USD ' . $i,
+                'comment' => 'USD ' . $i,
+            ]);
+        }
 
 
-        // for ($i = 2; $i <= 6; $i++) {
-        //     \App\Models\Property::factory()->create([
-        //         'title' => 'Propiedad ' . $i,
-        //         'rent' => 15000,
-        //         'landlord_id' => $i,
-        //         'building_id' => $i,
-        //         'location' => 'Domicilio ' . $i,
-        //         'description' => 'Propiedad ' . $i,
-        //     ]);
-        // }
+        for ($i = 1; $i <= 5; $i++) {
+            \App\Models\Building::factory()->create([
+                'name' => 'Unidad Habitacional ' . $i + 1,
+                'address' => 'Domicilio ' . $i + 1,
+                'description' => 'Unidad Habitacional ' . $i + 1,
+            ]);
+        }
 
-        // for ($i = 2; $i <= 6; $i++) {
-        //     \App\Models\Subproperty::factory()->create([
-        //         'title' => 'Subpropiedad ' . $i,
-        //         'rent' => 1500,
-        //         'landlord_id' => $i,
-        //         'property_id' => 1,
 
-        //         'type' => 'Estacionamiento',
-        //         'address' => 'Domicilio ' . $i,
-        //         'description' => 'Subpropiedad ' . $i,
-        //     ]);
-        // }
+        for ($i = 2; $i <= 6; $i++) {
+            \App\Models\Property::factory()->create([
+                'title' => 'Propiedad ' . $i,
+                'rent' => 15000,
+                'landlord_id' => $i,
+                'building_id' => $i,
+                'location' => 'Domicilio ' . $i,
+                'description' => 'Propiedad ' . $i,
+            ]);
+        }
 
-        // for ($i = 1; $i <= 5; $i++) {
-        //     \App\Models\Tenant::factory()->create([
-        //         'name' => 'Arrendatario ' . $i + 1,
-        //         'email' => 'arrendatario' . $i + 1 . '@correo.com',
-        //         'address' => 'Domicilio ' . $i + 1,
-        //         'phone' => '55443311' . $i + 1,
-        //         'description' => 'Arrendatario ' . $i + 1,
-        //     ]);
-        // }
+        for ($i = 2; $i <= 6; $i++) {
+            \App\Models\Subproperty::factory()->create([
+                'title' => 'Subpropiedad ' . $i,
+                'rent' => 1500,
+                'landlord_id' => $i,
+                'property_id' => 1,
 
-        // \App\Models\Supplier::factory()->create([
-        //     'name' => 'Proveedor ' . $i,
-        //     'phone' => '55443311' . $i,
-        //     'email' => 'supplier' . $i . '@correo.com',
-        //     'comment' => 'Proveedor ' . $i,
-        // ]);
+                'type' => 'Estacionamiento',
+                'address' => 'Domicilio ' . $i,
+                'description' => 'Subpropiedad ' . $i,
+            ]);
+        }
+
+        for ($i = 1; $i <= 5; $i++) {
+            \App\Models\Tenant::factory()->create([
+                'name' => 'Arrendatario ' . $i + 1,
+                'email' => 'arrendatario' . $i + 1 . '@correo.com',
+                'address' => 'Domicilio ' . $i + 1,
+                'phone' => '55443311' . $i + 1,
+                'description' => 'Arrendatario ' . $i + 1,
+            ]);
+        }
+
+        \App\Models\Supplier::factory()->create([
+            'name' => 'Proveedor ' . $i,
+            'phone' => '55443311' . $i,
+            'email' => 'supplier' . $i . '@correo.com',
+            'comment' => 'Proveedor ' . $i,
+        ]);
 
 
 
