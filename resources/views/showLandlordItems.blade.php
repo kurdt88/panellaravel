@@ -156,8 +156,9 @@
                                 <tr>
                                     <th scope="col">Banco</th>
                                     <th scope="col">Cuenta</th>
-                                    <th scope="col">Divisa</th>
                                     <th scope="col">Alias</th>
+                                    <th scope="col">Saldo del Mes</th>
+
                                     @can('bankaccount')
                                         <th scope="col">Ver Mas</th>
                                     @endcan
@@ -169,8 +170,13 @@
 
                                         <td>{{ $account->bank }}</td>
                                         <td>{{ $account->number }}</td>
-                                        <td>{{ $account->type }}</td>
                                         <td>{{ Str::limit($account->alias, 20) }}</td>
+                                        <td>
+                                            <label style="color:rgb(22, 100, 126)">
+                                                <small>{{ $account->type }}</small>
+                                                {{ Number::currency($account->monthbalance) }}
+                                            </label>
+                                        </td>
                                         @can('bankaccount')
                                             <td>
                                                 <a href="/accounts/{{ $account->id }}" class="text-muted">

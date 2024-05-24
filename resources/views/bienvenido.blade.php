@@ -234,7 +234,7 @@
         </div>
     @else
         <x-adminlte-callout theme="info" title-class="text-info text-uppercase" icon="fas fa-lg fa-id-badge"
-            title="Su cuenta de usuario aún no cuenta con autorización para acceder al sistema">
+            title="Su cuenta de usuario no cuenta con autorización para acceder al sistema">
             Por favor <u>contacte al Administrador del sistema</u> para solicitar su acceso.
         </x-adminlte-callout>
     @endif

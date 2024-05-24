@@ -115,8 +115,9 @@
                     <font color="blue"><small>Valor actual:
                             <b>
                                 [{{ $payment->invoice->sequence }}]: {{ $payment->invoice->start_date }} -
-                                {{ $payment->invoice->due_date }} / Divisa: {{ $payment->invoice->type }} /
-                                {{ $payment->invoice->total }} / {{ $payment->invoice->comment }}
+                                {{ $payment->invoice->due_date }} | Divisa: {{ $payment->invoice->type }} |
+                                {{ $payment->invoice->total }} | {{ $payment->invoice->comment }} |
+                                {{ $payment->invoice->concept }} | {{ $payment->invoice->subconcept }}
                             </b>
                         </small></font>
                     <div class="form-group">
@@ -324,12 +325,16 @@
                                 value
                                 .start_date + ' - ' +
                                 value
-                                .due_date + ' / Divisa: ' +
+                                .due_date + ' | Divisa: ' +
                                 value
-                                .type + ' / $' +
-                                value.total + ' / ' +
+                                .type + ' | $' +
+                                value.total + ' | ' +
                                 value
-                                .comment + '</option>');
+                                .comment + ' | ' +
+                                value
+                                .concept + ' | ' +
+                                value
+                                .subconcept + '</option>');
                         });
                         // $('#invoice-dropdown').html(
                         //     '<option value="">-- Select Invoice 2 --</option>');

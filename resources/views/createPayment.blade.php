@@ -277,13 +277,16 @@
                                     value
                                     .start_date + ' - ' +
                                     value
-                                    .due_date + ' / Divisa: ' +
+                                    .due_date + ' | Divisa: ' +
                                     value
-                                    .type + ' / $' +
-                                    value.total + ' / ' +
-                                    value.concept + ' / ' +
+                                    .type + ' | $' +
+                                    value.total + ' | ' +
                                     value
-                                    .comment + '</option>');
+                                    .comment + ' | ' +
+                                    value
+                                    .concept + ' | ' +
+                                    value
+                                    .subconcept + '</option>');
                             });
                             // $('#invoice-dropdown').html(
                             //     '<option value="">-- Select Invoice 2 --</option>');

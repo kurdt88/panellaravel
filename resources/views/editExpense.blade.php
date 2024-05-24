@@ -110,8 +110,8 @@
                         <b>
                             [{{ $expense->invoice->sequence }}]: {{ $expense->invoice->start_date }} -
                             {{ $expense->invoice->due_date }} | Divisa: {{ $expense->invoice->type }} |
-                            {{ $expense->invoice->total }} | {{ $expense->invoice->comment }}|
-                            {{ $expense->invoice->concept }}
+                            {{ $expense->invoice->total }} | {{ $expense->invoice->comment }} |
+                            {{ $expense->invoice->concept }} | {{ $expense->invoice->subconcept }}
                         </b>
 
                     </small></font>
@@ -491,7 +491,9 @@
                             value
                             .comment + ' | ' +
                             value
-                            .concept + '</option>');
+                            .concept + ' | ' +
+                            value
+                            .subconcept + '</option>');
                     });
                 }
             });

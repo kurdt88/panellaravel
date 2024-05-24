@@ -356,7 +356,10 @@
                                 value
                                 .comment + ' | ' +
                                 value
-                                .concept + '</option>');
+                                .concept + ' | ' +
+                                value
+                                .subconcept +
+                                '</option>');
                         });
                     }
                 });

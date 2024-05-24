@@ -74,7 +74,8 @@
 
                 </td>
                 <td>
-                    {{ Str::limit($invoice->concept, 20) }} | <small>{{ Str::limit($invoice->comment, 30) }}</small>
+                    {{ Str::limit($invoice->concept, 20) }} | {{ Str::limit($invoice->subconcept, 20) }} |
+                    <small>{{ Str::limit($invoice->comment, 30) }}</small>
 
 
                 </td>
