@@ -60,6 +60,7 @@ class PaymentController extends Controller
         $myinvoice = Invoice::whereId($request->get('invoice_id'))->first();
         $invoice_type = $myinvoice->type;
         $debt = $myinvoice->total - $myinvoice->payments->sum('ammount');
+        $debt = number_format((float) $debt, 2, '.', '');
 
 
 
@@ -161,6 +162,9 @@ class PaymentController extends Controller
         $myinvoice = Invoice::whereId($request->get('invoice_id'))->first();
         $invoice_type = $myinvoice->type;
         $debt = $myinvoice->total - $myinvoice->payments->sum('ammount') + $payment->ammount;
+        $debt = number_format((float) $debt, 2, '.', '');
+
+
 
         //Si NO hay cambio de DIVISA en el update
         if ($type == $payment->type) {

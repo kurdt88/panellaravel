@@ -68,11 +68,14 @@ class ExpenseController extends Controller
 
 
         $ammount = $request->get('ammount');
+        $ammount = $ammount * 1;
         $type = $request->get('type');
 
         $myinvoice = Invoice::whereId($request->get('invoice_id'))->first();
         $invoice_type = $myinvoice->type;
         $debt = $myinvoice->total - $myinvoice->expenses->sum('ammount');
+        $debt = number_format((float) $debt, 2, '.', '');
+
 
 
 
@@ -91,7 +94,7 @@ class ExpenseController extends Controller
                 $tmp = $ammount * $rate_exchange;
 
                 if ($tmp > $debt) {
-                    return Redirect::back()->withErrors(['msg' => "Error. El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
+                    return Redirect::back()->withErrors(['msg' => "Error.1a El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
                 }
 
 
@@ -101,7 +104,7 @@ class ExpenseController extends Controller
                 //Aqui valido que el pago no exceda la deuda en la prefactura
                 $tmp = $ammount / $rate_exchange;
                 if ($tmp > $debt) {
-                    return Redirect::back()->withErrors(['msg' => "Error. El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
+                    return Redirect::back()->withErrors(['msg' => "Error.2a El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
                 }
             }
         } else {
@@ -109,7 +112,7 @@ class ExpenseController extends Controller
             $formFields = array_merge($formFields, array('ammount' => $ammount));
             //Aqui valido que el pago no exceda la deuda en la prefactura
             if ($ammount > $debt) {
-                return Redirect::back()->withErrors(['msg' => "Error. El monto del pago ingresado $type$ $ammount excede la cantidad a liquidar $invoice_type$ $debt"]);
+                return Redirect::back()->withErrors(['msg' => "Error.3a El monto del pago ingresado $type$ <<$ammount>> excede la cantidad a liquidar $invoice_type$ <<$debt>>"]);
             }
 
         }
@@ -271,6 +274,7 @@ class ExpenseController extends Controller
         $myinvoice = Invoice::whereId($request->get('invoice_id'))->first();
         $invoice_type = $myinvoice->type;
         $debt = $myinvoice->total - $myinvoice->expenses->sum('ammount') + $expense->ammount;
+        $debt = number_format((float) $debt, 2, '.', '');
 
 
 
@@ -289,7 +293,7 @@ class ExpenseController extends Controller
                 //Aqui valido que el pago no exceda la deuda en la prefactura
                 $tmp = $ammount;
                 if ($tmp > $debt) {
-                    return Redirect::back()->withErrors(['msg' => "Error.a El monto del pago ingresado $type$ $ammount ( $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
+                    return Redirect::back()->withErrors(['msg' => "Error.1 El monto del pago ingresado $type$ $ammount ( $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
                 }
 
             } else {
@@ -301,7 +305,7 @@ class ExpenseController extends Controller
                     $tmp = $ammount * $rate_exchange;
 
                     if ($tmp > $debt) {
-                        return Redirect::back()->withErrors(['msg' => "Error. El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
+                        return Redirect::back()->withErrors(['msg' => "Error.2 El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
                     }
 
 
@@ -311,7 +315,7 @@ class ExpenseController extends Controller
                     //Aqui valido que el pago no exceda la deuda en la prefactura
                     $tmp = $ammount / $rate_exchange;
                     if ($tmp > $debt) {
-                        return Redirect::back()->withErrors(['msg' => "Error. El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
+                        return Redirect::back()->withErrors(['msg' => "Error.3 El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
                     }
                 }
 
@@ -325,7 +329,7 @@ class ExpenseController extends Controller
                 //Aqui valido que el pago no exceda la deuda en la prefactura
                 $tmp = $ammount;
                 if ($tmp > $debt) {
-                    return Redirect::back()->withErrors(['msg' => "Error. El monto del pago ingresado $type$ $ammount  ($invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
+                    return Redirect::back()->withErrors(['msg' => "Error.4 El monto del pago ingresado $type$ $ammount  ($invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
                 }
             } else {
                 if ($rate_exchange = $request->get('rate_exchange')) {
@@ -338,7 +342,7 @@ class ExpenseController extends Controller
                     $tmp = $ammount * $rate_exchange;
 
                     if ($tmp > $debt) {
-                        return Redirect::back()->withErrors(['msg' => "Error. El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
+                        return Redirect::back()->withErrors(['msg' => "Error.5 El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
                     }
 
 
@@ -348,7 +352,7 @@ class ExpenseController extends Controller
                     //Aqui valido que el pago no exceda la deuda en la prefactura
                     $tmp = $ammount / $rate_exchange;
                     if ($tmp > $debt) {
-                        return Redirect::back()->withErrors(['msg' => "Error. El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
+                        return Redirect::back()->withErrors(['msg' => "Error.6 El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
                     }
                 }
 

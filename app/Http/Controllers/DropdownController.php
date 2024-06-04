@@ -17,6 +17,7 @@ use Illuminate\Support\Number;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Ramsey\Uuid\Type\Decimal;
 
 
 class DropdownController extends Controller
@@ -100,8 +101,13 @@ class DropdownController extends Controller
             error_log("Caso tobepaid-expense");
 
             $myinvoce = Invoice::where("id", $request->invoice_id)->get()->first();
+            error_log(json_encode($myinvoce->total));
+            error_log(json_encode($myinvoce->expenses->sum('ammount')));
+            $myvalue = ($myinvoce->total - $myinvoce->expenses->sum('ammount'));
+            $myvalue = number_format((float) $myvalue, 2, '.', '');
+            error_log($myvalue);
 
-            return response()->json($myinvoce->type . ' $' . ($myinvoce->total - $myinvoce->expenses->sum('ammount')));
+            return response()->json($myinvoce->type . ' $' . ($myvalue));
 
 
         } elseif ($request->concept == 'type') {
