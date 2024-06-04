@@ -416,7 +416,13 @@
                 </label> /
 
                 <label style="color:rgb(103, 103, 103)">Por pagar: <small>{{ $invoice->type }}</small>
-                    {{ Number::currency($invoice->total - $invoice->payments->sum('ammount')) }}
+
+
+                    {{-- {{ Number::currency($invoice->total - $invoice->payments->sum('ammount')) }} --}}
+                    {{ Number::currency($invoice->balance) }}
+
+
+
                 </label>
             @else
                 <label style="color:rgb(12, 3, 91)">
@@ -467,7 +473,7 @@
                     </label> |
 
                     <label style="color:rgb(103, 103, 103)">Por pagar: <small>{{ $invoice->type }}</small>
-                        {{ Number::currency($invoice->total - $invoice->expenses->sum('ammount')) }}
+                        {{ Number::currency($invoice->balance) }}
                     </label>
                 </small>
 

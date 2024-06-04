@@ -12,14 +12,32 @@ class Invoice extends Model
 
     protected $fillable = ['lease_id', 'property_id', 'subproperty_id', 'sequence', 'ammount', 'iva', 'iva_rate', 'iva_ammount', 'type', 'concept', 'subconcept', 'category', 'start_date', 'due_date', 'comment'];
 
-    protected $appends = ['total', 'supplier'];
+    protected $appends = ['total', 'balance', 'supplier'];
 
     public function getTotalAttribute($value)
     {
+        $myvalue = $this->ammount + $this->iva_ammount;
+        $myvalue = number_format((float) $myvalue, 2, '.', '');
 
-
-        return ($this->ammount + $this->iva_ammount);
+        return ($myvalue);
     }
+
+    public function getBalanceAttribute($value)
+    {
+        if ($this->category == 'Egreso') {
+            $mypayments = $this->expenses->sum('ammount');
+            $mypayments = number_format((float) $mypayments, 2, '.', '');
+            return ($this->total - $mypayments);
+
+        } else {
+            $mypayments = $this->payments->sum('ammount');
+            $mypayments = number_format((float) $mypayments, 2, '.', '');
+            return ($this->total - $mypayments);
+
+        }
+
+    }
+
 
     public function getSupplierAttribute($value)
     {

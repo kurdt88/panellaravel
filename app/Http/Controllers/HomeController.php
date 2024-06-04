@@ -106,13 +106,13 @@ class HomeController extends Controller
         $myinvoices = Invoice::where('due_date', '<=', Carbon::now())->get();
         foreach ($myinvoices as $invoice) {
             if ($invoice->category == 'Ingreso') {
-                if (($invoice->total - $invoice->payments->sum('ammount')) != 0) {
+                if ($invoice->balance != 0) {
                     array_push($myoverdueinvoicesarraypayment, $invoice);
                 }
             }
 
             if ($invoice->category == 'Egreso') {
-                if (($invoice->total - $invoice->expenses->sum('ammount')) != 0) {
+                if ($invoice->balance != 0) {
                     array_push($myoverdueinvoicesarrayexpense, $invoice);
                 }
             }

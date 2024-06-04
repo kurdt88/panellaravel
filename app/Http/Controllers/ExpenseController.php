@@ -73,7 +73,8 @@ class ExpenseController extends Controller
 
         $myinvoice = Invoice::whereId($request->get('invoice_id'))->first();
         $invoice_type = $myinvoice->type;
-        $debt = $myinvoice->total - $myinvoice->expenses->sum('ammount');
+        // $debt = $myinvoice->total - $myinvoice->expenses->sum('ammount');
+        $debt = $myinvoice->balance;
         $debt = number_format((float) $debt, 2, '.', '');
 
 
@@ -273,7 +274,9 @@ class ExpenseController extends Controller
 
         $myinvoice = Invoice::whereId($request->get('invoice_id'))->first();
         $invoice_type = $myinvoice->type;
-        $debt = $myinvoice->total - $myinvoice->expenses->sum('ammount') + $expense->ammount;
+        // $debt = $myinvoice->total - $myinvoice->expenses->sum('ammount') + $expense->ammount;
+        $debt = $myinvoice->balance + $expense->ammount;
+
         $debt = number_format((float) $debt, 2, '.', '');
 
 

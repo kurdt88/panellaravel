@@ -120,7 +120,7 @@
                                             @if ($invoice->category == 'Ingreso')
                                                 @if ($invoice->ammount == 0)
                                                     <label style="color:rgb(90, 94, 96);">Excento Pago</label>
-                                                @elseif ($invoice->total - $invoice->payments->sum('ammount') == 0)
+                                                @elseif ($invoice->balance == 0)
                                                     <label style="color:rgb(1, 109, 30);">Liquidado</label>
                                                 @else
                                                     @if (Illuminate\Support\Carbon::createFromFormat('Y-m-d', $invoice->start_date)->isFuture())
@@ -135,10 +135,10 @@
                                                     @endif
                                                 @endif
                                             @else
-                                                @if ($invoice->total - $invoice->expenses->sum('ammount') == 0)
+                                                @if ($invoice->balance == 0)
                                                     <label style="color:rgb(1, 109, 30);">Liquidado</label>
                                                 @else
-                                                    @if ($invoice->total - $invoice->expenses->sum('ammount') == 0)
+                                                    @if ($invoice->balance == 0)
                                                         <label style="color:rgb(1, 109, 30);">Liquidado</label>
                                                     @else
                                                         @if (Illuminate\Support\Carbon::createFromFormat('Y-m-d', $invoice->start_date)->isFuture())

@@ -128,7 +128,7 @@
                                             <td>
                                                 @if ($invoice->ammount == 0)
                                                     <label style="color:rgb(90, 94, 96);">Excento Pago</label>
-                                                @elseif ($invoice->total - $invoice->payments->sum('ammount') == 0)
+                                                @elseif ($invoice->balance == 0)
                                                     <label style="color:rgb(1, 109, 30);">Liquidado</label>
                                                 @else
                                                     @if ($invoice->lease->rescission)

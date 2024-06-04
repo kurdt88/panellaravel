@@ -59,7 +59,8 @@ class PaymentController extends Controller
 
         $myinvoice = Invoice::whereId($request->get('invoice_id'))->first();
         $invoice_type = $myinvoice->type;
-        $debt = $myinvoice->total - $myinvoice->payments->sum('ammount');
+        // $debt = $myinvoice->total - $myinvoice->payments->sum('ammount');
+        $debt = $myinvoice->balance;
         $debt = number_format((float) $debt, 2, '.', '');
 
 
@@ -161,7 +162,9 @@ class PaymentController extends Controller
 
         $myinvoice = Invoice::whereId($request->get('invoice_id'))->first();
         $invoice_type = $myinvoice->type;
-        $debt = $myinvoice->total - $myinvoice->payments->sum('ammount') + $payment->ammount;
+        // $debt = $myinvoice->total - $myinvoice->payments->sum('ammount') + $payment->ammount;
+        $debt = $myinvoice->balance + $payment->ammount;
+
         $debt = number_format((float) $debt, 2, '.', '');
 
 
