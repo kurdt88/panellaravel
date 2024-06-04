@@ -89,9 +89,33 @@
                             disabled />
                     </div>
 
+                    @php
+                        $myDescriptionArray = explode('&&&', $subproperty->description);
+                    @endphp
+                    @php
+                        if (empty($myDescriptionArray[0])) {
+                            $myDescription = '';
+                        } else {
+                            $myDescription = $myDescriptionArray[0];
+                        }
+                        if (empty($myDescriptionArray[1])) {
+                            $myType = '';
+                        } else {
+                            $myType = $myDescriptionArray[1];
+                        }
+
+                    @endphp
+
+                    <div class="form-group">
+                        <label for="rent">Divisa</label>
+                        <input type="text" value="{{ $myType }}" class="form-control" disabled />
+                    </div>
+
+
+
                     <div class="form-group">
                         <label for="inputMessage">Descripción de la Subunidad</label>
-                        <textarea class="form-control" rows="4" disabled>{{ $subproperty->description }}</textarea>
+                        <textarea class="form-control" rows="4" disabled>{{ $myDescription }}</textarea>
                     </div>
                     <div class="col-12">
                         <button type="button" onClick="location.href='/landlords/{{ $subproperty->landlord_id }}/'"

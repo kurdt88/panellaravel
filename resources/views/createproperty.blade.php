@@ -82,6 +82,24 @@
                         @enderror
                     </div>
 
+
+                    <div class="form-group">
+                        <label for="type">Divisa</label>
+                        <select name="type" class="custom-select rounded-0">
+                            <option value="MXN">MXN</option>
+                            <option value="USD">USD</option>
+
+                            <option selected="selected">
+                                {{ old('type') }}
+                            </option>
+                        </select>
+                        @error('type')
+                            <p class="text-red">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+
+
                     <div class="form-group">
                         <label for="location">Ubicación</label>
                         <textarea type="text" class="form-control" name="location" id="location" value="{{ old('location') }}"

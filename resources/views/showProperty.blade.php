@@ -102,10 +102,37 @@
                         <label for="inputSubject">Web</label>
                         <input type="text" value="{{ $property->website }}" class="form-control" disabled />
                     </div> --}}
+
+
+
+                    @php
+                        $myDescriptionArray = explode('&&&', $property->description);
+                    @endphp
+                    @php
+                        if (empty($myDescriptionArray[0])) {
+                            $myDescription = '';
+                        } else {
+                            $myDescription = $myDescriptionArray[0];
+                        }
+                        if (empty($myDescriptionArray[1])) {
+                            $myType = '';
+                        } else {
+                            $myType = $myDescriptionArray[1];
+                        }
+
+                    @endphp
+
+                    <div class="form-group">
+                        <label for="rent">Divisa</label>
+                        <input type="text" value="{{ $myType }}" class="form-control" disabled />
+                    </div>
                     <div class="form-group">
                         <label for="inputMessage">Descripción de la propiedad</label>
-                        <textarea class="form-control" rows="4" disabled>{{ $property->description }}</textarea>
+                        <textarea class="form-control" rows="4" disabled>{{ $myDescription }}</textarea>
                     </div>
+
+
+
                     <div class="col-12">
                         <button type="button" onClick="location.href='/propertycommodities/{{ $property->id }}/'"
                             class="btn btn-success float-right" style="margin-right: 5px;">

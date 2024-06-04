@@ -133,6 +133,43 @@
                             <p class="text-red">{{ $message }}</p>
                         @enderror
                     </div>
+
+                    @php
+                        $myDescriptionArray = explode('&&&', $property->description);
+                    @endphp
+
+                    @php
+                        if (empty($myDescriptionArray[0])) {
+                            $myDescription = '';
+                        } else {
+                            $myDescription = $myDescriptionArray[0];
+                        }
+                        if (empty($myDescriptionArray[1])) {
+                            $myType = '';
+                        } else {
+                            $myType = $myDescriptionArray[1];
+                        }
+
+                    @endphp
+
+                    <div class="form-group">
+                        <label for="type">Divisa</label>
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                <b>{{ $myType }}</b>
+                            </small></font>
+                        <select name="type" class="custom-select rounded-0">
+                            <option value="">-- Selecciona un Divisa --</option>
+                            <option value="MXN">MXN</option>
+                            <option value="USD">USD</option>
+
+
+                        </select>
+                        @error('type')
+                            <p class="text-red">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     {{-- <div class="form-group">
                         <label for="tags">Etiquetas</label>
                         <input type="text" class="form-control" name="tags" value="{{ $property->tags }}">
@@ -163,9 +200,9 @@
                         <label for="description">Descripción de la propiedad</label>
                         <br>
                         <font color="blue"><small>Valor actual:
-                                <b>{{ $property->description }}</b>
+                                <b>{{ $myDescription }}</b>
                             </small></font>
-                        <textarea class="form-control" name="description" rows="3">{{ $property->description }}</textarea>
+                        <textarea class="form-control" name="description" rows="3">{{ $myDescription }}</textarea>
                         @error('description')
                             <p class="text-red">{{ $message }}</p>
                         @enderror

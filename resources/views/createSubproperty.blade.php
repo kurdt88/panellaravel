@@ -109,6 +109,20 @@
                             <p class="text-red">{{ $message }}</p>
                         @enderror
                     </div> --}}
+                    <div class="form-group">
+                        <label for="typed">Divisa</label>
+                        <select name="typed" class="custom-select rounded-0">
+                            <option value="MXN">MXN</option>
+                            <option value="USD">USD</option>
+
+                            <option selected="selected">
+                                {{ old('typed') }}
+                            </option>
+                        </select>
+                        @error('typed')
+                            <p class="text-red">{{ $message }}</p>
+                        @enderror
+                    </div>
 
                     <x-adminlte-textarea name="description" label="Información de la Subunidad" rows=2
                         label-class="text-dark" igroup-size="sm"

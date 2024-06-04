@@ -173,11 +173,46 @@
                         @enderror
                     </div>
 
+                    @php
+                        $myDescriptionArray = explode('&&&', $subproperty->description);
+                    @endphp
+
+                    @php
+                        if (empty($myDescriptionArray[0])) {
+                            $myDescription = '';
+                        } else {
+                            $myDescription = $myDescriptionArray[0];
+                        }
+                        if (empty($myDescriptionArray[1])) {
+                            $myType = '';
+                        } else {
+                            $myType = $myDescriptionArray[1];
+                        }
+
+                    @endphp
+
+                    <div class="form-group">
+                        <label for="typed">Divisa</label>
+                        <br>
+                        <font color="blue"><small>Valor actual:
+                                <b>{{ $myType }}</b>
+                            </small></font>
+                        <select name="typed" class="custom-select rounded-0">
+                            <option value="">-- Selecciona un Divisa --</option>
+                            <option value="MXN">MXN</option>
+                            <option value="USD">USD</option>
+
+
+                        </select>
+                        @error('typed')
+                            <p class="text-red">{{ $message }}</p>
+                        @enderror
+                    </div>
 
                     <label for="deposit">Información de la Subunidad</label>
                     <br>
                     <font color="blue"><small>Valor actual:
-                            <b>{{ $subproperty->description }}</b>
+                            <b>{{ $myDescription }}</b>
                         </small></font>
                     <x-adminlte-textarea name="description" rows=5 label-class="text-dark" igroup-size="sm">
                         <x-slot name="prependSlot">
@@ -185,7 +220,7 @@
                                 <i class="fas fa-lg fa-file-alt text-light"></i>
                             </div>
                         </x-slot>
-                        {{ $subproperty->description }}
+                        {{ $myDescription }}
                     </x-adminlte-textarea>
 
 

@@ -34,11 +34,20 @@ class PropertyController extends Controller
             'landlord_id' => 'required',
             'building_id' => 'required',
             'location' => 'required',
-            // 'website' => 'required',
+            'type' => 'required',
             // 'tags' => 'required',
             'rent' => 'required',
             'description' => 'required'
         ]);
+
+
+
+        $mytype = $request->get('type');
+        $mydescription = $request->get('description');
+
+        $formFields = array_merge($formFields, array('description' => $mydescription . '&&&' . $mytype));
+
+
 
 
 
@@ -134,11 +143,16 @@ class PropertyController extends Controller
             'building_id' => 'required',
             // 'website' => 'required',
             // 'tags' => 'required',
+            'type' => 'required',
+
             'rent' => 'required',
             'description' => 'required'
         ]);
 
+        $mytype = $request->get('type');
+        $mydescription = $request->get('description');
 
+        $formFields = array_merge($formFields, array('description' => $mydescription . '&&&' . $mytype));
 
         try {
             $property->update($formFields);

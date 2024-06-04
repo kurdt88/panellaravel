@@ -43,12 +43,17 @@ class SubpropertyController extends Controller
             'landlord_id' => 'required',
             'title' => 'required',
             'type' => 'required',
+            'typed' => 'required',
             'rent' => 'required',
             'address' => 'required',
             'description' => 'required',
         ]);
 
 
+        $mytype = $request->get('typed');
+        $mydescription = $request->get('description');
+
+        $formFields = array_merge($formFields, array('description' => $mydescription . '&&&' . $mytype));
 
 
         try {
@@ -98,11 +103,16 @@ class SubpropertyController extends Controller
             'landlord_id' => 'required',
             'title' => 'required',
             'type' => 'required',
+            'typed' => 'required',
             'rent' => 'required',
             'address' => 'required',
             'description' => 'required',
         ]);
 
+        $mytype = $request->get('typed');
+        $mydescription = $request->get('description');
+
+        $formFields = array_merge($formFields, array('description' => $mydescription . '&&&' . $mytype));
 
         try {
             $subproperty->update($formFields);
