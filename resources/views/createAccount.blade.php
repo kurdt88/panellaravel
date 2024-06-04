@@ -59,6 +59,9 @@
                     <div class="form-group">
                         <label for="bank">Banco</label>
                         <select name="bank" class="custom-select rounded-0">
+                            <option value="Banco en Efectivo">Banco en Efectivo</option>
+                            <option value="California Bank">California Bank</option>
+
                             <option value="ABC Capital">ABC Capital</option>
                             <option value="Accendo Banco">Accendo Banco</option>
                             <option value="American Express Bank">American Express Bank</option>
