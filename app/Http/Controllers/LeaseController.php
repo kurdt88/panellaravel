@@ -124,119 +124,119 @@ class LeaseController extends Controller
 
         $diff = $lease_start_date->diffInMonths($lease_end_date);
 
-        if ($diff >= 12) {
+        // if ($diff >= 12) {
 
-            //FROM THE MODEL
-            try {
-                DB::connection()->beginTransaction();
+        //FROM THE MODEL
+        try {
+            DB::connection()->beginTransaction();
 
-                $mylease = Lease::create($formFields);
-                $lease_id = $mylease->id;
-
-
-
-                if ($deposit) {
+            $mylease = Lease::create($formFields);
+            $lease_id = $mylease->id;
 
 
-                    // Primero Crea la factura del Deposito de Garantia y despues ya genera las de las rentas
-                    $deposit_invoice_start_date = Carbon::createFromFormat('Y-m-d', $startString)->format('Y-m-d');
-                    $deposit_invoice_due_date = Carbon::createFromFormat('Y-m-d', $startString)->addDays(5)->format('Y-m-d');
-                    $concept = 'Ingreso General';
 
-                    // FORMULA DE IVA_RETENCIONES
-                    if ($iva_type == 'IVA_RETENCIONES') {
-
-                        $iva_ammount_fixed = ($deposit * 0.16) - ($deposit * 0.10667) - ($deposit * 0.0125);
-
-                    } else {
-                        $iva_ammount_fixed = $deposit * $iva_rate;
-                    }
+            if ($deposit) {
 
 
-                    Invoice::create([
-                        'lease_id' => $lease_id,
-                        'sequence' => 1,
-                        'ammount' => $deposit,
-                        'type' => $request->get('type'),
-                        'category' => "Ingreso",
-                        'concept' => $concept,
-                        'subconcept' => "DEPOSITO CONTRATO",
-                        'iva' => $iva_type,
-                        'iva_rate' => $iva_rate,
-                        'iva_ammount' => $iva_ammount_fixed,
+                // Primero Crea la factura del Deposito de Garantia y despues ya genera las de las rentas
+                $deposit_invoice_start_date = Carbon::createFromFormat('Y-m-d', $startString)->format('Y-m-d');
+                $deposit_invoice_due_date = Carbon::createFromFormat('Y-m-d', $startString)->addDays(5)->format('Y-m-d');
+                $concept = 'Ingreso General';
 
-                        'comment' => "Garantía establecida en el contrato",
-                        'start_date' => $deposit_invoice_start_date,
-                        'due_date' => $deposit_invoice_due_date
+                // FORMULA DE IVA_RETENCIONES
+                if ($iva_type == 'IVA_RETENCIONES') {
 
-                    ]);
+                    $iva_ammount_fixed = ($deposit * 0.16) - ($deposit * 0.10667) - ($deposit * 0.0125);
 
+                } else {
+                    $iva_ammount_fixed = $deposit * $iva_rate;
                 }
 
 
-                for ($i = 1; $i <= $diff; $i++) {
-                    $sequence = $i;
-                    $invoice_start_date = Carbon::createFromFormat('Y-m-d', $startString)->addMonths($i - 1)->format('Y-m-d');
-                    $invoice_due_date = Carbon::createFromFormat('Y-m-d', $startString)->addMonths($i - 1)->addDays(5)->format('Y-m-d');
-                    if ($i <= $months_grace_period) {
-                        $ammount = 0;
-                        $concept = 'Ingreso General';
-                        $subconcept = 'RENTA EXENTA POR PERIODO DE GRACIA';
+                Invoice::create([
+                    'lease_id' => $lease_id,
+                    'sequence' => 1,
+                    'ammount' => $deposit,
+                    'type' => $request->get('type'),
+                    'category' => "Ingreso",
+                    'concept' => $concept,
+                    'subconcept' => "DEPOSITO CONTRATO",
+                    'iva' => $iva_type,
+                    'iva_rate' => $iva_rate,
+                    'iva_ammount' => $iva_ammount_fixed,
 
-                    } else {
-                        $ammount = $request->get('rent');
-                        $concept = 'Ingreso General';
-                        $subconcept = 'RENTA';
-                    }
+                    'comment' => "Garantía establecida en el contrato",
+                    'start_date' => $deposit_invoice_start_date,
+                    'due_date' => $deposit_invoice_due_date
 
+                ]);
 
-
-                    // FORMULA DE IVA_RETENCIONES
-                    if ($iva_type == 'IVA_RETENCIONES') {
-
-                        $iva_ammount_fixed = ($ammount * 0.16) - ($ammount * 0.10667) - ($ammount * 0.0125);
-
-                    } else {
-                        $iva_ammount_fixed = $ammount * $iva_rate;
-                    }
-
-
-                    Invoice::create([
-                        'lease_id' => $lease_id,
-                        'sequence' => $sequence,
-                        'ammount' => $ammount,
-                        'type' => $request->get('type'),
-                        'category' => "Ingreso",
-                        'concept' => $concept,
-                        'subconcept' => $subconcept,
-                        'iva' => $iva_type,
-                        'iva_rate' => $iva_rate,
-                        'iva_ammount' => $iva_ammount_fixed,
-                        'comment' => "Recibo # " . $sequence,
-                        'start_date' => $invoice_start_date,
-                        'due_date' => $invoice_due_date
-
-                    ]);
-
-                    DB::connection()->commit();
-
-                }
-            } catch (QueryException $exception) {
-                DB::connection()->rollBack();
-
-                // You can check get the details of the error using `errorInfo`:
-                $errorInfo = $exception->getMessage();
-                return redirect('newlease')->with('message', $errorInfo);
             }
 
 
-            return redirect('/leases')->with('message', 'Contrato creado');
-        } else {
+            for ($i = 1; $i <= $diff; $i++) {
+                $sequence = $i;
+                $invoice_start_date = Carbon::createFromFormat('Y-m-d', $startString)->addMonths($i - 1)->format('Y-m-d');
+                $invoice_due_date = Carbon::createFromFormat('Y-m-d', $startString)->addMonths($i - 1)->addDays(5)->format('Y-m-d');
+                if ($i <= $months_grace_period) {
+                    $ammount = 0;
+                    $concept = 'Ingreso General';
+                    $subconcept = 'RENTA EXENTA POR PERIODO DE GRACIA';
 
-            return Redirect::back()->withErrors(['msg' => "Error. El periodo seleccionado es menor a 12 meses : " . $request->get('leaseperiod')]);
+                } else {
+                    $ammount = $request->get('rent');
+                    $concept = 'Ingreso General';
+                    $subconcept = 'RENTA';
+                }
 
-            // return redirect('newlease')->with('message', "El periodo seleccionado es menor a 12 meses : " . $request->get('leaseperiod'));
+
+
+                // FORMULA DE IVA_RETENCIONES
+                if ($iva_type == 'IVA_RETENCIONES') {
+
+                    $iva_ammount_fixed = ($ammount * 0.16) - ($ammount * 0.10667) - ($ammount * 0.0125);
+
+                } else {
+                    $iva_ammount_fixed = $ammount * $iva_rate;
+                }
+
+
+                Invoice::create([
+                    'lease_id' => $lease_id,
+                    'sequence' => $sequence,
+                    'ammount' => $ammount,
+                    'type' => $request->get('type'),
+                    'category' => "Ingreso",
+                    'concept' => $concept,
+                    'subconcept' => $subconcept,
+                    'iva' => $iva_type,
+                    'iva_rate' => $iva_rate,
+                    'iva_ammount' => $iva_ammount_fixed,
+                    'comment' => "Recibo # " . $sequence,
+                    'start_date' => $invoice_start_date,
+                    'due_date' => $invoice_due_date
+
+                ]);
+
+                DB::connection()->commit();
+
+            }
+        } catch (QueryException $exception) {
+            DB::connection()->rollBack();
+
+            // You can check get the details of the error using `errorInfo`:
+            $errorInfo = $exception->getMessage();
+            return redirect('newlease')->with('message', $errorInfo);
         }
+
+
+        return redirect('/leases')->with('message', 'Contrato creado');
+        // } else {
+
+        //     return Redirect::back()->withErrors(['msg' => "Error. El periodo seleccionado es menor a 12 meses : " . $request->get('leaseperiod')]);
+
+        //     // return redirect('newlease')->with('message', "El periodo seleccionado es menor a 12 meses : " . $request->get('leaseperiod'));
+        // }
 
 
 
