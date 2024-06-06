@@ -43,6 +43,21 @@ class LeaseController extends Controller
         ]);
     }
 
+    public function index_onrenovation()
+    {
+
+        $myleasesarray = array();
+        $myleases = Lease::latest()->get();
+        foreach ($myleases as $lease) {
+            if ($lease->isvalid == 5) {
+                array_push($myleasesarray, $lease);
+            }
+        }
+
+        return view('listLeases', [
+            'leases' => $myleasesarray
+        ]);
+    }
 
     public function create()
     {

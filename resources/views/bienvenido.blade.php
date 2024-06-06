@@ -107,12 +107,12 @@
 
 
 
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-2 col-6">
 
                     <div class="small-box bg-danger">
                         <div class="inner">
                             <h3>{{ $myoverdueinvoicesarraypayment }}</h3>
-                            <p>Cobros (Recibos de Ingreso) Vencidos</p>
+                            <p>Cobros (Ingresos) Vencidos</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-donate"></i>
@@ -121,17 +121,32 @@
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-2 col-6">
 
-                    <div class="small-box bg-warning">
+                    <div class="small-box bg-secondary">
                         <div class="inner">
                             <h3>{{ $myoverdueinvoicesarrayexpense }}</h3>
-                            <p>Pagos (Recibos de Egreso) Vencidos</p>
+                            <p>Pagos (Egresos) Vencidos</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-hand-holding-usd"></i>
                         </div>
                         <a href="/invoices_overdue" class="small-box-footer">Mas información <i
+                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-6">
+
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{ $leasesonrenovation }}</h3>
+                            <p>Contratos "En Renovación"</p>
+                        </div>
+                        <div class="icon">
+                            <i class="far fa-calendar"></i>
+                        </div>
+                        <a href="/leases_onrenovation" class="small-box-footer">Mas información <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>

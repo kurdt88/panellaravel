@@ -100,7 +100,7 @@
                             @elseif ($lease->isvalid == 3)
                                 <font color="#FF6700">Vencido</font>
                             @elseif ($lease->isvalid == 5)
-                                <font color="#2B1B17">Por Vencer</font>
+                                <font color="#2B1B17">En Renovación</font>
                             @elseif ($lease->isvalid == 1)
                                 <font color="#12AD2B">Vigente</font>
                             @endif

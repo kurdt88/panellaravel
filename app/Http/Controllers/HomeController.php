@@ -171,6 +171,13 @@ class HomeController extends Controller
             ->get();
 
 
+        $myleasesarray = array();
+        $myleases = Lease::latest()->get();
+        foreach ($myleases as $lease) {
+            if ($lease->isvalid == 5) {
+                array_push($myleasesarray, $lease);
+            }
+        }
 
 
 
@@ -181,7 +188,7 @@ class HomeController extends Controller
             'expensesmxn' => $expensesmxn1->sum('ammount') + $expensesmxn2->sum('ammount_exchange'),
             'paymentsusd' => $paymentsusd1->sum('ammount') + $paymentsusd2->sum('ammount_exchange'),
             'expensesusd' => $expensesusd1->sum('ammount') + $expensesusd2->sum('ammount_exchange'),
-
+            'leasesonrenovation' => count($myleasesarray),
             'cuentasusd' => $resultadosusd,
             'cuentasmxn' => $resultadosmxn,
             'myoverdueinvoicesarrayexpense' => count($myoverdueinvoicesarrayexpense),

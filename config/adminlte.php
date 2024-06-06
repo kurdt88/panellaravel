@@ -381,6 +381,11 @@ return [
                     'url' => 'leases_valid',
                 ],
                 [
+                    'text' => 'En Renovación',
+                    'icon' => 'far fa-calendar',
+                    'url' => 'leases_onrenovation',
+                ],
+                [
                     'text' => 'Todos',
                     'icon' => 'fas 	fa-archive fa-fw',
                     'url' => 'leases',

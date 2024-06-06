@@ -151,6 +151,9 @@ Route::middleware([
         Route::get('/leases', [LeaseController::class, 'index']);
         Route::get('/leases_valid', [LeaseController::class, 'index_valid']);
 
+        Route::get('/leases_onrenovation', [LeaseController::class, 'index_onrenovation']);
+
+
         Route::get('/tenants', [TenantController::class, 'index']);
         Route::get('/payments', [PaymentController::class, 'index']);
         Route::get('/invoices', [InvoiceController::class, 'index']);
