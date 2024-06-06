@@ -38,7 +38,9 @@ class TenantController extends Controller
             'name' => ['required', Rule::unique('tenants', 'name')],
             'address' => 'required',
             'email' => ['required', 'email'],
-            'phone' => 'required|numeric|digits:10',
+            // 'phone' => 'required|numeric|digits:10',
+            'phone' => 'required|numeric',
+
             'description' => 'required'
 
         ]);
