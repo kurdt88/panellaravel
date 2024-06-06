@@ -77,7 +77,8 @@ class DropdownController extends Controller
             error_log("Caso tobepaid");
             $myinvoce = Invoice::where("id", $request->invoice_id)->get()->first();
 
-            return response()->json($myinvoce->type . ' $' . ($myinvoce->total - $myinvoce->payments->sum('ammount')));
+
+            return response()->json($myinvoce->type . ' $' . $myinvoce->balance);
 
 
         } elseif ($request->concept == 'paid-expense') {
@@ -101,13 +102,8 @@ class DropdownController extends Controller
             error_log("Caso tobepaid-expense");
 
             $myinvoce = Invoice::where("id", $request->invoice_id)->get()->first();
-            error_log(json_encode($myinvoce->total));
-            error_log(json_encode($myinvoce->expenses->sum('ammount')));
-            $myvalue = ($myinvoce->total - $myinvoce->expenses->sum('ammount'));
-            $myvalue = number_format((float) $myvalue, 2, '.', '');
-            error_log($myvalue);
 
-            return response()->json($myinvoce->type . ' $' . ($myvalue));
+            return response()->json($myinvoce->type . ' $' . $myinvoce->balance);
 
 
         } elseif ($request->concept == 'type') {
