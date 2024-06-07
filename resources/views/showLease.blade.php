@@ -205,7 +205,7 @@
                         </x-adminlte-callout>
                     @elseif ($isvalid == 5)
                         <x-adminlte-callout theme="info" title-class="text-dark text-uppercase" icon="far fa-clock"
-                            title="CONTRATO VIGENTE PERO VENCE EN MENOS DE 1 MES">
+                            title="CONTRATO VIGENTE PERO VENCE EN MENOS DE 2 MESES">
 
                             @php
                                 $myleasesarray = [];
