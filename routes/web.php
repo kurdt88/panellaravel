@@ -75,6 +75,12 @@ Route::middleware([
         Route::post('/indexbudgets', [BudgetController::class, 'store']);
 
         Route::get('/cancellease/{lease}', [LeaseController::class, 'cancel']);
+
+        Route::get('/deleteleaseinvoices/{lease}', [LeaseController::class, 'deleteinvoices']);
+
+        Route::post('/delleaseinvoices/{lease}', [LeaseController::class, 'delinvoices']);
+
+
         Route::get('/renewlease/{lease}', [LeaseController::class, 'renew']);
 
     });

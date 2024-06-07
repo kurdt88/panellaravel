@@ -286,6 +286,9 @@ class LeaseController extends Controller
     public function update(Request $request, Lease $lease)
     {
 
+        $startString = substr($request->get('leaseperiod'), 0, 10);
+        $endString = substr($request->get('leaseperiod'), -10);
+
 
         $formFields = $request->validate([
             'property' => 'required',
@@ -294,10 +297,11 @@ class LeaseController extends Controller
             'rent' => 'required',
             'iva' => 'required',
             'type' => 'required',
-            'leaseperiod' => 'required'
-
+            'leaseperiod' => 'required',
 
         ]);
+
+        $formFields = array_merge($formFields, array('start' => $startString, 'end' => $endString));
 
         if ($subproperty_id = $request->get('subproperty_id')) {
             $formFields = array_merge($formFields, array('subproperty_id' => $subproperty_id));
@@ -385,5 +389,66 @@ class LeaseController extends Controller
             'invoices' => $myinvoicesarray
         ]);
     }
+
+
+
+
+
+    public function deleteinvoices(Lease $lease)
+    {
+        $myinvoicesarray = array();
+
+        $myinvoices = Invoice::where("lease_id", $lease->id)
+            ->get();
+
+        foreach ($myinvoices as $invoice) {
+            if (count($invoice->payments) == 0 && count($invoice->expenses) == 0) {
+                array_push($myinvoicesarray, $invoice);
+            }
+        }
+
+
+        return view('delInvoices', [
+            'lease' => $lease,
+            'invoices' => $myinvoicesarray
+        ]);
+    }
+
+
+
+
+    public function delinvoices(Lease $lease)
+    {
+
+        try {
+            DB::connection()->beginTransaction();
+
+            $myinvoices = Invoice::where("lease_id", $lease->id)
+                ->get();
+
+            foreach ($myinvoices as $invoice) {
+                if (count($invoice->payments) == 0 && count($invoice->expenses) == 0) {
+                    $invoice->delete();
+                }
+            }
+
+
+            DB::connection()->commit();
+
+        } catch (QueryException $exception) {
+            DB::connection()->rollBack();
+
+            $errorInfo = $exception->getMessage();
+            return Redirect::back()->with('message', $errorInfo);
+        }
+
+        return redirect('/leasemovements/' . $lease->id . '/')->with('message', 'Recibos eliminados');
+
+
+
+    }
+
+
+
 
 }

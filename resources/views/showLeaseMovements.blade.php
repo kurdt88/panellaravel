@@ -5,6 +5,7 @@
 @section('content_header')
     {{-- <h1>Propiedades<b>LTE</b></h1> --}}
     {{-- <p>Mostrando propiedad: {{ $property->title }}</p> --}}
+    <x-flash-message />
 
 @stop
 
@@ -221,13 +222,19 @@
                 </div>
                 <br>
                 <div class="col-12">
+                    @can('edit')
+                        <button onClick="location.href='/deleteleaseinvoices/{{ $lease->id }}/'" type="button"
+                            class="btn btn-danger float-right" style="margin-right: 5px;">
+                            <i class="fas fa-eraser"></i> Borrar Recibos
+                        </button>
+                    @endcan
 
                     <button onClick="window.print()" type="button" class="btn btn-warning float-right"
                         style="margin-right: 5px;">
                         <i class="fas fa-print"></i> Imprimir
                     </button>
-                    <button onClick="javascript:history.back()" type="button" class="btn btn-primary float-right"
-                        style="margin-right: 5px;">
+                    <button onClick="location.href='/leases/{{ $lease->id }}/'" type="button"
+                        class="btn btn-primary float-right" style="margin-right: 5px;">
                         <i class="fas fa-reply"></i> Regresar
                     </button>
                 </div>
