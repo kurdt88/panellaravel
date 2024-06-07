@@ -17,7 +17,7 @@ class Invoice extends Model
     public function getTotalAttribute($value)
     {
         $myvalue = $this->ammount + $this->iva_ammount;
-        $myvalue = number_format((float) $myvalue, 2, '.', '');
+        $myvalue = number_format((float) $myvalue, 5, '.', '');
 
         return ($myvalue);
     }
@@ -26,12 +26,12 @@ class Invoice extends Model
     {
         if ($this->category == 'Egreso') {
             $mypayments = $this->expenses->sum('ammount');
-            $mypayments = number_format((float) $mypayments, 2, '.', '');
+            $mypayments = number_format((float) $mypayments, 5, '.', '');
             return ($this->total - $mypayments);
 
         } else {
             $mypayments = $this->payments->sum('ammount');
-            $mypayments = number_format((float) $mypayments, 2, '.', '');
+            $mypayments = number_format((float) $mypayments, 5, '.', '');
             return ($this->total - $mypayments);
 
         }

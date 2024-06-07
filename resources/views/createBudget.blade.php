@@ -53,7 +53,7 @@
                 <div class="form-group">
                     <label>Presupuesto en MXN</label> <small> * Campo Opcional | default 0</small>
 
-                    <input type="number" step="0.01" id="maintenance_budget_mxn" name="maintenance_budget_mxn"
+                    <input type="number" step="any" id="maintenance_budget_mxn" name="maintenance_budget_mxn"
                         class="custom-select rounded-0" value="0"></input>
                     @error('maintenance_budget_mxn')
                         <p class="text-red">{{ $message }}</p>
@@ -64,7 +64,7 @@
                 <div class="form-group">
                     <label>Presupuesto en USD</label> <small> * Campo Opcional | default 0</small>
 
-                    <input type="number" step="0.01" id="maintenance_budget_usd" name="maintenance_budget_usd"
+                    <input type="number" step="any" id="maintenance_budget_usd" name="maintenance_budget_usd"
                         class="custom-select rounded-0" value="0"></input>
                     @error('maintenance_budget_usd')
                         <p class="text-red">{{ $message }}</p>

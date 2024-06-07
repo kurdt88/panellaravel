@@ -171,7 +171,7 @@
                     </div>
 
                     <label id="rate_exchange_label">Tipo de cambio (Pesos por Dolar)</label>
-                    <input type="number" step="0.01" class="custom-select" name="rate_exchange" id="rate_exchange"
+                    <input type="number" step="any" class="custom-select" name="rate_exchange" id="rate_exchange"
                         placeholder="Ingrese el tipo de cambio (Pesos por Dolar)"></input>
 
 
@@ -179,7 +179,7 @@
                     <label for="ammount">Monto del ingreso</label>
 
                     <div class="form-group">
-                        <input type="number" step="0.01" id="ammount" name="ammount"
+                        <input type="number" step="any" id="ammount" name="ammount"
                             class="custom-select rounded-0"></input>
 
 

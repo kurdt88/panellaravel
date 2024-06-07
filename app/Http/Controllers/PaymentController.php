@@ -78,8 +78,8 @@ class PaymentController extends Controller
                 $formFields = array_merge($formFields, array('ammount' => $ammount * $rate_exchange));
                 //Aqui valido que el pago no exceda la deuda en la prefactura
                 $tmp = $ammount * $rate_exchange;
-                $debt = number_format((float) $debt, 3, '.', '');
-                $tmp = number_format((float) $tmp, 3, '.', '');
+                $debt = number_format((float) $debt, 5, '.', '');
+                $tmp = number_format((float) $tmp, 5, '.', '');
 
                 if ($tmp > $debt) {
                     return Redirect::back()->withErrors(['msg' => "Error.1s El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
@@ -91,8 +91,8 @@ class PaymentController extends Controller
                 $formFields = array_merge($formFields, array('ammount' => $ammount / $rate_exchange));
                 //Aqui valido que el pago no exceda la deuda en la prefactura
                 $tmp = $ammount / $rate_exchange;
-                $debt = number_format((float) $debt, 3, '.', '');
-                $tmp = number_format((float) $tmp, 3, '.', '');
+                $debt = number_format((float) $debt, 5, '.', '');
+                $tmp = number_format((float) $tmp, 5, '.', '');
 
                 error_log($tmp);
                 error_log($debt);
@@ -106,8 +106,8 @@ class PaymentController extends Controller
             // Si NO hay cambio en la divisa del pago, respecto de la divisa de la factura
             $formFields = array_merge($formFields, array('ammount' => $ammount));
             //Aqui valido que el pago no exceda la deuda en la prefactura
-            $debt = number_format((float) $debt, 3, '.', '');
-            $ammount = number_format((float) $ammount, 3, '.', '');
+            $debt = number_format((float) $debt, 5, '.', '');
+            $ammount = number_format((float) $ammount, 5, '.', '');
             if ($ammount > $debt) {
                 return Redirect::back()->withErrors(['msg' => "Error.3s El monto del pago ingresado $type$ $ammount excede la cantidad a liquidar $invoice_type$ $debt"]);
             }
@@ -176,7 +176,7 @@ class PaymentController extends Controller
         // $debt = $myinvoice->total - $myinvoice->payments->sum('ammount') + $payment->ammount;
         $debt = $myinvoice->balance + $payment->ammount;
 
-        // $debt = number_format((float) $debt, 3, '.', '');
+        // $debt = number_format((float) $debt, 5, '.', '');
 
 
 
@@ -192,8 +192,8 @@ class PaymentController extends Controller
 
                 //Aqui valido que el pago no exceda la deuda en la prefactura
                 $tmp = $ammount;
-                $debt = number_format((float) $debt, 3, '.', '');
-                $tmp = number_format((float) $tmp, 3, '.', '');
+                $debt = number_format((float) $debt, 5, '.', '');
+                $tmp = number_format((float) $tmp, 5, '.', '');
                 if ($tmp > $debt) {
                     return Redirect::back()->withErrors(['msg' => "Error.1u El monto del pago ingresado $type$ $ammount ( $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
                 }
@@ -205,8 +205,8 @@ class PaymentController extends Controller
                     $formFields = array_merge($formFields, array('ammount' => $ammount * $rate_exchange));
                     //Aqui valido que el pago no exceda la deuda en la prefactura
                     $tmp = $ammount * $rate_exchange;
-                    $debt = number_format((float) $debt, 3, '.', '');
-                    $tmp = number_format((float) $tmp, 3, '.', '');
+                    $debt = number_format((float) $debt, 5, '.', '');
+                    $tmp = number_format((float) $tmp, 5, '.', '');
                     if ($tmp > $debt) {
                         return Redirect::back()->withErrors(['msg' => "Error.2u El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
                     }
@@ -217,8 +217,8 @@ class PaymentController extends Controller
                     $formFields = array_merge($formFields, array('ammount' => $ammount / $rate_exchange));
                     //Aqui valido que el pago no exceda la deuda en la prefactura
                     $tmp = $ammount / $rate_exchange;
-                    $debt = number_format((float) $debt, 3, '.', '');
-                    $tmp = number_format((float) $tmp, 3, '.', '');
+                    $debt = number_format((float) $debt, 5, '.', '');
+                    $tmp = number_format((float) $tmp, 5, '.', '');
                     if ($tmp > $debt) {
                         return Redirect::back()->withErrors(['msg' => "Error.3u El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
                     }
@@ -233,8 +233,8 @@ class PaymentController extends Controller
                 $formFields = array_merge($formFields, array('ammount_exchange' => null));
                 //Aqui valido que el pago no exceda la deuda en la prefactura
                 $tmp = $ammount;
-                $debt = number_format((float) $debt, 3, '.', '');
-                $tmp = number_format((float) $tmp, 3, '.', '');
+                $debt = number_format((float) $debt, 5, '.', '');
+                $tmp = number_format((float) $tmp, 5, '.', '');
                 if ($tmp > $debt) {
                     return Redirect::back()->withErrors(['msg' => "Error.4u El monto del pago ingresado $type$ $ammount  ($invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
                 }
@@ -247,8 +247,8 @@ class PaymentController extends Controller
                     $formFields = array_merge($formFields, array('ammount' => $ammount * $rate_exchange));
                     //Aqui valido que el pago no exceda la deuda en la prefactura
                     $tmp = $ammount * $rate_exchange;
-                    $debt = number_format((float) $debt, 3, '.', '');
-                    $tmp = number_format((float) $tmp, 3, '.', '');
+                    $debt = number_format((float) $debt, 5, '.', '');
+                    $tmp = number_format((float) $tmp, 5, '.', '');
                     if ($tmp > $debt) {
                         return Redirect::back()->withErrors(['msg' => "Error.5u El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
                     }
@@ -259,8 +259,8 @@ class PaymentController extends Controller
                     $formFields = array_merge($formFields, array('ammount' => $ammount / $rate_exchange));
                     //Aqui valido que el pago no exceda la deuda en la prefactura
                     $tmp = $ammount / $rate_exchange;
-                    $debt = number_format((float) $debt, 3, '.', '');
-                    $tmp = number_format((float) $tmp, 3, '.', '');
+                    $debt = number_format((float) $debt, 5, '.', '');
+                    $tmp = number_format((float) $tmp, 5, '.', '');
                     if ($tmp > $debt) {
                         return Redirect::back()->withErrors(['msg' => "Error.6u El monto del pago ingresado $type$ $ammount (Tipo de cambio $rate_exchange / $invoice_type$$tmp ) excede la cantidad a liquidar $invoice_type$ $debt"]);
                     }

@@ -216,10 +216,10 @@
                                 </b>
                             </small></font>
                     </label>
-                    <input type="number" step="0.01" class="custom-select" name="rate_exchange" id="rate_exchange"
+                    <input type="number" step="any" class="custom-select" name="rate_exchange" id="rate_exchange"
                         value={{ $expense->rate_exchange }}></input>
                 @else
-                    <input type="number" step="0.01" class="custom-select" name="rate_exchange" id="rate_exchange"
+                    <input type="number" step="any" class="custom-select" name="rate_exchange" id="rate_exchange"
                         value=""></input>
                 @endif
 
@@ -233,7 +233,7 @@
                             </b>
                         </small></font>
                     <div class="form-group">
-                        <input type="number" step="0.01" id="ammount" name="ammount"
+                        <input type="number" step="any" id="ammount" name="ammount"
                             class="custom-select rounded-0" value={{ $expense->ammount }}></input>
                         @error('ammount')
                             <p class="text-red">{{ $message }}</p>
@@ -248,7 +248,7 @@
                             </b>
                         </small></font>
                     <div class="form-group">
-                        <input type="number" step="0.01" id="ammount" name="ammount"
+                        <input type="number" step="any" id="ammount" name="ammount"
                             class="custom-select rounded-0" value={{ $expense->ammount_exchange }}></input>
                         @error('ammount')
                             <p class="text-red">{{ $message }}</p>
