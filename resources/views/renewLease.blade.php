@@ -155,16 +155,23 @@
                     @php
                         $config = [
                             'timePicker' => true,
-                            'startDate' => Illuminate\Support\Carbon::createFromFormat('Y-m-d', $lease->start)
-                                ->addYears(1)
-                                ->format('Y-m-d'),
+                            'startDate' => Illuminate\Support\Carbon::createFromFormat('Y-m-d', $lease->end)->format(
+                                'Y-m-d',
+                            ),
                             'endDate' => Illuminate\Support\Carbon::createFromFormat('Y-m-d', $lease->end)
                                 ->addYears(1)
                                 ->format('Y-m-d'),
                             'locale' => ['format' => 'YYYY-MM-DD'],
                         ];
                     @endphp
-                    <x-adminlte-date-range name="leaseperiod" label="Fecha de Inicio y Fin" :config="$config">
+
+                    <label>Fecha de Inicio y Fin*</label>
+                    <br>
+                    <font color="blue"><small>Valores contrato actual:
+                            {{ $lease->start }} - {{ $lease->end }} <br> *El periodo por default para la renovación de
+                            Contrato es de 12 meses. <b>Revisar y en su caso ajustar las fechas al periodo deseado. </b>
+                        </small></font>
+                    <x-adminlte-date-range name="leaseperiod" label="" :config="$config">
                         <x-slot name="prependSlot">
                             <div class="input-group-text bg-gradient-primary">
                                 <i class="far fa-lg fa-calendar-alt"></i>

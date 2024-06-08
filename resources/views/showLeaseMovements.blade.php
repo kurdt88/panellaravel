@@ -114,8 +114,10 @@
                                     <tr>
                                         <td>{{ $invoice->due_date }}</td>
                                         <td>
-                                            <small>{{ $invoice->type }}</small>
-                                            {{ Number::currency($invoice->total) }}
+                                            {{-- <small>{{ $invoice->type }}</small>
+                                            {{ Number::currency($invoice->total) }} --}}
+                                            {{ Str::limit($invoice->category, 8) }} |
+                                            {{ Str::limit($invoice->subconcept, 10) }}
                                         </td>
                                         <td>
                                             @if ($invoice->category == 'Ingreso')
@@ -185,7 +187,9 @@
                                 <tr>
                                     <th scope="col">Fecha</th>
                                     <th scope="col">Comentario</th>
-                                    <th scope="col">Monto</th>
+                                    {{-- <th scope="col">Monto</th> --}}
+                                    <th scope="col">Concepto</th>
+
                                     <th scope="col">Ver Mas</th>
                                 </tr>
                             </thead>
@@ -205,6 +209,7 @@
                                                 <small>{{ $expense->invoice->type }}</small>
                                                 {{ Number::currency($expense->ammount) }}
                                             @endif
+
                                         </td>
                                         <td>
                                             <a href="/expenses/{{ $expense->id }}" class="text-muted">
@@ -235,7 +240,7 @@
                     </button>
                     <button onClick="location.href='/leases/{{ $lease->id }}/'" type="button"
                         class="btn btn-primary float-right" style="margin-right: 5px;">
-                        <i class="fas fa-reply"></i> Regresar
+                        <i class="fas fa-reply"></i> Ver Contrato
                     </button>
                 </div>
             </div>

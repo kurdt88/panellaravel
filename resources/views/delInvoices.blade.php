@@ -67,7 +67,7 @@
                     </font>
                     <br> <br>
 
-                    <div class="col-6">
+                    <div class="col-12">
                         <div>
 
                             <table class="table table-sm table-striped">
@@ -88,7 +88,7 @@
 
                                             <td>
                                                 {{ Str::limit($invoice->subconcept, 20) }} |
-                                                <small>{{ Str::limit($invoice->comment, 30) }}</small>
+                                                <small>{{ Str::limit($invoice->comment, 40) }}</small>
                                             </td>
 
                                             <td>

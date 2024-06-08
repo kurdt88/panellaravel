@@ -12,7 +12,7 @@ class Invoice extends Model
 
     protected $fillable = ['lease_id', 'property_id', 'subproperty_id', 'sequence', 'ammount', 'iva', 'iva_rate', 'iva_ammount', 'type', 'concept', 'subconcept', 'category', 'start_date', 'due_date', 'comment'];
 
-    protected $appends = ['total', 'balance', 'supplier'];
+    protected $appends = ['total', 'total2d', 'balance', 'supplier'];
 
     public function getTotalAttribute($value)
     {
@@ -21,6 +21,15 @@ class Invoice extends Model
 
         return ($myvalue);
     }
+
+    public function getTotal2dAttribute($value)
+    {
+        $myvalue = $this->ammount + $this->iva_ammount;
+        $myvalue = number_format((float) $myvalue, 2, '.', '');
+
+        return ($myvalue);
+    }
+
 
     public function getBalanceAttribute($value)
     {

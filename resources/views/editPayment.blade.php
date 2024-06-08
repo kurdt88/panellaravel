@@ -328,7 +328,7 @@
                                 .due_date + ' | Divisa: ' +
                                 value
                                 .type + ' | $' +
-                                value.total + ' | ' +
+                                value.total2d + ' | ' +
                                 value
                                 .comment + ' | ' +
                                 value
