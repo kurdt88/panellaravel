@@ -112,7 +112,9 @@
                                         <tr>
                                             <td>{{ $invoice->category }}</td>
 
-                                            <td> {{ $invoice->concept }} <small>[{{ $invoice->sequence }}]</small>
+                                            <td>
+                                                {{ Str::limit($invoice->subconcept, 20) }} |
+                                                <small>{{ Str::limit($invoice->comment, 30) }}</small>
                                             </td>
 
                                             <td>
