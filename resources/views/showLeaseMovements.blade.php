@@ -116,8 +116,9 @@
                                         <td>
                                             {{-- <small>{{ $invoice->type }}</small>
                                             {{ Number::currency($invoice->total) }} --}}
-                                            {{ Str::limit($invoice->category, 8) }} |
-                                            {{ Str::limit($invoice->subconcept, 10) }}
+                                            {{ Str::limit($invoice->subconcept, 10) }} |
+                                            <small>{{ $invoice->type }}</small>
+                                            {{ Number::currency($invoice->total) }}
                                         </td>
                                         <td>
                                             @if ($invoice->category == 'Ingreso')
