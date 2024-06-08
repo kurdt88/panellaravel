@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Redirect;
 
@@ -176,9 +178,14 @@ class LeaseController extends Controller
                     'category' => "Ingreso",
                     'concept' => $concept,
                     'subconcept' => "DEPOSITO CONTRATO",
-                    'iva' => $iva_type,
-                    'iva_rate' => $iva_rate,
-                    'iva_ammount' => $iva_ammount_fixed,
+                    // 'iva' => $iva_type,
+                    // 'iva_rate' => $iva_rate,
+
+                    'iva' => 'Exento',
+                    'iva_rate' => 0,
+                    // 'iva_ammount' => $iva_ammount_fixed,
+                    'iva_ammount' => 0,
+
 
                     'comment' => "Garantía establecida en el contrato",
                     'start_date' => $deposit_invoice_start_date,
@@ -244,8 +251,11 @@ class LeaseController extends Controller
             return redirect('newlease')->with('message', $errorInfo);
         }
 
+        // Log::info("Contrato creado - Usuario: {$request->user()->id}, Contrato: {$mylease->id} | {$mylease->propertyname}| {$mylease->subpropertyname}| {$mylease->tenantname}| {$mylease->start}| {$mylease->end}");
+
 
         return redirect('/leases')->with('message', 'Contrato creado');
+
         // } else {
 
         //     return Redirect::back()->withErrors(['msg' => "Error. El periodo seleccionado es menor a 12 meses : " . $request->get('leaseperiod')]);
@@ -265,6 +275,8 @@ class LeaseController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('/leases')->with('message', $errorInfo);
         }
+
+        // Log::info("Contrato eliminado - Usuario:" . Auth::user()->name . ", Contrato: {$lease->id} | {$lease->propertyname}| {$lease->subpropertyname}| {$lease->tenantname}| {$lease->start}| {$lease->end}");
 
         return redirect('/leases')->with('message', 'Contrato eliminado');
 
