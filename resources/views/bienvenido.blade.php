@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Tablero de información')
+@section('title', 'Monitor (Tablero de información)')
 
 @section('content_header')
     {{-- <h1>Propiedades<b>LTE</b></h1> --}}
