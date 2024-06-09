@@ -4,7 +4,7 @@
 
 @section('content_header')
     {{-- <h1>Propiedades<b>LTE</b></h1> --}}
-    <h1>Tablero de información</h1>
+    <h1>Monitor</h1>
 
 @stop
 
