@@ -6,6 +6,8 @@ use App\Models\Landlord;
 use App\Models\Property;
 use App\Models\Subproperty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 
 class SubpropertyController extends Controller
@@ -57,13 +59,15 @@ class SubpropertyController extends Controller
 
 
         try {
-            Subproperty::create($formFields);
+            $subproperty = Subproperty::create($formFields);
 
 
         } catch (QueryException $exception) {
             $errorInfo = $exception->getMessage();
             return redirect('newsubproperty')->with('message', $errorInfo);
         }
+
+        Log::info("Subnidad Creada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$subproperty->id}) Nombre ({$subproperty->title}) Tipo ({$subproperty->type}) Direccion ({$subproperty->address}) Descripcion ({$subproperty->description}) Propietario Asociado ({$subproperty->landlord_id}) Propiedad Asociada ({$subproperty->property_id}) ");
 
         return redirect('/subproperties')->with('message', 'Subunidad creada');
     }
@@ -123,6 +127,8 @@ class SubpropertyController extends Controller
             return redirect('newsubproperty')->with('message', $errorInfo);
         }
 
+        Log::info("Subnidad Actualizada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$subproperty->id}) Nombre ({$subproperty->title}) Tipo ({$subproperty->type}) Direccion ({$subproperty->address}) Descripcion ({$subproperty->description}) Propietario Asociado ({$subproperty->landlord_id}) Propiedad Asociada ({$subproperty->property_id}) ");
+
         return redirect('/subproperties')->with('message', 'Subunidad actualizada');
 
     }
@@ -140,6 +146,9 @@ class SubpropertyController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('/subproperties')->with('message', $errorInfo);
         }
+
+        Log::info("Subnidad Eliminada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$subproperty->id}) Nombre ({$subproperty->title}) Tipo ({$subproperty->type}) Direccion ({$subproperty->address}) Descripcion ({$subproperty->description}) Propietario Asociado ({$subproperty->landlord_id}) Propiedad Asociada ({$subproperty->property_id}) ");
+
         return redirect('/subproperties')->with('message', 'Subunidad eliminada');
 
     }

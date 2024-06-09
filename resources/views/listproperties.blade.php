@@ -122,7 +122,10 @@
                                 <form style="display:inline;" method="POST" action="/delproperty/{{ $property->id }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
+
+                                    <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete"
+                                        onclick="return confirm('¿Estás seguro de querer borrar la Unidad Ingreso seleccionada ? \n ALERTA Si confirma no se podrá recuperar la información.')">
+
                                         <i class="fa fa-lg fa-fw fa-trash"></i>
                                     </button>
                                 </form>

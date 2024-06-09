@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Landlord;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 
 class LandlordController extends Controller
@@ -43,11 +45,13 @@ class LandlordController extends Controller
 
 
         try {
-            Landlord::create($formFields);
+            $landlord = Landlord::create($formFields);
         } catch (QueryException $exception) {
             $errorInfo = $exception->getMessage();
             return redirect('newlandlord')->with('message', $errorInfo);
         }
+
+        Log::info("Propietario Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$landlord->id}) Nombre ({$landlord->name}) Email ({$landlord->email}) Telefono ({$landlord->phone}) Direccion ({$landlord->address}) Comentario ({$landlord->comment})");
 
         return redirect('/landlords')->with('message', 'Propietario creado');
     }
@@ -97,6 +101,8 @@ class LandlordController extends Controller
             return redirect('newlandlord')->with('message', $errorInfo);
         }
 
+        Log::info("Propietario Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$landlord->id}) Nombre ({$landlord->name}) Email ({$landlord->email}) Telefono ({$landlord->phone}) Direccion ({$landlord->address}) Comentario ({$landlord->comment})");
+
         return redirect('/landlords')->with('message', 'Propietario actualizado');
     }
 
@@ -111,6 +117,9 @@ class LandlordController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('landlords')->with('message', $errorInfo);
         }
+
+        Log::info("Propietario Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$landlord->id}) Nombre ({$landlord->name}) Email ({$landlord->email}) Telefono ({$landlord->phone}) Direccion ({$landlord->address}) Comentario ({$landlord->comment})");
+
         return redirect('/landlords')->with('message', 'Propietario eliminado');
     }
 

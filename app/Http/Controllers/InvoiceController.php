@@ -8,6 +8,8 @@ use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Redirect;
 
@@ -179,12 +181,15 @@ class InvoiceController extends Controller
             $formFields = array_merge($formFields, array('sequence' => 1, 'start_date' => $startString, 'due_date' => $endString));
 
             try {
-                Invoice::create($formFields);
+                $invoice = Invoice::create($formFields);
 
             } catch (QueryException $exception) {
                 $errorInfo = $exception->getMessage();
                 return redirect('newinvoice')->with('message', $errorInfo);
             }
+
+            Log::info("Recibo Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$invoice->id}) Monto ({$invoice->type}{$invoice->ammount}) IVA ({$invoice->iva}) Tipo ({$invoice->category}) Categoria ({$invoice->concept}) Concepto ({$invoice->subconcept}) Contrato Asociado ({$invoice->lease_id}) Descripcion ({$invoice->comment}) ");
+
             return redirect('/invoices_active')->with('message', 'Recibo creado');
         }
 
@@ -218,6 +223,9 @@ class InvoiceController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('/invoices')->with('message', $errorInfo);
         }
+
+        Log::info("Recibo Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$invoice->id}) Monto ({$invoice->type}{$invoice->ammount}) IVA ({$invoice->iva}) Tipo ({$invoice->category}) Categoria ({$invoice->concept}) Concepto ({$invoice->subconcept}) Contrato Asociado ({$invoice->lease_id}) Descripcion ({$invoice->comment}) ");
+
         return redirect('/invoices_active')->with('message', 'Recibo eliminado');
 
     }
@@ -302,6 +310,9 @@ class InvoiceController extends Controller
                 $errorInfo = $exception->getMessage();
                 return redirect('newinvoice')->with('message', $errorInfo);
             }
+
+            Log::info("Recibo Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$invoice->id}) Monto ({$invoice->type}{$invoice->ammount}) IVA ({$invoice->iva}) Tipo ({$invoice->category}) Categoria ({$invoice->concept}) Concepto ({$invoice->subconcept}) Contrato Asociado ({$invoice->lease_id}) Descripcion ({$invoice->comment})");
+
             return redirect('/invoices_active')->with('message', 'Recibo actualizado');
         }
     }

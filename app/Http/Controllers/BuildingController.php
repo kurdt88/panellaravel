@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Budget;
 use Carbon\Carbon;
+use App\Models\Budget;
 use App\Models\Expense;
 use App\Models\Invoice;
 use App\Models\Building;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 
 class BuildingController extends Controller
@@ -48,12 +50,13 @@ class BuildingController extends Controller
 
 
         try {
-            Building::create($formFields);
+            $building = Building::create($formFields);
         } catch (QueryException $exception) {
             $errorInfo = $exception->getMessage();
             return redirect('newbuilding')->with('message', $errorInfo);
         }
 
+        Log::info("Unidad Habitacional Creada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$building->id}) Nombre ({$building->name}) Direccion ({$building->address}) Descripcion ({$building->description}) ");
         return redirect('/buildings')->with('message', 'Unidad Habitacional creada');
     }
 
@@ -201,6 +204,9 @@ class BuildingController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('/buildings')->with('message', $errorInfo);
         }
+
+        Log::info("Unidad Habitacional Eliminada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$building->id}) Nombre ({$building->name}) Direccion ({$building->address}) Descripcion ({$building->description}) ");
+
         return redirect('/buildings')->with('message', 'Unidad Habitacional eliminada');
     }
 
@@ -239,6 +245,8 @@ class BuildingController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('newbuilding')->with('message', $errorInfo);
         }
+
+        Log::info("Unidad Habitacional Actualizada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$building->id}) Nombre ({$building->name}) Direccion ({$building->address}) Descripcion ({$building->description}) ");
 
         return redirect('/buildings')->with('message', 'Unidad Habitacional actualizada');
     }

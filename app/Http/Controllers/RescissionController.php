@@ -6,6 +6,8 @@ use App\Models\Invoice;
 use App\Models\Rescission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Redirect;
 
@@ -24,7 +26,7 @@ class RescissionController extends Controller
 
             DB::connection()->beginTransaction();
 
-            Rescission::create($formFields);
+            $myrescission = Rescission::create($formFields);
 
             $myinvoices = Invoice::where("lease_id", $request->get('lease_id'))
                 ->where('subconcept', 'like', '%RENTA%')
@@ -59,6 +61,8 @@ class RescissionController extends Controller
             $errorInfo = $exception->getMessage();
             return Redirect::back()->with('message', $errorInfo);
         }
+
+        Log::info("Contrato Cancelado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$myrescission->id}) Contrato Asociado ({$myrescission->lease_id}) Motivo ({$myrescission->reason}) Fecha inicia ({$myrescission->date_start})  ");
 
         return redirect('/leases')->with('message', 'Contrato cancelado');
     }

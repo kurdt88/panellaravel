@@ -9,6 +9,8 @@ use App\Models\Payment;
 
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Redirect;
 
@@ -48,7 +50,7 @@ class PaymentController extends Controller
             'type' => 'required',
             'date' => 'required',
             'invoice_id' => 'required',
-            // 'ammount' => 'required',
+            'ammount' => 'required',
             'comment' => 'required',
         ]);
 
@@ -120,12 +122,14 @@ class PaymentController extends Controller
 
         //FROM THE MODEL
         try {
-            Payment::create($formFields);
+            $payment = Payment::create($formFields);
         } catch (QueryException $exception) {
             // You can check get the details of the error using `errorInfo`:
             $errorInfo = $exception->getMessage();
             return redirect('newpayment')->with('message', $errorInfo);
         }
+
+        Log::info("Ingreso Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$payment->id}) Monto ({$payment->type}{$payment->ammount}) Cuenta asociada ({$payment->account_id}) Contrato Asociado ({$payment->lease_id}) Recibo Asociado ({$payment->invoice_id}) Fecha ({$payment->date}) Comentario ({$payment->comment})");
 
         return redirect('/payments')->with('message', 'Ingreso creado');
     }
@@ -139,6 +143,9 @@ class PaymentController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('/payments')->with('message', $errorInfo);
         }
+
+        Log::info("Ingreso Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$payment->id}) Monto ({$payment->type}{$payment->ammount}) Cuenta asociada ({$payment->account_id}) Contrato Asociado ({$payment->lease_id}) Recibo Asociado ({$payment->invoice_id}) Fecha ({$payment->date}) Comentario ({$payment->comment})");
+
         return redirect('/payments')->with('message', 'Ingreso eliminado');
 
     }
@@ -283,6 +290,8 @@ class PaymentController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('/newpayment')->with('message', $errorInfo);
         }
+
+        Log::info("Ingreso Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$payment->id}) Monto ({$payment->type}{$payment->ammount}) Cuenta asociada ({$payment->account_id}) Contrato Asociado ({$payment->lease_id}) Recibo Asociado ({$payment->invoice_id}) Fecha ({$payment->date}) Comentario ({$payment->comment})");
 
         return redirect('/payments')->with('message', 'Ingreso actualizado');
     }

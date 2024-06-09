@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Tenant;
 use Illuminate\Http\Request;
-use Illuminate\Database\QueryException;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
 
 
 class TenantController extends Controller
@@ -48,12 +50,13 @@ class TenantController extends Controller
 
         //FROM THE MODEL
         try {
-            Tenant::create($formFields);
+            $tenant = Tenant::create($formFields);
         } catch (QueryException $exception) {
             // You can check get the details of the error using `errorInfo`:
             $errorInfo = $exception->getMessage();
             return redirect('newtenant')->with('message', $errorInfo);
         }
+        Log::info("Arrendatario Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$tenant->id}) Nombre ({$tenant->name}) Direccion ({$tenant->address}) Email ({$tenant->email}) Phone ({$tenant->phone}) Descripcion ({$tenant->description}) ");
 
         return redirect('/tenants')->with('message', 'Arrendatario creado');
     }
@@ -66,6 +69,8 @@ class TenantController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('/tenants')->with('message', $errorInfo);
         }
+        Log::info("Arrendatario Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$tenant->id}) Nombre ({$tenant->name}) Direccion ({$tenant->address}) Email ({$tenant->email}) Phone ({$tenant->phone}) Descripcion ({$tenant->description}) ");
+
         return redirect('/tenants')->with('message', 'Arrendatario eliminado');
 
     }
@@ -97,6 +102,8 @@ class TenantController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('/newtenant')->with('message', $errorInfo);
         }
+
+        Log::info("Arrendatario Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$tenant->id}) Nombre ({$tenant->name}) Direccion ({$tenant->address}) Email ({$tenant->email}) Phone ({$tenant->phone}) Descripcion ({$tenant->description}) ");
 
         return redirect('/tenants')->with('message', 'Arrendatario actualizado');
     }

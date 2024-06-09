@@ -251,7 +251,8 @@ class LeaseController extends Controller
             return redirect('newlease')->with('message', $errorInfo);
         }
 
-        // Log::info("Contrato creado - Usuario: {$request->user()->id}, Contrato: {$mylease->id} | {$mylease->propertyname}| {$mylease->subpropertyname}| {$mylease->tenantname}| {$mylease->start}| {$mylease->end}");
+        Log::info("Contrato creado por el Usuario: ID ({$request->user()->id})  Nombre ({$request->user()->name}) | Contrato: ID ({$mylease->id}) Propiedad ({$mylease->propertyname}) Subpropiedad ({$mylease->subpropertyname}) Arrendatario ({$mylease->tenantname}) Inicio ({$mylease->start}) Fin ({$mylease->end}) Renta ({$mylease->type}{$mylease->rent})  IVA ({$mylease->iva}) Deposito ({$mylease->deposit}) Meses de Gracia ({$months_grace_period}) Comentario  ({$mylease->contract}) ");
+
 
 
         return redirect('/leases')->with('message', 'Contrato creado');
@@ -276,7 +277,9 @@ class LeaseController extends Controller
             return redirect('/leases')->with('message', $errorInfo);
         }
 
-        // Log::info("Contrato eliminado - Usuario:" . Auth::user()->name . ", Contrato: {$lease->id} | {$lease->propertyname}| {$lease->subpropertyname}| {$lease->tenantname}| {$lease->start}| {$lease->end}");
+
+
+        Log::info("Contrato eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | Contrato: ID ({$lease->id}) Propiedad ({$lease->propertyname}) Subpropiedad ({$lease->subpropertyname}) Arrendatario ({$lease->tenantname}) Inicio ({$lease->start}) Fin ({$lease->end}) Renta ({$lease->type}{$lease->rent})  IVA ({$lease->iva}) Deposito ({$lease->deposit}) Comentario  ({$lease->contract}) ");
 
         return redirect('/leases')->with('message', 'Contrato eliminado');
 
@@ -354,6 +357,8 @@ class LeaseController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('/newlease')->with('message', $errorInfo);
         }
+
+        Log::info("Contrato actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | Actualizacion: ID ({$lease->id}) Propiedad ({$lease->propertyname}) Subpropiedad ({$lease->subpropertyname}) Arrendatario ({$lease->tenantname}) Inicio ({$lease->start}) Fin ({$lease->end}) Renta ({$lease->type}{$lease->rent})  IVA ({$lease->iva}) Deposito ({$lease->deposit}) Comentario  ({$lease->contract}) ");
 
         return redirect('/leases')->with('message', 'Contrato actualizado');
     }
@@ -440,6 +445,7 @@ class LeaseController extends Controller
 
             foreach ($myinvoices as $invoice) {
                 if (count($invoice->payments) == 0 && count($invoice->expenses) == 0) {
+                    Log::info("Recibo eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | Recibo: ID ({$invoice->id}) Monto ({$invoice->type} {$invoice->ammount}) Tipo ({$invoice->category}) Categoria ({$invoice->concept}) Concepto ({$invoice->subconcept}) Comentario ({$invoice->comment}) Contrato Asociado ({$invoice->lease_id}) ");
                     $invoice->delete();
                 }
             }
@@ -454,6 +460,7 @@ class LeaseController extends Controller
             return Redirect::back()->with('message', $errorInfo);
         }
 
+        Log::info("Recibos eliminados en lote por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ")");
         return redirect('/leasemovements/' . $lease->id . '/')->with('message', 'Recibos eliminados');
 
 

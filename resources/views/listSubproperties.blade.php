@@ -115,7 +115,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete"
-                                        onclick="return confirm('¿Estas seguro de querer borrar la subunidad <<{{ $subproperty->title }}>> ? \n ALERTA Si confirma se borrarán todos los pagos asociados al contrato.')">
+                                        onclick="return confirm('¿Estás seguro de querer borrar la Subnidad Ingreso seleccionada ? \n ALERTA Si confirma no se podrá recuperar la información.')">
 
                                         <i class="fa fa-lg fa-fw fa-trash"></i>
                                     </button>

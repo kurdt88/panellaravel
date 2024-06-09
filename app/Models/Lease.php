@@ -84,7 +84,12 @@ class Lease extends Model
             return '--';
 
         } else {
-            return '[' . $mysubproperty->type . '] ' . $mysubproperty->title;
+            if ($mysubproperty) {
+                return '[' . $mysubproperty->type . '] ' . $mysubproperty->title;
+            } else {
+                return '--';
+            }
+
         }
     }
 
