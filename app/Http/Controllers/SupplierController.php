@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Logevent;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -54,9 +55,12 @@ class SupplierController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('newsupplier')->with('message', $errorInfo);
         }
-
-        Log::info("Proveedor Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$supplier->id}) Nombre ({$supplier->name}) Descripcion ({$supplier->comment}) ");
-
+        $mymessage = "Proveedor Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$supplier->id}) Nombre ({$supplier->name}) Descripcion ({$supplier->comment}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/suppliers')->with('message', 'Proveedor creado');
     }
 
@@ -106,8 +110,12 @@ class SupplierController extends Controller
             return redirect('/suppliers')->with('message', $errorInfo);
         }
 
-        Log::info("Proveedor Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$supplier->id}) Nombre ({$supplier->name}) Descripcion ({$supplier->comment}) ");
-
+        $mymessage = "Proveedor Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$supplier->id}) Nombre ({$supplier->name}) Descripcion ({$supplier->comment}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/suppliers')->with('message', 'Proveedor actualizado');
     }
 
@@ -122,8 +130,12 @@ class SupplierController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('/suppliers')->with('message', $errorInfo);
         }
-        Log::info("Proveedor Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$supplier->id}) Nombre ({$supplier->name}) Descripcion ({$supplier->comment}) ");
-
+        $mymessage = "Proveedor Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$supplier->id}) Nombre ({$supplier->name}) Descripcion ({$supplier->comment}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/suppliers')->with('message', 'Proveedor eliminado');
     }
 

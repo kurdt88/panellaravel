@@ -7,6 +7,7 @@ use App\Models\Budget;
 use App\Models\Expense;
 use App\Models\Invoice;
 use App\Models\Building;
+use App\Models\Logevent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -56,7 +57,14 @@ class BuildingController extends Controller
             return redirect('newbuilding')->with('message', $errorInfo);
         }
 
-        Log::info("Unidad Habitacional Creada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$building->id}) Nombre ({$building->name}) Direccion ({$building->address}) Descripcion ({$building->description}) ");
+
+        $mymessage = "Unidad Habitacional Creada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$building->id}) Nombre ({$building->name}) Direccion ({$building->address}) Descripcion ({$building->description}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
+
         return redirect('/buildings')->with('message', 'Unidad Habitacional creada');
     }
 
@@ -205,8 +213,12 @@ class BuildingController extends Controller
             return redirect('/buildings')->with('message', $errorInfo);
         }
 
-        Log::info("Unidad Habitacional Eliminada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$building->id}) Nombre ({$building->name}) Direccion ({$building->address}) Descripcion ({$building->description}) ");
-
+        $mymessage = "Unidad Habitacional Eliminada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$building->id}) Nombre ({$building->name}) Direccion ({$building->address}) Descripcion ({$building->description}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/buildings')->with('message', 'Unidad Habitacional eliminada');
     }
 
@@ -246,8 +258,12 @@ class BuildingController extends Controller
             return redirect('newbuilding')->with('message', $errorInfo);
         }
 
-        Log::info("Unidad Habitacional Actualizada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$building->id}) Nombre ({$building->name}) Direccion ({$building->address}) Descripcion ({$building->description}) ");
-
+        $mymessage = "Unidad Habitacional Actualizada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$building->id}) Nombre ({$building->name}) Direccion ({$building->address}) Descripcion ({$building->description}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/buildings')->with('message', 'Unidad Habitacional actualizada');
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Landlord;
+use App\Models\Logevent;
 use App\Models\Property;
 use App\Models\Subproperty;
 use Illuminate\Http\Request;
@@ -67,8 +68,12 @@ class SubpropertyController extends Controller
             return redirect('newsubproperty')->with('message', $errorInfo);
         }
 
-        Log::info("Subnidad Creada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$subproperty->id}) Nombre ({$subproperty->title}) Tipo ({$subproperty->type}) Direccion ({$subproperty->address}) Descripcion ({$subproperty->description}) Propietario Asociado ({$subproperty->landlord_id}) Propiedad Asociada ({$subproperty->property_id}) ");
-
+        $mymessage = "Subnidad Creada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$subproperty->id}) Nombre ({$subproperty->title}) Tipo ({$subproperty->type}) Direccion ({$subproperty->address}) Descripcion ({$subproperty->description}) Propietario Asociado ({$subproperty->landlord_id}) Propiedad Asociada ({$subproperty->property_id}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/subproperties')->with('message', 'Subunidad creada');
     }
 
@@ -127,8 +132,12 @@ class SubpropertyController extends Controller
             return redirect('newsubproperty')->with('message', $errorInfo);
         }
 
-        Log::info("Subnidad Actualizada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$subproperty->id}) Nombre ({$subproperty->title}) Tipo ({$subproperty->type}) Direccion ({$subproperty->address}) Descripcion ({$subproperty->description}) Propietario Asociado ({$subproperty->landlord_id}) Propiedad Asociada ({$subproperty->property_id}) ");
-
+        $mymessage = "Subnidad Actualizada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$subproperty->id}) Nombre ({$subproperty->title}) Tipo ({$subproperty->type}) Direccion ({$subproperty->address}) Descripcion ({$subproperty->description}) Propietario Asociado ({$subproperty->landlord_id}) Propiedad Asociada ({$subproperty->property_id}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/subproperties')->with('message', 'Subunidad actualizada');
 
     }
@@ -147,8 +156,12 @@ class SubpropertyController extends Controller
             return redirect('/subproperties')->with('message', $errorInfo);
         }
 
-        Log::info("Subnidad Eliminada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$subproperty->id}) Nombre ({$subproperty->title}) Tipo ({$subproperty->type}) Direccion ({$subproperty->address}) Descripcion ({$subproperty->description}) Propietario Asociado ({$subproperty->landlord_id}) Propiedad Asociada ({$subproperty->property_id}) ");
-
+        $mymessage = "Subnidad Eliminada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$subproperty->id}) Nombre ({$subproperty->title}) Tipo ({$subproperty->type}) Direccion ({$subproperty->address}) Descripcion ({$subproperty->description}) Propietario Asociado ({$subproperty->landlord_id}) Propiedad Asociada ({$subproperty->property_id}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/subproperties')->with('message', 'Subunidad eliminada');
 
     }

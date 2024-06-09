@@ -78,4 +78,10 @@ class User extends Authenticatable
     {
         return 'profile';
     }
+
+
+    public function logevents()
+    {
+        return $this->hasMany(Logevent::class, 'user_id');
+    }
 }

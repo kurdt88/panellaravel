@@ -7,6 +7,7 @@ use App\Models\Account;
 use App\Models\Invoice;
 use App\Models\Payment;
 
+use App\Models\Logevent;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Log;
@@ -129,8 +130,13 @@ class PaymentController extends Controller
             return redirect('newpayment')->with('message', $errorInfo);
         }
 
-        Log::info("Ingreso Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$payment->id}) Monto ({$payment->type}{$payment->ammount}) Cuenta asociada ({$payment->account_id}) Contrato Asociado ({$payment->lease_id}) Recibo Asociado ({$payment->invoice_id}) Fecha ({$payment->date}) Comentario ({$payment->comment})");
 
+        $mymessage = "Ingreso Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$payment->id}) Monto ({$payment->type}{$payment->ammount}) Cuenta asociada ({$payment->account_id}) Contrato Asociado ({$payment->lease_id}) Recibo Asociado ({$payment->invoice_id}) Fecha ({$payment->date}) Comentario ({$payment->comment})";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/payments')->with('message', 'Ingreso creado');
     }
 
@@ -144,8 +150,12 @@ class PaymentController extends Controller
             return redirect('/payments')->with('message', $errorInfo);
         }
 
-        Log::info("Ingreso Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$payment->id}) Monto ({$payment->type}{$payment->ammount}) Cuenta asociada ({$payment->account_id}) Contrato Asociado ({$payment->lease_id}) Recibo Asociado ({$payment->invoice_id}) Fecha ({$payment->date}) Comentario ({$payment->comment})");
-
+        $mymessage = "Ingreso Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$payment->id}) Monto ({$payment->type}{$payment->ammount}) Cuenta asociada ({$payment->account_id}) Contrato Asociado ({$payment->lease_id}) Recibo Asociado ({$payment->invoice_id}) Fecha ({$payment->date}) Comentario ({$payment->comment})";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/payments')->with('message', 'Ingreso eliminado');
 
     }
@@ -291,8 +301,12 @@ class PaymentController extends Controller
             return redirect('/newpayment')->with('message', $errorInfo);
         }
 
-        Log::info("Ingreso Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$payment->id}) Monto ({$payment->type}{$payment->ammount}) Cuenta asociada ({$payment->account_id}) Contrato Asociado ({$payment->lease_id}) Recibo Asociado ({$payment->invoice_id}) Fecha ({$payment->date}) Comentario ({$payment->comment})");
-
+        $mymessage = "Ingreso Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$payment->id}) Monto ({$payment->type}{$payment->ammount}) Cuenta asociada ({$payment->account_id}) Contrato Asociado ({$payment->lease_id}) Recibo Asociado ({$payment->invoice_id}) Fecha ({$payment->date}) Comentario ({$payment->comment})";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/payments')->with('message', 'Ingreso actualizado');
     }
 

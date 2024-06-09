@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Budget;
+use App\Models\Logevent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -69,7 +70,14 @@ class BudgetController extends Controller
             return redirect('/newbudget/' . $building)->with('message', $errorInfo);
         }
 
-        Log::info("Presupuesto de Mantenimiento Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$budget->id}) Year ({$budget->year}) Month ({$budget->month}) PresupuestoMXN ({$budget->maintenance_budget_mxn}) PresupuestoUSD ({$budget->maintenance_budget_usd}) Unidad Hab Asociada ({$budget->building_id}) ");
+
+
+        $mymessage = "Presupuesto de Mantenimiento Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$budget->id}) Year ({$budget->year}) Month ({$budget->month}) PresupuestoMXN ({$budget->maintenance_budget_mxn}) PresupuestoUSD ({$budget->maintenance_budget_usd}) Unidad Hab Asociada ({$budget->building_id}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
 
         return redirect('/buildingbudgets/' . $building)->with('message', 'Presupuesto de Mantenimiento creado');
 
@@ -130,8 +138,12 @@ class BudgetController extends Controller
             return redirect('/buildingbudgets/' . $building)->with('message', $errorInfo);
         }
 
-        Log::info("Presupuesto de Mantenimiento Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$budget->id}) Year ({$budget->year}) Month ({$budget->month}) PresupuestoMXN ({$budget->maintenance_budget_mxn}) PresupuestoUSD ({$budget->maintenance_budget_usd}) Unidad Hab Asociada ({$budget->building_id}) ");
-
+        $mymessage = "Presupuesto de Mantenimiento Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$budget->id}) Year ({$budget->year}) Month ({$budget->month}) PresupuestoMXN ({$budget->maintenance_budget_mxn}) PresupuestoUSD ({$budget->maintenance_budget_usd}) Unidad Hab Asociada ({$budget->building_id}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/buildingbudgets/' . $building)->with('message', 'Presupuesto de Mantenimiento actualizado');
     }
 
@@ -147,8 +159,12 @@ class BudgetController extends Controller
             return redirect('/buildingbudgets/' . $budget->building->id)->with('message', $errorInfo);
         }
 
-        Log::info("Presupuesto de Mantenimiento Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$budget->id}) Year ({$budget->year}) Month ({$budget->month}) PresupuestoMXN ({$budget->maintenance_budget_mxn}) PresupuestoUSD ({$budget->maintenance_budget_usd}) Unidad Hab Asociada ({$budget->building_id}) ");
-
+        $mymessage = "Presupuesto de Mantenimiento Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$budget->id}) Year ({$budget->year}) Month ({$budget->month}) PresupuestoMXN ({$budget->maintenance_budget_mxn}) PresupuestoUSD ({$budget->maintenance_budget_usd}) Unidad Hab Asociada ({$budget->building_id}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/buildingbudgets/' . $budget->building->id)->with('message', 'Presupuesto de Mtto eliminado');
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Landlord;
+use App\Models\Logevent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -51,8 +52,12 @@ class LandlordController extends Controller
             return redirect('newlandlord')->with('message', $errorInfo);
         }
 
-        Log::info("Propietario Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$landlord->id}) Nombre ({$landlord->name}) Email ({$landlord->email}) Telefono ({$landlord->phone}) Direccion ({$landlord->address}) Comentario ({$landlord->comment})");
-
+        $mymessage = "Propietario Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$landlord->id}) Nombre ({$landlord->name}) Email ({$landlord->email}) Telefono ({$landlord->phone}) Direccion ({$landlord->address}) Comentario ({$landlord->comment})";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/landlords')->with('message', 'Propietario creado');
     }
 
@@ -101,8 +106,12 @@ class LandlordController extends Controller
             return redirect('newlandlord')->with('message', $errorInfo);
         }
 
-        Log::info("Propietario Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$landlord->id}) Nombre ({$landlord->name}) Email ({$landlord->email}) Telefono ({$landlord->phone}) Direccion ({$landlord->address}) Comentario ({$landlord->comment})");
-
+        $mymessage = "Propietario Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$landlord->id}) Nombre ({$landlord->name}) Email ({$landlord->email}) Telefono ({$landlord->phone}) Direccion ({$landlord->address}) Comentario ({$landlord->comment})";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/landlords')->with('message', 'Propietario actualizado');
     }
 
@@ -118,8 +127,12 @@ class LandlordController extends Controller
             return redirect('landlords')->with('message', $errorInfo);
         }
 
-        Log::info("Propietario Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$landlord->id}) Nombre ({$landlord->name}) Email ({$landlord->email}) Telefono ({$landlord->phone}) Direccion ({$landlord->address}) Comentario ({$landlord->comment})");
-
+        $mymessage = "Propietario Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$landlord->id}) Nombre ({$landlord->name}) Email ({$landlord->email}) Telefono ({$landlord->phone}) Direccion ({$landlord->address}) Comentario ({$landlord->comment})";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/landlords')->with('message', 'Propietario eliminado');
     }
 

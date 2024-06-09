@@ -7,6 +7,7 @@ use App\Models\Account;
 use App\Models\Expense;
 use App\Models\Payment;
 use App\Models\Landlord;
+use App\Models\Logevent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -50,13 +51,18 @@ class AccountController extends Controller
 
 
         try {
-            $myaccount = Account::create($formFields);
+            $account = Account::create($formFields);
         } catch (QueryException $exception) {
             $errorInfo = $exception->getMessage();
             return redirect('newaccount')->with('message', $errorInfo);
         }
 
-        Log::info("Cuenta Bancaria Creada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$myaccount->id}) Alias ({$myaccount->alias}) Banco ({$myaccount->bank}) Numero ({$myaccount->number}) Comentario ({$myaccount->comment}) Divisa ({$myaccount->type}) Propietario Asociado ({$myaccount->landlord_id}) ");
+        $mymessage = "Cuenta Bancaria Creada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$account->id}) Alias ({$account->alias}) Banco ({$account->bank}) Numero ({$account->number}) Comentario ({$account->comment}) Divisa ({$account->type}) Propietario Asociado ({$account->landlord_id}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
 
         return redirect('/accounts')->with('message', 'Cuenta Bancaria creada');
     }
@@ -192,8 +198,12 @@ class AccountController extends Controller
             return redirect('newaccount')->with('message', $errorInfo);
         }
 
-        Log::info("Cuenta Bancaria actualizada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$account->id}) Alias ({$account->alias}) Banco ({$account->bank}) Numero ({$account->number}) Comentario ({$account->comment}) Divisa ({$account->type}) Propietario Asociado ({$account->landlord_id}) ");
-
+        $mymessage = "Cuenta Bancaria Actualizada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$account->id}) Alias ({$account->alias}) Banco ({$account->bank}) Numero ({$account->number}) Comentario ({$account->comment}) Divisa ({$account->type}) Propietario Asociado ({$account->landlord_id}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/accounts')->with('message', 'Cuenta Bancaria actualizada');
     }
 
@@ -211,8 +221,13 @@ class AccountController extends Controller
         }
 
 
-        Log::info("Cuenta Bancaria eliminada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$account->id}) Alias ({$account->alias}) Banco ({$account->bank}) Numero ({$account->number}) Comentario ({$account->comment}) Divisa ({$account->type}) Propietario Asociado ({$account->landlord_id}) ");
 
+        $mymessage = "Cuenta Bancaria Eliminada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$account->id}) Alias ({$account->alias}) Banco ({$account->bank}) Numero ({$account->number}) Comentario ({$account->comment}) Divisa ({$account->type}) Propietario Asociado ({$account->landlord_id}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/accounts')->with('message', 'Cuenta Bancaria eliminada');
     }
 }

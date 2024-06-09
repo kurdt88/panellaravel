@@ -13,6 +13,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\LandlordController;
+use App\Http\Controllers\LogeventController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\RescissionController;
@@ -91,6 +92,8 @@ Route::middleware([
         Route::get('/indexusers/{user}/edit', [UserController::class, 'edit']);
         Route::put('/indexusers/{user}', [UserController::class, 'update']);
         Route::delete('/deluser/{user}', [UserController::class, 'destroy']);
+        Route::get('/audit', [LogeventController::class, 'index']);
+
     });
 
     //RUTAS para el permiso EDIT
@@ -210,6 +213,6 @@ Route::middleware([
         Route::get('profile', [HomeController::class, 'settings']);
     });
 
-    URL::forceScheme('https');
+    // URL::forceScheme('https');
 
 });

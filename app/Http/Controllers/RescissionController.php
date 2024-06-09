@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
+use App\Models\Logevent;
 use App\Models\Rescission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -62,8 +63,12 @@ class RescissionController extends Controller
             return Redirect::back()->with('message', $errorInfo);
         }
 
-        Log::info("Contrato Cancelado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$myrescission->id}) Contrato Asociado ({$myrescission->lease_id}) Motivo ({$myrescission->reason}) Fecha inicia ({$myrescission->date_start})  ");
-
+        $mymessage = "Contrato Cancelado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$myrescission->id}) Contrato Asociado ({$myrescission->lease_id}) Motivo ({$myrescission->reason}) Fecha inicia ({$myrescission->date_start})  ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/leases')->with('message', 'Contrato cancelado');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tenant;
+use App\Models\Logevent;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Log;
@@ -56,8 +57,12 @@ class TenantController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('newtenant')->with('message', $errorInfo);
         }
-        Log::info("Arrendatario Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$tenant->id}) Nombre ({$tenant->name}) Direccion ({$tenant->address}) Email ({$tenant->email}) Phone ({$tenant->phone}) Descripcion ({$tenant->description}) ");
-
+        $mymessage = "Arrendatario Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$tenant->id}) Nombre ({$tenant->name}) Direccion ({$tenant->address}) Email ({$tenant->email}) Phone ({$tenant->phone}) Descripcion ({$tenant->description}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/tenants')->with('message', 'Arrendatario creado');
     }
 
@@ -69,8 +74,12 @@ class TenantController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('/tenants')->with('message', $errorInfo);
         }
-        Log::info("Arrendatario Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$tenant->id}) Nombre ({$tenant->name}) Direccion ({$tenant->address}) Email ({$tenant->email}) Phone ({$tenant->phone}) Descripcion ({$tenant->description}) ");
-
+        $mymessage = "Arrendatario Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$tenant->id}) Nombre ({$tenant->name}) Direccion ({$tenant->address}) Email ({$tenant->email}) Phone ({$tenant->phone}) Descripcion ({$tenant->description}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/tenants')->with('message', 'Arrendatario eliminado');
 
     }
@@ -103,8 +112,12 @@ class TenantController extends Controller
             return redirect('/newtenant')->with('message', $errorInfo);
         }
 
-        Log::info("Arrendatario Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$tenant->id}) Nombre ({$tenant->name}) Direccion ({$tenant->address}) Email ({$tenant->email}) Phone ({$tenant->phone}) Descripcion ({$tenant->description}) ");
-
+        $mymessage = "Arrendatario Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$tenant->id}) Nombre ({$tenant->name}) Direccion ({$tenant->address}) Email ({$tenant->email}) Phone ({$tenant->phone}) Descripcion ({$tenant->description}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/tenants')->with('message', 'Arrendatario actualizado');
     }
 

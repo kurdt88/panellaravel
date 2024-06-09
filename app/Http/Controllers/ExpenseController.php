@@ -6,6 +6,7 @@ use App\Models\Lease;
 use App\Models\Account;
 use App\Models\Expense;
 use App\Models\Invoice;
+use App\Models\Logevent;
 use App\Models\Expenseimg;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -227,7 +228,12 @@ class ExpenseController extends Controller
             return redirect('newexpense')->with('message', $errorInfo);
         }
 
-        Log::info("Egreso Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$myexpense->id}) Monto ({$myexpense->type}{$myexpense->ammount}) Cuenta asociada ({$myexpense->account_id}) Contrato Asociado ({$myexpense->lease_id}) Descripcion ({$myexpense->description}) Recibo Asociado ({$myexpense->invoice_id}) Fecha ({$myexpense->date}) PresupuestoMtto ({$myexpense->maintenance_budget})");
+        $mymessage = "Egreso Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$myexpense->id}) Monto ({$myexpense->type}{$myexpense->ammount}) Cuenta asociada ({$myexpense->account_id}) Contrato Asociado ({$myexpense->lease_id}) Descripcion ({$myexpense->description}) Recibo Asociado ({$myexpense->invoice_id}) Fecha ({$myexpense->date}) PresupuestoMtto ({$myexpense->maintenance_budget})";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/expenses')->with('message', 'Egreso creado');
     }
 
@@ -246,8 +252,12 @@ class ExpenseController extends Controller
             return redirect('/expenses')->with('message', $errorInfo);
         }
 
-        Log::info("Egreso Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$expense->id}) Monto ({$expense->type}{$expense->ammount}) Cuenta asociada ({$expense->account_id}) Contrato Asociado ({$expense->lease_id}) Descripcion ({$expense->description}) Recibo Asociado ({$expense->invoice_id}) Fecha ({$expense->date})  PresupuestoMtto ({$expense->maintenance_budget}) ");
-
+        $mymessage = "Egreso Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$expense->id}) Monto ({$expense->type}{$expense->ammount}) Cuenta asociada ({$expense->account_id}) Contrato Asociado ({$expense->lease_id}) Descripcion ({$expense->description}) Recibo Asociado ({$expense->invoice_id}) Fecha ({$expense->date}) PresupuestoMtto ({$expense->maintenance_budget})";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/expenses')->with('message', 'Egreso eliminado');
 
     }
@@ -492,8 +502,12 @@ class ExpenseController extends Controller
             return Redirect::back()->with('message', $errorInfo);
         }
 
-        Log::info("Egreso Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$expense->id}) Monto ({$expense->type}{$expense->ammount}) Cuenta asociada ({$expense->account_id}) Contrato Asociado ({$expense->lease_id}) Descripcion ({$expense->description}) Recibo Asociado ({$expense->invoice_id}) Fecha ({$expense->date})  PresupuestoMtto ({$expense->maintenance_budget}) ");
-
+        $mymessage = "Egreso Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$expense->id}) Monto ({$expense->type}{$expense->ammount}) Cuenta asociada ({$expense->account_id}) Contrato Asociado ({$expense->lease_id}) Descripcion ({$expense->description}) Recibo Asociado ({$expense->invoice_id}) Fecha ({$expense->date}) PresupuestoMtto ({$expense->maintenance_budget})";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/expenses')->with('message', 'Egreso actualizado');
     }
 

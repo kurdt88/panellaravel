@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Logevent;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -31,8 +32,14 @@ class UserController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('/users')->with('message', $errorInfo);
         }
-        Log::info("Usuario Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$user->id}) Nombre ({$user->name}) Email ({$user->email}) ");
 
+        $mymessage = "Usuario Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$user->id}) Nombre ({$user->name}) Email ({$user->email}) ";
+        Log::info($mymessage);
+
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/users')->with('message', 'Usuario eliminado');
     }
 
@@ -97,11 +104,21 @@ class UserController extends Controller
         }
 
         if ($password) {
-            Log::info("Usuario Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$user->id}) Nombre ({$user->name}) Email ({$user->email}) Rol ({$newrole}) Password Actualizado");
+            $mymessage = "Usuario Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$user->id}) Nombre ({$user->name}) Email ({$user->email}) Rol ({$newrole}) Password Actualizado";
+            Log::info($mymessage);
+
+            Logevent::create([
+                'event' => $mymessage,
+                'user_id' => Auth::user()->id
+            ]);
 
         } else {
-            Log::info("Usuario Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$user->id}) Nombre ({$user->name}) Email ({$user->email}) Rol ({$newrole}) ");
-
+            $mymessage = "Usuario Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$user->id}) Nombre ({$user->name}) Email ({$user->email}) Rol ({$newrole}) ";
+            Log::info($mymessage);
+            Logevent::create([
+                'event' => $mymessage,
+                'user_id' => Auth::user()->id
+            ]);
         }
 
         return redirect('/users')->with('message', 'Usuario actualizado');

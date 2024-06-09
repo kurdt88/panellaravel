@@ -8,6 +8,7 @@ use App\Models\Expense;
 use App\Models\Invoice;
 use App\Models\Building;
 use App\Models\Landlord;
+use App\Models\Logevent;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -60,7 +61,12 @@ class PropertyController extends Controller
             return redirect('/newproperty')->with('message', $errorInfo);
         }
 
-        Log::info("Unidad Creada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$property->id}) Nombre ({$property->title}) Direccion ({$property->location}) Descripcion ({$property->description}) Propietario Asociado ({$property->landlord_id}) Unidad Habitacional Asociada ({$property->building_id}) ");
+        $mymessage = "Unidad Creada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$property->id}) Nombre ({$property->title}) Direccion ({$property->location}) Descripcion ({$property->description}) Propietario Asociado ({$property->landlord_id}) Unidad Habitacional Asociada ({$property->building_id}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
 
         return redirect('/properties')->with('message', 'Unidad creada');
     }
@@ -122,8 +128,12 @@ class PropertyController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('/properties')->with('message', $errorInfo);
         }
-        Log::info("Unidad Eliminada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$property->id}) Nombre ({$property->title}) Direccion ({$property->location}) Descripcion ({$property->description}) Propietario Asociado ({$property->landlord_id}) Unidad Habitacional Asociada ({$property->building_id}) ");
-
+        $mymessage = "Unidad Eliminada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$property->id}) Nombre ({$property->title}) Direccion ({$property->location}) Descripcion ({$property->description}) Propietario Asociado ({$property->landlord_id}) Unidad Habitacional Asociada ({$property->building_id}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/properties')->with('message', 'Unidad eliminada');
 
     }
@@ -167,8 +177,12 @@ class PropertyController extends Controller
             $errorInfo = $exception->getMessage();
             return redirect('/newproperty')->with('message', $errorInfo);
         }
-        Log::info("Unidad Actualizada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$property->id}) Nombre ({$property->title}) Direccion ({$property->location}) Descripcion ({$property->description}) Propietario Asociado ({$property->landlord_id}) Unidad Habitacional Asociada ({$property->building_id}) ");
-
+        $mymessage = "Unidad Actualizada por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$property->id}) Nombre ({$property->title}) Direccion ({$property->location}) Descripcion ({$property->description}) Propietario Asociado ({$property->landlord_id}) Unidad Habitacional Asociada ({$property->building_id}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/properties')->with('message', 'Unidad actualizada');
     }
 

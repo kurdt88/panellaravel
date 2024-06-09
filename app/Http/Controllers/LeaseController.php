@@ -6,10 +6,11 @@ use App\Models\Tax;
 use App\Models\Lease;
 use App\Models\Tenant;
 use App\Models\Invoice;
+use App\Models\Logevent;
 use App\Models\Property;
+
+
 use Illuminate\Http\Request;
-
-
 use Illuminate\Routing\Route;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -251,9 +252,13 @@ class LeaseController extends Controller
             return redirect('newlease')->with('message', $errorInfo);
         }
 
-        Log::info("Contrato creado por el Usuario: ID ({$request->user()->id})  Nombre ({$request->user()->name}) | Contrato: ID ({$mylease->id}) Propiedad ({$mylease->propertyname}) Subpropiedad ({$mylease->subpropertyname}) Arrendatario ({$mylease->tenantname}) Inicio ({$mylease->start}) Fin ({$mylease->end}) Renta ({$mylease->type}{$mylease->rent})  IVA ({$mylease->iva}) Deposito ({$mylease->deposit}) Meses de Gracia ({$months_grace_period}) Comentario  ({$mylease->contract}) ");
 
-
+        $mymessage = "Contrato Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | Contrato: ID ({$mylease->id}) Propiedad ({$mylease->propertyname}) Subpropiedad ({$mylease->subpropertyname}) Arrendatario ({$mylease->tenantname}) Inicio ({$mylease->start}) Fin ({$mylease->end}) Renta ({$mylease->type}{$mylease->rent})  IVA ({$mylease->iva}) Deposito ({$mylease->deposit}) Meses de Gracia ({$months_grace_period}) Comentario  ({$mylease->contract}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
 
         return redirect('/leases')->with('message', 'Contrato creado');
 
@@ -279,8 +284,12 @@ class LeaseController extends Controller
 
 
 
-        Log::info("Contrato eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | Contrato: ID ({$lease->id}) Propiedad ({$lease->propertyname}) Subpropiedad ({$lease->subpropertyname}) Arrendatario ({$lease->tenantname}) Inicio ({$lease->start}) Fin ({$lease->end}) Renta ({$lease->type}{$lease->rent})  IVA ({$lease->iva}) Deposito ({$lease->deposit}) Comentario  ({$lease->contract}) ");
-
+        $mymessage = "Contrato Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | Contrato: ID ({$lease->id}) Propiedad ({$lease->propertyname}) Subpropiedad ({$lease->subpropertyname}) Arrendatario ({$lease->tenantname}) Inicio ({$lease->start}) Fin ({$lease->end}) Renta ({$lease->type}{$lease->rent})  IVA ({$lease->iva}) Deposito ({$lease->deposit})  Comentario  ({$lease->contract}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/leases')->with('message', 'Contrato eliminado');
 
     }
@@ -358,8 +367,12 @@ class LeaseController extends Controller
             return redirect('/newlease')->with('message', $errorInfo);
         }
 
-        Log::info("Contrato actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | Actualizacion: ID ({$lease->id}) Propiedad ({$lease->propertyname}) Subpropiedad ({$lease->subpropertyname}) Arrendatario ({$lease->tenantname}) Inicio ({$lease->start}) Fin ({$lease->end}) Renta ({$lease->type}{$lease->rent})  IVA ({$lease->iva}) Deposito ({$lease->deposit}) Comentario  ({$lease->contract}) ");
-
+        $mymessage = "Contrato Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | Contrato: ID ({$lease->id}) Propiedad ({$lease->propertyname}) Subpropiedad ({$lease->subpropertyname}) Arrendatario ({$lease->tenantname}) Inicio ({$lease->start}) Fin ({$lease->end}) Renta ({$lease->type}{$lease->rent})  IVA ({$lease->iva}) Deposito ({$lease->deposit})  Comentario  ({$lease->contract}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/leases')->with('message', 'Contrato actualizado');
     }
 

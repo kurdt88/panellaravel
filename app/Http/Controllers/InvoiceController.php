@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tax;
 use App\Models\Lease;
 use App\Models\Invoice;
+use App\Models\Logevent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -188,7 +189,12 @@ class InvoiceController extends Controller
                 return redirect('newinvoice')->with('message', $errorInfo);
             }
 
-            Log::info("Recibo Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$invoice->id}) Monto ({$invoice->type}{$invoice->ammount}) IVA ({$invoice->iva}) Tipo ({$invoice->category}) Categoria ({$invoice->concept}) Concepto ({$invoice->subconcept}) Contrato Asociado ({$invoice->lease_id}) Descripcion ({$invoice->comment}) ");
+            $mymessage = "Recibo Creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$invoice->id}) Monto ({$invoice->type}{$invoice->ammount}) IVA ({$invoice->iva}) Tipo ({$invoice->category}) Categoria ({$invoice->concept}) Concepto ({$invoice->subconcept}) Contrato Asociado ({$invoice->lease_id}) Descripcion ({$invoice->comment}) ";
+            Log::info($mymessage);
+            Logevent::create([
+                'event' => $mymessage,
+                'user_id' => Auth::user()->id
+            ]);
 
             return redirect('/invoices_active')->with('message', 'Recibo creado');
         }
@@ -224,8 +230,12 @@ class InvoiceController extends Controller
             return redirect('/invoices')->with('message', $errorInfo);
         }
 
-        Log::info("Recibo Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$invoice->id}) Monto ({$invoice->type}{$invoice->ammount}) IVA ({$invoice->iva}) Tipo ({$invoice->category}) Categoria ({$invoice->concept}) Concepto ({$invoice->subconcept}) Contrato Asociado ({$invoice->lease_id}) Descripcion ({$invoice->comment}) ");
-
+        $mymessage = "Recibo Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$invoice->id}) Monto ({$invoice->type}{$invoice->ammount}) IVA ({$invoice->iva}) Tipo ({$invoice->category}) Categoria ({$invoice->concept}) Concepto ({$invoice->subconcept}) Contrato Asociado ({$invoice->lease_id}) Descripcion ({$invoice->comment}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/invoices_active')->with('message', 'Recibo eliminado');
 
     }
@@ -311,8 +321,12 @@ class InvoiceController extends Controller
                 return redirect('newinvoice')->with('message', $errorInfo);
             }
 
-            Log::info("Recibo Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$invoice->id}) Monto ({$invoice->type}{$invoice->ammount}) IVA ({$invoice->iva}) Tipo ({$invoice->category}) Categoria ({$invoice->concept}) Concepto ({$invoice->subconcept}) Contrato Asociado ({$invoice->lease_id}) Descripcion ({$invoice->comment})");
-
+            $mymessage = "Recibo Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$invoice->id}) Monto ({$invoice->type}{$invoice->ammount}) IVA ({$invoice->iva}) Tipo ({$invoice->category}) Categoria ({$invoice->concept}) Concepto ({$invoice->subconcept}) Contrato Asociado ({$invoice->lease_id}) Descripcion ({$invoice->comment}) ";
+            Log::info($mymessage);
+            Logevent::create([
+                'event' => $mymessage,
+                'user_id' => Auth::user()->id
+            ]);
             return redirect('/invoices_active')->with('message', 'Recibo actualizado');
         }
     }
