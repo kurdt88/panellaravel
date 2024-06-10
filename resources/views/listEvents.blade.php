@@ -19,7 +19,7 @@
 @section('content')
 
     @php
-        $heads = ['ID', 'Fecha', 'Usuario', 'Evento'];
+        $heads = ['ID', 'Fecha', 'Evento'];
 
     @endphp
 
@@ -29,16 +29,16 @@
         @foreach ($logevents as $logevent)
             <tr>
                 <td>
-                    {{ $logevent->id }}
+                    <small>{{ $logevent->id }}</small>
                 </td>
                 <td>
-                    {{ $logevent->created_at->format('d M Y') }}
+                    <small>{{ $logevent->created_at }}</small>
                 </td>
 
-                <td>
+                {{-- <td>
                     ({{ $logevent->user_id }})
                     {{ App\Models\User::where('id', $logevent->user_id)->get()->first()->name }}
-                </td>
+                </td> --}}
                 <td>
                     <small>{{ $logevent->event }}</small>
                 </td>
