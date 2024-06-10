@@ -137,7 +137,8 @@
                         <font color="blue"><small>Valor actual:
                                 {{ Number::Currency($lease->deposit) }}
                             </small></font>
-                        <input type="number" class="form-control" name="deposit" value="{{ $lease->deposit }}">
+                        <input type="number" step="any" class="form-control" name="deposit"
+                            value="{{ $lease->deposit }}">
                         @error('deposit')
                             <p class="text-red">{{ $message }}</p>
                         @enderror

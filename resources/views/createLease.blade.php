@@ -160,7 +160,8 @@
 
                     <div class="form-group">
                         <label for="deposit">Depósito</label>
-                        <input type="number" class="form-control" name="deposit" value="{{ old('deposit') }}">
+                        <input type="number" step="any" class="form-control" name="deposit"
+                            value="{{ old('deposit') }}">
                         @error('deposit')
                             <p class="text-red">{{ $message }}</p>
                         @enderror
