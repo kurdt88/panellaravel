@@ -92,7 +92,7 @@ Route::middleware([
         Route::get('/indexusers/{user}/edit', [UserController::class, 'edit']);
         Route::put('/indexusers/{user}', [UserController::class, 'update']);
         Route::delete('/deluser/{user}', [UserController::class, 'destroy']);
-        Route::get('/audit', [LogeventController::class, 'index']);
+        Route::get('/eventviewer', [LogeventController::class, 'index']);
 
     });
 
@@ -213,6 +213,6 @@ Route::middleware([
         Route::get('profile', [HomeController::class, 'settings']);
     });
 
-    URL::forceScheme('https');
+    // URL::forceScheme('https');
 
 });

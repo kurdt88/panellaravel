@@ -7,7 +7,7 @@
     <x-flash-message />
 
 
-    <h1>Eventos del Sistema (Auditoria)
+    <h1>Auditoria de Eventos del Sistema (Crear/Editar/Eliminar)
     </h1>
 
 
@@ -19,29 +19,44 @@
 @section('content')
 
     @php
-        $heads = ['ID', 'Fecha', 'Evento'];
-
+        $heads = ['Fecha & Hora', 'Usuario', 'Evento', 'Ver Mas'];
+        $config = [
+            'order' => [[0, 'desc']],
+        ];
     @endphp
 
-    <x-adminlte-datatable id="table1" :heads="$heads" head-theme="light" theme="light" with-buttons striped hoverable>
+    <x-adminlte-datatable id="table1" :heads="$heads" :config="$config" head-theme="light" theme="light" with-buttons
+        striped hoverable>
 
 
         @foreach ($logevents as $logevent)
             <tr>
+
                 <td>
-                    <small>{{ $logevent->id }}</small>
-                </td>
-                <td>
-                    <small>{{ $logevent->created_at }}</small>
+
+
+                    {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $logevent->created_at, 'UTC')->setTimezone('America/Mexico_City') }}
+
+
                 </td>
 
-                {{-- <td>
+                <td>
                     ({{ $logevent->user_id }})
                     {{ App\Models\User::where('id', $logevent->user_id)->get()->first()->name }}
-                </td> --}}
-                <td>
-                    <small>{{ $logevent->event }}</small>
                 </td>
+                <td>
+                    <i class="fas fa-exclamation-triangle fa-fw"></i>
+
+                    {{ Str::limit($logevent->event, 160) }}
+                </td>
+                <td>
+
+                    <button type="button" onClick="javascript:alert('{{ $logevent->event }}')"
+                        class="btn btn-success float-center" style="margin-center: 5px;">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </td>
+
 
 
             </tr>

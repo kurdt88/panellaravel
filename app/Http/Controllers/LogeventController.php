@@ -11,7 +11,7 @@ class LogeventController extends Controller
     {
 
         return view('listEvents', [
-            'logevents' => Logevent::latest()->get()
+            'logevents' => Logevent::all()
 
         ]);
     }
