@@ -280,7 +280,7 @@
                                     .due_date + ' | Divisa: ' +
                                     value
                                     .type + ' | $' +
-                                    value.total2d + ' | ' +
+                                    value.total + ' | ' +
                                     value
                                     .comment + ' | ' +
                                     value
