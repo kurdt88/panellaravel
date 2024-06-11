@@ -17,7 +17,7 @@ class Invoice extends Model
     public function getTotalAttribute($value)
     {
         $myvalue = $this->ammount + $this->iva_ammount;
-        $myvalue = number_format((float) $myvalue, 5, '.', '');
+        $myvalue = number_format((float) $myvalue, 2, '.', '');
 
         return ($myvalue);
     }
