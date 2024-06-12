@@ -41,7 +41,7 @@
                 </td>
 
                 <td>
-                    ({{ $logevent->user_id }})
+                    {{-- ({{ $logevent->user_id }}) --}}
                     {{ App\Models\User::where('id', $logevent->user_id)->get()->first()->name }}
                 </td>
                 <td>

@@ -464,6 +464,15 @@ return [
 
         ],
         [
+            'text' => 'Archivos Comunes',
+            'url' => 'myfiles',
+            'icon' => 'far fa-folder-open fa-fw',
+            // 'label' => 4,
+            'label_color' => 'success',
+            'can' => 'view',
+
+        ],
+        [
             'header' => 'CONFIGURACION DE LA CUENTA',
             'can' => 'view'
         ],

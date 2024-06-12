@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LeaseController;
 use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\MyfileController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ExpenseController;
@@ -60,6 +61,8 @@ Route::middleware([
         Route::get('/newsupplier', [SupplierController::class, 'create']);
         Route::get('/newbudget/{building}', [BuildingController::class, 'createBudget']);
 
+        Route::get('/newmyfile', [MyfileController::class, 'create']);
+
 
         Route::post('/cancellease', [RescissionController::class, 'store']);
         Route::post('/indexproperties', [PropertyController::class, 'store']);
@@ -74,6 +77,8 @@ Route::middleware([
         Route::post('/indexaccounts', [AccountController::class, 'store']);
         Route::post('/indexsuppliers', [SupplierController::class, 'store']);
         Route::post('/indexbudgets', [BudgetController::class, 'store']);
+        Route::post('/indexmyfiles', [MyfileController::class, 'store']);
+
 
         Route::get('/cancellease/{lease}', [LeaseController::class, 'cancel']);
 
@@ -110,6 +115,10 @@ Route::middleware([
         Route::get('/indexaccounts/{account}/edit', [AccountController::class, 'edit']);
         Route::get('/indexsuppliers/{supplier}/edit', [SupplierController::class, 'edit']);
         Route::get('/indexbudgets/{budget}/edit', [BudgetController::class, 'edit']);
+        Route::get('/indexmyfiles/{myfile}/edit', [MyfileController::class, 'edit']);
+
+
+
 
         Route::put('/indexproperties/{property}', [PropertyController::class, 'update']);
         Route::put('/indexleases/{lease}', [LeaseController::class, 'update']);
@@ -123,6 +132,8 @@ Route::middleware([
         Route::put('/indexaccounts/{account}', [AccountController::class, 'update']);
         Route::put('/indexsuppliers/{supplier}', [SupplierController::class, 'update']);
         Route::put('/indexbudgets/{budget}', [BudgetController::class, 'update']);
+        Route::put('/indexmyfiles/{myfile}', [MyfileController::class, 'update']);
+
     });
 
 
@@ -141,6 +152,8 @@ Route::middleware([
         Route::delete('/delaccount/{account}', [AccountController::class, 'destroy']);
         Route::delete('/delsupplier/{supplier}', [SupplierController::class, 'destroy']);
         Route::delete('/delbudget/{budget}', [BudgetController::class, 'destroy']);
+        Route::delete('/delmyfile/{myfile}', [MyfileController::class, 'destroy']);
+
     });
 
     //RUTAS para el permiso BANKACCOUNT
@@ -175,6 +188,8 @@ Route::middleware([
         Route::get('/subproperties', [SubpropertyController::class, 'index']);
         Route::get('/landlords', [LandlordController::class, 'index']);
         Route::get('/suppliers', [SupplierController::class, 'index']);
+
+        Route::get('/myfiles', [MyfileController::class, 'index']);
 
 
 

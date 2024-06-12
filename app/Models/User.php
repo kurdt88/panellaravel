@@ -84,4 +84,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Logevent::class, 'user_id');
     }
+    public function myfiles()
+    {
+        return $this->hasMany(Myfile::class, 'user_id');
+    }
 }
