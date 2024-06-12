@@ -67,7 +67,7 @@ class Lease extends Model
                 return 4;
             }
             if (Carbon::createFromFormat('Y-m-d', $this->end)->subMonths(2)->isPast()) {
-                // Vence en menos de 1 mes
+                // Vence en menos de 2 meses
                 return 5;
             }
         }

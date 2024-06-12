@@ -449,7 +449,8 @@
                                 '<option value="">-- Selecciona un Contrato --</option>');
                             $.each(result.leases, function(key, value) {
                                 if (value.id != 1) {
-                                    if (value.isvalid == 1) {
+                                    if (value.isvalid == 1 || value.isvalid == 4 || value
+                                        .isvalid == 5) {
                                         $("#lease-dropdown").append(
                                             '<option value="' + value
                                             .id +
