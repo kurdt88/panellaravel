@@ -464,7 +464,7 @@ return [
 
         ],
         [
-            'text' => 'Archivos Comunes',
+            'text' => 'Archivos',
             'url' => 'myfiles',
             'icon' => 'far fa-folder-open fa-fw',
             // 'label' => 4,
