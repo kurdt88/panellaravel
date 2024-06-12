@@ -43,7 +43,7 @@
                     {{-- ({{ $logevent->user_id }}) --}}
                     {{ App\Models\User::where('id', $myfile->user_id)->get()->first()->name }}
                 </td>
-                <td> {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $myfile->created_at, 'UTC')->setTimezone('America/Mexico_City') }}
+                <td> {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $myfile->created_at, 'UTC')->setTimezone('America/Mazatlan') }}
                 </td>
 
                 <div>

@@ -138,7 +138,7 @@ Route::middleware([
 
 
 
-    //RUTAS para el permiso EDIT
+    //RUTAS para el permiso BORRAR
     Route::group(['middleware' => ['can:delete']], function () {
         Route::delete('/deltenant/{tenant}', [TenantController::class, 'destroy']);
         Route::delete('/dellease/{lease}', [LeaseController::class, 'destroy']);

@@ -35,7 +35,7 @@
                 <td>
 
 
-                    {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $logevent->created_at, 'UTC')->setTimezone('America/Mexico_City') }}
+                    {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $logevent->created_at, 'UTC')->setTimezone('America/Mazatlan') }}
 
 
                 </td>
