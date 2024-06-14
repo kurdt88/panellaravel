@@ -68,14 +68,13 @@
                             {{ App\Models\Subproperty::whereId($invoice->subproperty_id)->first()->type }} |
                             {{ Str::limit(App\Models\Subproperty::whereId($invoice->subproperty_id)->first()->title, 20) }}
                         @else
-                            @if ($invoice->subproperty_id)
-
+                            @if ($invoice->property_id)
                                 {{ App\Models\Property::whereId($invoice->property_id)->first()->title }}
                             @else
                                 <label style="color:rgb(90, 94, 96);">--</label>
-
                             @endif
                         @endif
+                    @endif
 
                 </td>
                 <td>
