@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class MyfileController extends Controller
 {
@@ -31,13 +33,12 @@ class MyfileController extends Controller
 
     public function store(Request $request)
     {
+
         $formFields = $request->validate([
-            'myfile' => 'required',
+            'myfile' => 'required|max:2000',
             'comment' => 'required',
         ]);
-
         $myfilereq = $request->file('myfile');
-
         try {
 
 
@@ -48,12 +49,14 @@ class MyfileController extends Controller
                     'comment' => $request->get('comment'),
                     'original_name' => $myfilereq->getClientOriginalName(),
                     'file' => $myfilereq->store('/common/files', ['disk' => 'spaces', 'visibility' => 'public']),
+                    // 'file' => $myfilereq->store('files', 'public'),
+
 
                 ]);
             }
 
         } catch (QueryException $exception) {
-            $errorInfo = $exception->getMessage();
+            $errorInfo = json_encode($exception->getMessage());
             return redirect('newsupplier')->with('message', $errorInfo);
         }
         $mymessage = "Archivo Registrado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$myfile->id}) Nombre ({$myfile->original_name}) Descripcion ({$myfile->comment}) ";

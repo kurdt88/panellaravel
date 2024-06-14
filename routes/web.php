@@ -97,7 +97,7 @@ Route::middleware([
         Route::get('/indexusers/{user}/edit', [UserController::class, 'edit']);
         Route::put('/indexusers/{user}', [UserController::class, 'update']);
         Route::delete('/deluser/{user}', [UserController::class, 'destroy']);
-        Route::get('/eventviewer', [LogeventController::class, 'index']);
+        Route::get('/audit', [LogeventController::class, 'index']);
 
     });
 

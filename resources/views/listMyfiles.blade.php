@@ -51,6 +51,8 @@
 
 
                         <a href="https://propertiesspace.sfo3.digitaloceanspaces.com/{{ $myfile->file }}" class="text-muted">
+                            {{-- <a href="{{ asset('storage/' . $myfile->file) }}" class="text-muted"> --}}
+
                             <button class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details">
                                 <i class="fa fa-lg fa-fw fa-eye"></i>
                             </button>
