@@ -151,6 +151,7 @@ class InvoiceController extends Controller
 
 
 
+
             if ($property_id = $request->get('property_id')) {
                 $formFields = array_merge($formFields, array('property_id' => $property_id));
             }
@@ -158,6 +159,11 @@ class InvoiceController extends Controller
                 $formFields = array_merge($formFields, array('subproperty_id' => $subproperty_id));
             }
 
+            if ($request->get('lease_id') == '1' && is_null($property_id) && is_null($subproperty_id)) {
+
+                return Redirect::back()->withErrors(['msg' => "No se permite la creación de Recibos de Egreso no asociadas a un Contrato ni a una Propiedad. Favor de especificar un Contrato o una Propiedad (Unidad/Subunidad)"]);
+
+            }
 
             if ($request->get('iva') == 'Exento') {
                 $iva_rate = Tax::where('name', '=', 'Exento')->first()->value;
@@ -291,6 +297,11 @@ class InvoiceController extends Controller
 
             }
 
+            if ($request->get('lease_id') == '1' && is_null($property_id) && is_null($subproperty_id)) {
+
+                return Redirect::back()->withErrors(['msg' => "No se permite la creación de Recibos de Egreso no asociadas a un Contrato ni a una Propiedad. Favor de especificar un Contrato o una Propiedad (Unidad/Subunidad)"]);
+
+            }
 
             if ($request->get('iva') == 'Exento') {
                 $iva_rate = Tax::where('name', '=', 'Exento')->first()->value;
