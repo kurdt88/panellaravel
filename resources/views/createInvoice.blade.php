@@ -309,6 +309,10 @@
                             '<option value="DEVOLUCION DE DEPOSITO DE SEGURIDAD">DEVOLUCION DE DEPOSITO DE SEGURIDAD</option>'
                         );
 
+                        $("#subconcept").append('<option value="PUBLICIDAD">PUBLICIDAD</option>');
+                        $("#subconcept").append(
+                            '<option value="ESTUDIOS O LABORATORIOS">ESTUDIOS O LABORATORIOS</option>');
+
                         $("#subconcept").append('<option value="OOMSAPAS">OOMSAPAS</option>');
                         $("#subconcept").append('<option value="CFE">CFE</option>');
                         $("#subconcept").append('<option value="TELMEX">TELMEX</option>');
