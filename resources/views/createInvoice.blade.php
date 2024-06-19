@@ -319,6 +319,10 @@
                             '<option value="POLIZA MANTENIMIENTO">POLIZA MANTENIMIENTO</option>');
 
 
+                        $("#subconcept").append(
+                            '<option value="TARJETAS DE CREDITO">TARJETAS DE CREDITO</option>');
+                        $("#subconcept").append('<option value="POLIZAS DE SEGURO">POLIZAS DE SEGURO</option>');
+                        $("#subconcept").append('<option value="SERVICIO MEDICO">SERVICIO MEDICO</option>');
 
 
                         $("#subconcept").append('<option value="OOMSAPAS">OOMSAPAS</option>');
