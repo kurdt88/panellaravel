@@ -324,6 +324,11 @@
                         $("#subconcept").append('<option value="POLIZAS DE SEGURO">POLIZAS DE SEGURO</option>');
                         $("#subconcept").append('<option value="SERVICIO MEDICO">SERVICIO MEDICO</option>');
 
+                        $("#subconcept").append('<option value="VEHICULOS">VEHICULOS</option>');
+                        $("#subconcept").append(
+                            '<option value="ALBERCAS MATERIAL Y MANTENIMIENTO">ALBERCAS MATERIAL Y MANTENIMIENTO</option>'
+                            );
+
 
                         $("#subconcept").append('<option value="OOMSAPAS">OOMSAPAS</option>');
                         $("#subconcept").append('<option value="CFE">CFE</option>');
