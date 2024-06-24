@@ -117,9 +117,13 @@
                         <label for="inputMessage">Descripción de la Subunidad</label>
                         <textarea class="form-control" rows="4" disabled>{{ $myDescription }}</textarea>
                     </div>
+                    <button type="button" onClick="location.href='/subpropertyinvoicesnolease/{{ $subproperty->id }}/'"
+                        class="btn btn-primary float-right" style="margin-right: 5px;">
+                        <i class="fas fa-hand-holding-usd	"></i> Recibos sin Contrato
+                    </button>
                     <div class="col-12">
                         <button type="button" onClick="location.href='/landlords/{{ $subproperty->landlord_id }}/'"
-                            class="btn btn-primary float-right" style="margin-right: 5px;">
+                            class="btn btn-success float-right" style="margin-right: 5px;">
                             <i class="far fa-id-badge"></i> Ver Propietario
                         </button>
 

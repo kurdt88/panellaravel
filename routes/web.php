@@ -218,6 +218,12 @@ Route::middleware([
         Route::get('/landlorditems/{landlord}', [LandlordController::class, 'showItems']);
 
 
+
+        Route::get('/propertyinvoicesnolease/{property}', [PropertyController::class, 'showInvoicesnolease']);
+        Route::get('/subpropertyinvoicesnolease/{subproperty}', [SubpropertyController::class, 'showInvoicesnolease']);
+
+
+
         Route::get('/paymentpdf/{payment}', [PaymentController::class, 'getpdf']);
         Route::get('/invoicepdf/{invoice}', [InvoiceController::class, 'getpdf']);
         Route::get('/invoicexml/{invoice}', [InvoiceController::class, 'getxml']);

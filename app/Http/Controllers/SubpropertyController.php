@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
 use App\Models\Landlord;
 use App\Models\Logevent;
 use App\Models\Property;
@@ -139,6 +140,29 @@ class SubpropertyController extends Controller
             'user_id' => Auth::user()->id
         ]);
         return redirect('/subproperties')->with('message', 'Subunidad actualizada');
+
+    }
+
+
+
+
+    public function showInvoicesnolease(Subproperty $subproperty)
+    {
+        $myinvoicesarray = array();
+        $myinvoices = Invoice::where('lease_id', 1)
+            ->where('subproperty_id', $subproperty->id)
+            ->get();
+
+        foreach ($myinvoices as $invoice) {
+            array_push($myinvoicesarray, $invoice);
+        }
+
+
+
+        return view('listInvoicesnolease', [
+            'invoices' => $myinvoicesarray,
+            'property_name' => $subproperty->title
+        ]);
 
     }
 

@@ -139,6 +139,11 @@
                             <i class="fas fa-shopping-cart"></i> Ver Inventario
                         </button>
 
+                        <button type="button" onClick="location.href='/propertyinvoicesnolease/{{ $property->id }}/'"
+                            class="btn btn-primary float-right" style="margin-right: 5px;">
+                            <i class="fas fa-hand-holding-usd	"></i> Recibos sin Contrato
+                        </button>
+
                         <button onClick="window.print()" type="button" class="btn btn-warning float-right"
                             style="margin-right: 5px;">
                             <i class="fas fa-print"></i> Imprimir

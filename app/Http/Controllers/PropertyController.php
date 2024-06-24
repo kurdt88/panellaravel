@@ -203,4 +203,26 @@ class PropertyController extends Controller
     }
 
 
+    public function showInvoicesnolease(Property $property)
+    {
+        $myinvoicesarray = array();
+        $myinvoices = Invoice::where('lease_id', 1)
+            ->where('property_id', $property->id)
+            ->get();
+
+        foreach ($myinvoices as $invoice) {
+            array_push($myinvoicesarray, $invoice);
+        }
+
+
+
+        return view('listInvoicesnolease', [
+            'invoices' => $myinvoicesarray,
+            'property_name' => $property->title
+        ]);
+
+    }
+
+
+
 }
