@@ -435,6 +435,15 @@ return [
                     'url' => 'newinvoice',
                     'can' => 'create',
 
+                ],
+                [
+                    'text' => 'Conceptos',
+                    'url' => 'concepts',
+                    'icon' => 'fas 	fa-layer-group fa-fw',
+                    // 'label' => 4,
+                    'label_color' => 'success',
+                    'can' => 'view',
+
                 ]
             ],
 
@@ -472,6 +481,7 @@ return [
             'can' => 'view',
 
         ],
+
         [
             'header' => 'CONFIGURACION DE LA CUENTA',
             'can' => 'view'
@@ -492,6 +502,13 @@ return [
             'text' => 'Administración de Usuarios',
             'url' => 'users',
             'icon' => 'fas fa-fw fa-users',
+            'can' => 'mgmtusers',
+
+        ],
+        [
+            'text' => 'Visor de Eventos',
+            'url' => 'audit',
+            'icon' => 'fab fa-fw fa-twitch',
             'can' => 'mgmtusers',
 
         ],

@@ -358,10 +358,11 @@
                                         alt="" />
                                 </div>
                             </a> --}}
-                            <a href="https://propertiesspace.sfo3.digitaloceanspaces.com/{{ $expenseimg->image }}">
+                            <a
+                                href="https://propertiesspace.sfo3.cdn.digitaloceanspaces.com/{{ $expenseimg->image }}">
                                 <div class="product-image-thumb">
                                     <img width="300" height="auto" {{-- src="{{ $expenseimg->image ? asset('storage/' . $expenseimg->image) : asset('/images/no-image.png') }}" --}}
-                                        src="https://propertiesspace.sfo3.digitaloceanspaces.com/{{ $expenseimg->image }}"
+                                        src="https://propertiesspace.sfo3.cdn.digitaloceanspaces.com/{{ $expenseimg->image }}"
                                         alt="{{ $expenseimg->original_name }}" />
                                 </div>
                             </a>
@@ -395,7 +396,7 @@
                                     </a>
                                 </a> --}}
                                 <a
-                                    href="https://propertiesspace.sfo3.digitaloceanspaces.com/{{ $expenseimg->image }}">
+                                    href="https://propertiesspace.sfo3.cdn.digitaloceanspaces.com/{{ $expenseimg->image }}">
 
                                     <li>{{ $expenseimg->original_name }}</li>
                                 </a>

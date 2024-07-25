@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Concept;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\MyfileController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ConceptController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymentController;
@@ -60,8 +62,9 @@ Route::middleware([
         Route::get('/newaccount', [AccountController::class, 'create']);
         Route::get('/newsupplier', [SupplierController::class, 'create']);
         Route::get('/newbudget/{building}', [BuildingController::class, 'createBudget']);
-
         Route::get('/newmyfile', [MyfileController::class, 'create']);
+        Route::get('/newconcept', [ConceptController::class, 'create']);
+
 
 
         Route::post('/cancellease', [RescissionController::class, 'store']);
@@ -78,6 +81,8 @@ Route::middleware([
         Route::post('/indexsuppliers', [SupplierController::class, 'store']);
         Route::post('/indexbudgets', [BudgetController::class, 'store']);
         Route::post('/indexmyfiles', [MyfileController::class, 'store']);
+        Route::post('/indexconcepts', [ConceptController::class, 'store']);
+
 
 
         Route::get('/cancellease/{lease}', [LeaseController::class, 'cancel']);
@@ -116,6 +121,7 @@ Route::middleware([
         Route::get('/indexsuppliers/{supplier}/edit', [SupplierController::class, 'edit']);
         Route::get('/indexbudgets/{budget}/edit', [BudgetController::class, 'edit']);
         Route::get('/indexmyfiles/{myfile}/edit', [MyfileController::class, 'edit']);
+        Route::get('/indexconcepts/{concept}/edit', [ConceptController::class, 'edit']);
 
 
 
@@ -133,6 +139,8 @@ Route::middleware([
         Route::put('/indexsuppliers/{supplier}', [SupplierController::class, 'update']);
         Route::put('/indexbudgets/{budget}', [BudgetController::class, 'update']);
         Route::put('/indexmyfiles/{myfile}', [MyfileController::class, 'update']);
+        Route::put('/indexconcepts/{concept}', [ConceptController::class, 'update']);
+
 
     });
 
@@ -153,6 +161,8 @@ Route::middleware([
         Route::delete('/delsupplier/{supplier}', [SupplierController::class, 'destroy']);
         Route::delete('/delbudget/{budget}', [BudgetController::class, 'destroy']);
         Route::delete('/delmyfile/{myfile}', [MyfileController::class, 'destroy']);
+        Route::delete('/delconcept/{concept}', [ConceptController::class, 'destroy']);
+
 
     });
 
@@ -190,6 +200,7 @@ Route::middleware([
         Route::get('/suppliers', [SupplierController::class, 'index']);
 
         Route::get('/myfiles', [MyfileController::class, 'index']);
+        Route::get('/concepts', [ConceptController::class, 'index']);
 
 
 

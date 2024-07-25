@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Concept;
 use App\Models\Lease;
 use App\Models\Tenant;
 use App\Models\Account;
@@ -253,6 +254,16 @@ class DropdownController extends Controller
                 $data['leases'] = Lease::all();
 
             }
+
+            error_log(json_encode($data));
+
+
+
+        } elseif ($request->concept == 'concepts') {
+
+            error_log("Caso concepts .. ");
+            $data['concepts'] = Concept::where("type", $request->category)
+                ->get();
 
             error_log(json_encode($data));
 

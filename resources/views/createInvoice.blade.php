@@ -262,38 +262,40 @@
 
 
                     if (category == 'Ingreso') {
-                        //Mostar Opciones Reducidas en el Campo concept
+                        // //Mostar Opciones Reducidas en el Campo concept
                         $("#concept").append(
                             '<option value="Ingreso General">Ingreso General</option>');
 
-                        $("#subconcept").append('<option value="RENTA DE LOCALES">RENTA DE LOCALES</option>');
-                        $("#subconcept").append(
-                            '<option value="RENTA DE APARTAMENTOS">RENTA DE APARTAMENTOS </option>');
-                        $("#subconcept").append('<option value="DEPOSITOS">DEPOSITOS</option>');
-                        $("#subconcept").append(
-                            '<option value="PAGO DE AGUA MENSUAL">PAGO DE AGUA MENSUAL</option>');
-                        $("#subconcept").append(
-                            '<option value="PAGO DE CONEXION LUZ Y AGUA">PAGO DE CONEXION LUZ Y AGUA</option>'
-                        );
-                        $("#subconcept").append('<option value="MULTAS">MULTAS</option>');
-                        $("#subconcept").append('<option value="INTERESES">INTERESES</option>');
-                        $("#subconcept").append(
-                            '<option value="RENTA DE ESTACIONAMIENTO">RENTA DE ESTACIONAMIENTO</option>');
-                        $("#subconcept").append(
-                            '<option value="DEPOSITO POR MASCOTAS">DEPOSITO POR MASCOTAS</option>');
-                        $("#subconcept").append(
-                            '<option value="ESTACIONAMIENTO POR HORA">ESTACIONAMIENTO POR HORA</option>');
-                        $("#subconcept").append(
-                            '<option value="TARJETA EXTRA ESTACIONAMIENTO">TARJETA EXTRA ESTACIONAMIENTO</option>'
-                        );
-                        $("#subconcept").append('<option value="RENTA DE T.S. ">RENTA DE T.S. </option>');
-                        $("#subconcept").append('<option value="RENTA SAN JOSE">RENTA SAN JOSE</option>');
-                        $("#subconcept").append('<option value="RENTA">RENTA</option>');
-                        $("#subconcept").append(
-                            '<option value="RENTA EXENTA POR PERIODO DE GRACIA">RENTA EXENTA POR PERIODO DE GRACIA</option>'
-                        );
-                        $("#subconcept").append('<option value="DEPOSITO CONTRATO">DEPOSITO CONTRATO</option>');
-                        $("#subconcept").append('<option value="OTRO">OTRO</option>');
+
+
+                        // $("#subconcept").append('<option value="RENTA DE LOCALES">RENTA DE LOCALES</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="RENTA DE APARTAMENTOS">RENTA DE APARTAMENTOS </option>');
+                        // $("#subconcept").append('<option value="DEPOSITOS">DEPOSITOS</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="PAGO DE AGUA MENSUAL">PAGO DE AGUA MENSUAL</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="PAGO DE CONEXION LUZ Y AGUA">PAGO DE CONEXION LUZ Y AGUA</option>'
+                        // );
+                        // $("#subconcept").append('<option value="MULTAS">MULTAS</option>');
+                        // $("#subconcept").append('<option value="INTERESES">INTERESES</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="RENTA DE ESTACIONAMIENTO">RENTA DE ESTACIONAMIENTO</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="DEPOSITO POR MASCOTAS">DEPOSITO POR MASCOTAS</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="ESTACIONAMIENTO POR HORA">ESTACIONAMIENTO POR HORA</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="TARJETA EXTRA ESTACIONAMIENTO">TARJETA EXTRA ESTACIONAMIENTO</option>'
+                        // );
+                        // $("#subconcept").append('<option value="RENTA DE T.S. ">RENTA DE T.S. </option>');
+                        // $("#subconcept").append('<option value="RENTA SAN JOSE">RENTA SAN JOSE</option>');
+                        // $("#subconcept").append('<option value="RENTA">RENTA</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="RENTA EXENTA POR PERIODO DE GRACIA">RENTA EXENTA POR PERIODO DE GRACIA</option>'
+                        // );
+                        // $("#subconcept").append('<option value="DEPOSITO CONTRATO">DEPOSITO CONTRATO</option>');
+                        // $("#subconcept").append('<option value="OTRO">OTRO</option>');
 
 
 
@@ -302,80 +304,101 @@
                         $("#concept").append('<option value="Egreso_General">Egreso General</option>');
                         $("#concept").append(
                             '<option value="Compra de Inventario">Compra de Inventario</option>');
-                        // $("#concept").append(
-                        //     '<option value="Presupuesto_de_Mantenimiento">Presupuesto de Mantenimiento</option>'
+
+
+                        // $("#subconcept").append(
+                        //     '<option value="DEVOLUCION DE DEPOSITO DE SEGURIDAD">DEVOLUCION DE DEPOSITO DE SEGURIDAD</option>'
                         // );
-                        $("#subconcept").append(
-                            '<option value="DEVOLUCION DE DEPOSITO DE SEGURIDAD">DEVOLUCION DE DEPOSITO DE SEGURIDAD</option>'
-                        );
 
-                        $("#subconcept").append('<option value="PUBLICIDAD">PUBLICIDAD</option>');
-                        $("#subconcept").append(
-                            '<option value="ESTUDIOS O LABORATORIOS">ESTUDIOS O LABORATORIOS</option>');
+                        // $("#subconcept").append('<option value="PUBLICIDAD">PUBLICIDAD</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="ESTUDIOS O LABORATORIOS">ESTUDIOS O LABORATORIOS</option>');
 
-                        $("#subconcept").append('<option value="COMPRA VENTA">COMPRA VENTA</option>');
-                        $("#subconcept").append('<option value="NOMINA IMSS">NOMINA IMSS</option>');
-                        $("#subconcept").append(
-                            '<option value="POLIZA MANTENIMIENTO">POLIZA MANTENIMIENTO</option>');
+                        // $("#subconcept").append('<option value="COMPRA VENTA">COMPRA VENTA</option>');
+                        // $("#subconcept").append('<option value="NOMINA IMSS">NOMINA IMSS</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="POLIZA MANTENIMIENTO">POLIZA MANTENIMIENTO</option>');
 
 
-                        $("#subconcept").append(
-                            '<option value="TARJETAS DE CREDITO">TARJETAS DE CREDITO</option>');
-                        $("#subconcept").append('<option value="POLIZAS DE SEGURO">POLIZAS DE SEGURO</option>');
-                        $("#subconcept").append('<option value="SERVICIO MEDICO">SERVICIO MEDICO</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="TARJETAS DE CREDITO">TARJETAS DE CREDITO</option>');
+                        // $("#subconcept").append('<option value="POLIZAS DE SEGURO">POLIZAS DE SEGURO</option>');
+                        // $("#subconcept").append('<option value="SERVICIO MEDICO">SERVICIO MEDICO</option>');
 
-                        $("#subconcept").append('<option value="VEHICULOS">VEHICULOS</option>');
-                        $("#subconcept").append(
-                            '<option value="ALBERCAS MATERIAL Y MANTENIMIENTO">ALBERCAS MATERIAL Y MANTENIMIENTO</option>'
-                            );
+                        // $("#subconcept").append('<option value="VEHICULOS">VEHICULOS</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="ALBERCAS MATERIAL Y MANTENIMIENTO">ALBERCAS MATERIAL Y MANTENIMIENTO</option>'
+                        //     );
 
 
-                        $("#subconcept").append('<option value="OOMSAPAS">OOMSAPAS</option>');
-                        $("#subconcept").append('<option value="CFE">CFE</option>');
-                        $("#subconcept").append('<option value="TELMEX">TELMEX</option>');
-                        $("#subconcept").append('<option value="SUELDO PERSONAL">SUELDO PERSONAL</option>');
-                        $("#subconcept").append('<option value="AZTEK">AZTEK</option>');
-                        $("#subconcept").append('<option value="CAMARAS">CAMARAS</option>');
-                        $("#subconcept").append('<option value="CONTABILIDAD">CONTABILIDAD</option>');
-                        $("#subconcept").append('<option value="GASOLINA">GASOLINA</option>');
-                        $("#subconcept").append(
-                            '<option value="ARTICULOS DE LIMPIEZA">ARTICULOS DE LIMPIEZA</option>');
-                        $("#subconcept").append(
-                            '<option value="MATERIAL MANTENIMIENTO">MATERIAL MANTENIMIENTO</option>');
-                        $("#subconcept").append(
-                            '<option value="MANTENIMIENTO ELEVADOR">MANTENIMIENTO ELEVADOR</option>');
-                        $("#subconcept").append('<option value="RECOLECTORA TAZ">RECOLECTORA TAZ</option>');
-                        $("#subconcept").append(
-                            '<option value="DANIEL HIGUERA ANUAL">DANIEL HIGUERA ANUAL</option>');
-                        $("#subconcept").append('<option value="PREDIAL">PREDIAL</option>');
-                        $("#subconcept").append('<option value="COMISIONES">COMISIONES</option>');
-                        $("#subconcept").append('<option value="SAT">SAT</option>');
-                        $("#subconcept").append('<option value="IMSS">IMSS</option>');
-                        $("#subconcept").append('<option value="SAPAS LA PAZ">SAPAS LA PAZ</option>');
-                        $("#subconcept").append('<option value="TELCEL">TELCEL</option>');
-                        $("#subconcept").append('<option value="MUEBLES">MUEBLES</option>');
-                        $("#subconcept").append(
-                            '<option value="REPARACION DE MUEBLES">REPARACION DE MUEBLES</option>');
-                        $("#subconcept").append(
-                            '<option value="AIRES ACONDICIONADOS">AIRES ACONDICIONADOS</option>');
-                        $("#subconcept").append('<option value="CARPINTERIA">CARPINTERIA</option>');
-                        $("#subconcept").append('<option value="PINTURA">PINTURA</option>');
-                        $("#subconcept").append(
-                            '<option value="SUELDO ADMINISTRACION">SUELDO ADMINISTRACION</option>');
-                        $("#subconcept").append('<option value="JARDINERIA">JARDINERIA</option>');
-                        $("#subconcept").append(
-                            '<option value="RECOLECCION DE BASURA">RECOLECCION DE BASURA</option>');
-                        $("#subconcept").append(
-                            '<option value="PERSONAL DE LIMPIEZA">PERSONAL DE LIMPIEZA</option>');
-                        $("#subconcept").append('<option value="COLEGIATURA">COLEGIATURA</option>');
-                        $("#subconcept").append(
-                            '<option value="MENSUALIDAD ISABELLA">MENSUALIDAD ISABELLA</option>');
-                        $("#subconcept").append(
-                            '<option value="OTRO"</option>');
-                        $("#subconcept").append(
-                            '<option value=OTRO</option>');
+                        // $("#subconcept").append('<option value="OOMSAPAS">OOMSAPAS</option>');
+                        // $("#subconcept").append('<option value="CFE">CFE</option>');
+                        // $("#subconcept").append('<option value="TELMEX">TELMEX</option>');
+                        // $("#subconcept").append('<option value="SUELDO PERSONAL">SUELDO PERSONAL</option>');
+                        // $("#subconcept").append('<option value="AZTEK">AZTEK</option>');
+                        // $("#subconcept").append('<option value="CAMARAS">CAMARAS</option>');
+                        // $("#subconcept").append('<option value="CONTABILIDAD">CONTABILIDAD</option>');
+                        // $("#subconcept").append('<option value="GASOLINA">GASOLINA</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="ARTICULOS DE LIMPIEZA">ARTICULOS DE LIMPIEZA</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="MATERIAL MANTENIMIENTO">MATERIAL MANTENIMIENTO</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="MANTENIMIENTO ELEVADOR">MANTENIMIENTO ELEVADOR</option>');
+                        // $("#subconcept").append('<option value="RECOLECTORA TAZ">RECOLECTORA TAZ</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="DANIEL HIGUERA ANUAL">DANIEL HIGUERA ANUAL</option>');
+                        // $("#subconcept").append('<option value="PREDIAL">PREDIAL</option>');
+                        // $("#subconcept").append('<option value="COMISIONES">COMISIONES</option>');
+                        // $("#subconcept").append('<option value="SAT">SAT</option>');
+                        // $("#subconcept").append('<option value="IMSS">IMSS</option>');
+                        // $("#subconcept").append('<option value="SAPAS LA PAZ">SAPAS LA PAZ</option>');
+                        // $("#subconcept").append('<option value="TELCEL">TELCEL</option>');
+                        // $("#subconcept").append('<option value="MUEBLES">MUEBLES</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="REPARACION DE MUEBLES">REPARACION DE MUEBLES</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="AIRES ACONDICIONADOS">AIRES ACONDICIONADOS</option>');
+                        // $("#subconcept").append('<option value="CARPINTERIA">CARPINTERIA</option>');
+                        // $("#subconcept").append('<option value="PINTURA">PINTURA</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="SUELDO ADMINISTRACION">SUELDO ADMINISTRACION</option>');
+                        // $("#subconcept").append('<option value="JARDINERIA">JARDINERIA</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="RECOLECCION DE BASURA">RECOLECCION DE BASURA</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="PERSONAL DE LIMPIEZA">PERSONAL DE LIMPIEZA</option>');
+                        // $("#subconcept").append('<option value="COLEGIATURA">COLEGIATURA</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="MENSUALIDAD ISABELLA">MENSUALIDAD ISABELLA</option>');
+                        // $("#subconcept").append(
+                        //     '<option value="OTRO"</option>');
+                        // $("#subconcept").append(
+                        //     '<option value=OTRO</option>');
 
                     }
+                    $.ajax({
+                        url: "{{ url('api/fetch-invoices') }}",
+                        type: "POST",
+                        data: {
+                            category: category,
+                            concept: 'concepts',
+                            _token: '{{ csrf_token() }}'
+                        },
+                        dataType: 'json',
+                        success: function(result) {
+                            $('#subconcept').html(
+                                '<option value="">-- Selecciona un Concepto --</option>');
+                            $.each(result.concepts, function(key, value) {
+                                $("#subconcept").append(
+                                    '<option value="' + value
+                                    .name +
+                                    '">' + value.name +
+                                    '</option>');
+                            });
+
+                        }
+                    });
 
 
                     //Ahora oculto los campos NO necesarios para trabajar
