@@ -27,7 +27,7 @@
 
 
     @php
-        $heads = ['Fecha', 'Monto', 'Concepto', 'Propiedad | Contrato', 'Arrendatario', 'Recibo', 'Acciones'];
+        $heads = ['Fecha', 'Monto', 'Concepto', 'Propiedad', 'Arrendatario', 'Recibo', 'Acciones'];
 
         $config = [
             'order' => [[6, 'desc']],
@@ -63,8 +63,8 @@
                 </td>
 
                 <td>
-                    {{ Str::limit($payment->invoice->comment, 25) }}
-                    | {{ Str::limit($payment->comment, 25) }}
+                    {{ Str::limit($payment->invoice->comment, 20) }}
+                    | {{ Str::limit($payment->comment, 20) }}
 
                 </td>
 
@@ -77,7 +77,6 @@
                         @if ($mysubprop_id = $payment->invoice->subproperty_id)
                             {{ App\Models\Subproperty::whereid($mysubprop_id)->first()->title }}
                         @endif
-                        | <small>[Sin Contrato]</small>
                     </td>
                 @else
                     <td>
@@ -86,9 +85,7 @@
                         @else
                             {{ App\Models\Lease::whereId($payment->invoice->lease_id)->first()->property_->title }}
                         @endif
-                        <a href="/leases/{{ App\Models\Lease::whereId($payment->lease->id)->first()->id }}/">
-                            | <small>[Ver Contrato]</small>
-                        </a>
+
 
                     </td>
                 @endif
