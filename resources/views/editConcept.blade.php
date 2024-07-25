@@ -32,6 +32,23 @@
             <div class="card-body">
 
 
+                <div class="form-group">
+                    <label for="type">Tipo</label><br>
+                    <font color="blue"><small>Valor actual:
+                            <b>{{ $concept->type }}</b>
+                        </small></font>
+                    <select name="type" class="custom-select rounded-0">
+                        <option value="Ingreso">Ingreso</option>
+                        <option value="Egreso">Egreso</option>
+
+                        <option selected="selected">
+                            {{ $concept->type }}
+                        </option>
+                    </select>
+                    @error('type')
+                        <p class="text-red">{{ $message }}</p>
+                    @enderror
+                </div>
 
                 <div class="form-group">
                     <label>Concepto</label>
@@ -47,20 +64,6 @@
                 </div>
 
 
-                <div class="form-group">
-                    <label for="type">Tipo</label>
-                    <select name="type" class="custom-select rounded-0">
-                        <option value="Ingreso">Ingreso</option>
-                        <option value="Egreso">Egreso</option>
-
-                        <option selected="selected">
-                            {{ $concept->type }}
-                        </option>
-                    </select>
-                    @error('type')
-                        <p class="text-red">{{ $message }}</p>
-                    @enderror
-                </div>
 
 
 
