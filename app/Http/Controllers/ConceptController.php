@@ -53,12 +53,12 @@ class ConceptController extends Controller
         }
 
 
-        // $mymessage = "Concepto creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$concept->id}) Tipo ({$concept->type}) Concepto ({$concept->name})  ";
-        // Log::info($mymessage);
-        // Logevent::create([
-        //     'event' => $mymessage,
-        //     'user_id' => Auth::user()->id
-        // ]);
+        $mymessage = "Concepto creado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$concept->id}) Tipo ({$concept->type}) Concepto ({$concept->name})  ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
 
         return redirect('/concepts')->with('message', 'Concepto creado');
     }
@@ -101,12 +101,12 @@ class ConceptController extends Controller
             return redirect('newconcept')->with('message', $errorInfo);
         }
 
-        // $mymessage = "Concepto Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$concept->id}) Tipo ({$concept->type})  Nombre ({$concept->name})";
-        // Log::info($mymessage);
-        // Logevent::create([
-        //     'event' => $mymessage,
-        //     'user_id' => Auth::user()->id
-        // ]);
+        $mymessage = "Concepto Actualizado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$concept->id}) Tipo ({$concept->type})  Nombre ({$concept->name})";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/concepts')->with('message', 'Concepto actualizado');
     }
 
@@ -122,12 +122,12 @@ class ConceptController extends Controller
             return redirect('/concepts')->with('message', $errorInfo);
         }
 
-        // $mymessage = "Concepto Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$concept->id}) Nombre ({$concept->name}) Direccion ({$concept->address}) Descripcion ({$concept->description}) ";
-        // Log::info($mymessage);
-        // Logevent::create([
-        //     'event' => $mymessage,
-        //     'user_id' => Auth::user()->id
-        // ]);
+        $mymessage = "Concepto Eliminado por el Usuario: ID (" . Auth::user()->id . ")  Nombre (" . Auth::user()->name . ") | ID ({$concept->id}) Nombre ({$concept->name}) Direccion ({$concept->address}) Descripcion ({$concept->description}) ";
+        Log::info($mymessage);
+        Logevent::create([
+            'event' => $mymessage,
+            'user_id' => Auth::user()->id
+        ]);
         return redirect('/concepts')->with('message', 'Concepto eliminado');
     }
 
