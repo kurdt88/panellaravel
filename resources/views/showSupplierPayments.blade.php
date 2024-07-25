@@ -24,7 +24,7 @@
         $heads = [
             'Recibo Asociado',
             'Concepto',
-            'Propiedad | Contrato',
+            'Propiedad',
             // 'Propietario',
             'Monto',
             'Resúmen de Pagos del Recibo Asociado',
@@ -65,29 +65,30 @@
                         {{-- <i> Sin contrato asociado </i> --}}
                         @if ($myprop_id = $expense->invoice->property_id)
                             <a href="/properties/{{ $myprop_id }}/" class="text-muted">
-                                {{ App\Models\Property::whereid($myprop_id)->first()->title }}
+                                {{ Str::limit(App\Models\Property::whereid($myprop_id)->first()->title, 20) }}
                             </a>
                         @endif
                         @if ($mysubprop_id = $expense->invoice->subproperty_id)
                             <a href="/subproperties/{{ $mysubprop_id }}/" class="text-muted">
-                                {{ App\Models\Subproperty::whereid($mysubprop_id)->first()->title }}
+                                {{ Str::limit(App\Models\Subproperty::whereid($mysubprop_id)->first()->title, 20) }}
                             </a>
                         @endif
-                        | <small>&nbsp;[Sin Contrato Asociado]</small>
+                        {{-- | <small>&nbsp;[Sin Contrato Asociado]</small> --}}
                     </td>
                 @else
                     <td>
                         {{-- <img src="/images/expense-icon.png" alt="Product 1" class="img-circle img-size-32 mr-2"> --}}
                         <a href="/properties/{{ App\Models\Property::whereId($expense->lease->property)->first()->id }}/"
                             class="text-muted">
-                            {{ App\Models\Property::whereId($expense->lease->property)->first()->title }}</a>
+                            {{ Str::limit(App\Models\Property::whereId($expense->lease->property)->first()->title, 20) }}</a>
 
-                        &nbsp;|
-                        <a href="/leases/{{ App\Models\Lease::whereId($expense->lease->id)->first()->id }}/"
+                        {{--
+                         &nbsp;|
+                       <a href="/leases/{{ App\Models\Lease::whereId($expense->lease->id)->first()->id }}/"
                             class="text-muted">
                             <i class='far fa-file-alt'> </i>
                             </i>
-                        </a>
+                        </a> --}}
                         </a>
 
                     </td>
